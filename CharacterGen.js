@@ -5,7 +5,7 @@ import AddYear from './AddYear';
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 
-const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen"];
+const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen", "Fairy"];
 const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger"];
 
 const heightRanges = {
@@ -26,7 +26,8 @@ const heightRanges = {
   Lizardfolk: [160, 200],
   Triton: [160, 190],
   Rockmen: [100, 110],
-  Plantmen: [130, 160]
+  Plantmen: [130, 160],
+  Fairy: [90, 120]
 };
 
 const getHairColor = (race) => {

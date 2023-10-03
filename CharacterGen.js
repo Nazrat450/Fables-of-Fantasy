@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import AddYear from './AddYear';
+
 
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
@@ -71,6 +73,7 @@ const CharacterGen = () => {
   return (
     <div>
       <button onClick={generateCharacter}>Generate Character</button>
+      <AddYear character={character} setCharacter={setCharacter} />
       {character && (
         <div>
           <h1>Active Character: {character.FirstName} {character.LastName}</h1>

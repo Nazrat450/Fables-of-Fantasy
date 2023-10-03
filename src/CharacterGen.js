@@ -74,7 +74,7 @@ const CharacterGen = () => {
 
   return (
     <div>
-      <button onClick={generateCharacter}>Generate Character</button>
+      {!character && <button onClick={generateCharacter}>Generate Character</button>}
       <AddYear character={character} setCharacter={setCharacter} />
       {character && (
         <div>

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const AddYear = ({ character, setCharacter }) => {
+
+
+
+
+const AddYear = ({ character, setCharacter, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
 
   const handleAgeIncrement = () => {
@@ -9,6 +13,7 @@ const AddYear = ({ character, setCharacter }) => {
         const deathChance = Math.random();
         if (deathChance < 0.10) {
           setIsDead(true);
+          setLogMessage(character.FirstName + " " + character.LastName + " has died."); // Updated this line
           return;
         }
       }
@@ -22,13 +27,13 @@ const AddYear = ({ character, setCharacter }) => {
   const handleRestart = () => {
     setIsDead(false);
     setCharacter(null);
+    setLogMessage("");
   };
 
   if (isDead) {
     return (
       <div>
-        <p>The character has died.</p>
-        <button onClick={handleRestart}>Restart</button>
+       <button onClick={handleRestart}>Restart</button>
       </div>
     );
   }

@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import AddYear from './AddYear';
-
-
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 
@@ -43,8 +39,8 @@ const getRandomHeight = (race) => {
   return Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
 };
 
-const CharacterGen = () => {
-  const [character, setCharacter] = useState(null);
+const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
+  
 
   const generateCharacter = () => {
     const firstName = prompt("Enter the character's first name:");
@@ -69,13 +65,14 @@ const CharacterGen = () => {
         Height: getRandomHeight(race)
       };
       setCharacter(newCharacter);
+      setLogMessage(firstName + " " + lastName + " Welcome to the world!");
     }
   };
 
   return (
     <div>
       {!character && <button onClick={generateCharacter}>Generate Character</button>}
-      <AddYear character={character} setCharacter={setCharacter} />
+     
       {character && (
         <div>
           <h1>Active Character: {character.FirstName} {character.LastName}</h1>

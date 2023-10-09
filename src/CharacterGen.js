@@ -65,7 +65,7 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
         Height: getRandomHeight(race)
       };
       setCharacter(newCharacter);
-      setLogMessage(firstName + " " + lastName + " Welcome to the world!");
+      setLogMessage(prevLog => prevLog + "\n" + firstName + " " + lastName + " Welcome to the world!");
     }
   };
 

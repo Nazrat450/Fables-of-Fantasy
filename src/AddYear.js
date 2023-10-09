@@ -13,7 +13,7 @@ const AddYear = ({ character, setCharacter, setLogMessage }) => {
         const deathChance = Math.random();
         if (deathChance < 0.10) {
           setIsDead(true);
-          setLogMessage(character.FirstName + " " + character.LastName + " has died."); // Updated this line
+          setLogMessage(prevLog => prevLog + "\n" + character.FirstName + " " + character.LastName + " has died.");
           return;
         }
       }

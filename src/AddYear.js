@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  } from 'react';
 
 const AddYear = ({ character, setCharacter, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
@@ -17,6 +17,7 @@ const AddYear = ({ character, setCharacter, setLogMessage }) => {
         ...prevCharacter,
         Age: prevCharacter.Age + 1
       }));
+      setLogMessage(prevLog => prevLog + `\n${character.FirstName} is now ${character.Age + 1}\nYear Summary: [Add summary for the year here]`);
     }
   };
 

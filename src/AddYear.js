@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 
-
-
-
-
 const AddYear = ({ character, setCharacter, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
 
@@ -25,15 +21,23 @@ const AddYear = ({ character, setCharacter, setLogMessage }) => {
   };
 
   const handleRestart = () => {
-    setIsDead(false);
-    setCharacter(null);
-    setLogMessage("");
-  };
+    const userConfirmed = window.confirm("Are you sure you want to restart?");
+    
+    if (userConfirmed) {
+      setIsDead(false);
+      setCharacter(null);
+      setLogMessage("");
+
+      // event to notify about the reset
+      const resetEvent = new Event('characterReset', { 'bubbles': true });
+      window.dispatchEvent(resetEvent);
+    }
+};
 
   if (isDead) {
     return (
       <div>
-       <button onClick={handleRestart}>Restart</button>
+       <button style={{ backgroundColor: 'red', color: 'white' }} onClick={handleRestart}>Restart</button>
       </div>
     );
   }

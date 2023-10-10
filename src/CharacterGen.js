@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
@@ -99,24 +100,24 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
   return (
     <div>
       {!character ? (
-        <div>
-          <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-          <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+        <div class= "CharacterGen">
+          <input type="text" placeholder="First Name" class="input-field" value={firstName} onChange={e => setFirstName(e.target.value)} />
+          <input type="text" placeholder="Last Name" class="input-field" value={lastName} onChange={e => setLastName(e.target.value)} />
           
           <label>
-            <input type="radio" name="gender" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" class="radio-option" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
             Male
           </label>
           <label>
-            <input type="radio" name="gender" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" class="radio-option" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
             Female
           </label>
           <label>
-            <input type="radio" name="gender" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" class="radio-option" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
             Non-Binary  
           </label>
 
-          <button onClick={handleGenerateCharacter}>Generate Character</button>
+          <button id="genbut" onClick={handleGenerateCharacter}>Generate Character</button>
         </div>
       ) : (
         <div>

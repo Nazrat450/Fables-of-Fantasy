@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './App.css';
 const AddYear = ({ character, setCharacter, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
 

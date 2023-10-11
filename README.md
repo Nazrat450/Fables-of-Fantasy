@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+ChronoSaga
+Welcome to the repository of ChronoSaga. This project aims to offer players an experience akin to reading an interactive book, where every decision has the potential to alter the course of the story.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Current State
+As of now, the project consists of:
 
-## Available Scripts
+Character Generator: Allows players to create a unique character by specifying their name, race, gender, and other traits. Aspects like strength, dexterity, intelligence, and charisma are randomly generated.
 
-In the project directory, you can run:
+Year Adder: The game provides a mechanism to advance the character's age. This is a placeholder for more intricate time-based mechanics we plan to integrate in the future.
 
-### `npm start`
+Responsive Design: The game is playable on both web browsers and mobile devices, though optimizations are ongoing for the mobile interface.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Future Vision
+Interactive Storytelling: Just like flipping the pages of a book, players will venture into quests, face moral dilemmas, and make critical decisions that influence the outcome of the story.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Forming Parties: Players can recruit NPCs to join their cause, each bringing unique skills and stories to the table.
 
-### `npm test`
+Quests & Adventures: Players will embark on various quests, from simple fetch quests to intricate political intrigues. Each quest will be a chapter, adding depth to the game's world and lore.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Choice-Based Consequences: Every decision made by the player will have repercussions. From the alliances they form to the battles they choose, the game world will react dynamically.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Skills & Abilities: As characters progress, they'll acquire new skills and abilities that will aid them in their adventures, allowing for a more varied gameplay experience.

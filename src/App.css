@@ -86,12 +86,15 @@
 }
 
 .radio-option {
-  margin-right: 10px;
+  margin-right: 15px; 
+  vertical-align: middle; 
 }
 
 label {
   display: block;
   margin-bottom: 10px;
+  font-size: 16px; 
+  line-height: 24px; 
 }
 
 #genbut {
@@ -129,4 +132,8 @@ label {
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+}
+
+.input-field, .radio-option {
+  margin-bottom: 10px; 
 }

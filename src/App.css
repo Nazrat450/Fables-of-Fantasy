@@ -7,6 +7,7 @@
   background-color: #282c34;
   color: white;
   padding: 20px;
+  
 }
 
 @media only screen and (max-width: 600px) {
@@ -28,6 +29,8 @@
   border-radius: 5px;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .App-log button {
@@ -80,6 +83,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .modal-content {
@@ -87,4 +92,5 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }

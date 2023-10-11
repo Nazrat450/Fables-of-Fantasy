@@ -4,9 +4,22 @@ import './App.css';
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 
+
 const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen", "Fairy"];
 const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger"];
 const locations = [];
+
+const ClassSelectionModal = ({ onClassSelect }) => (
+  <div className="modal">
+    <div className="modal-content">
+      <h4>Select your class:</h4>
+      <button onClick={() => onClassSelect('Warrior')}>Warrior</button>
+      <button onClick={() => onClassSelect('Wizard')}>Wizard</button>
+      <button onClick={() => onClassSelect('Rogue')}>Rogue</button>
+    </div>
+  </div>
+);
+
 
 const heightRanges = {
     Human: [150, 200],
@@ -43,7 +56,8 @@ const getRandomHeight = (race) => {
     return Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
 };
 
-const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
+const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassModal, setLogMessage }) => {
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
@@ -78,7 +92,9 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
     const newCharacter = {
       FirstName: firstName,
       LastName: lastName,
+      Class: null,
       Age: 0,
+      Class: null,
       Race: race,
       Gender: gender,
       Health: 100,
@@ -96,7 +112,7 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
     setCharacter(newCharacter);
     setLogMessage(prevLog => prevLog + "\n" + firstName + " " + lastName + " Welcome to the world!");
   };
-
+  
   return (
     <div>
       {!character ? (
@@ -119,11 +135,15 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
 
           <button id="genbut" onClick={handleGenerateCharacter}>Generate Character</button>
         </div>
+
+        
       ) : (
+        
         <div>
           <h1>Active Character: {character.FirstName} {character.LastName}</h1>
           <p>Age: {character.Age}</p>
           <p>Gender: {character.Gender}</p>
+          {character.Class && <p>Class: {character.Class}</p>}
           <p>Race: {character.Race}</p>
           <p>Health: {character.Health}%</p>
           <p>Looks: {character.Looks}%</p>
@@ -136,7 +156,20 @@ const CharacterGen = ({ character, setCharacter, setLogMessage }) => {
           <p>Wisdom: {character.Wisdom}</p>
           <p>Charisma: {character.Charisma}</p>
         </div>
+        
       )}
+      <div>
+      {showClassModal && (
+    <ClassSelectionModal
+      onClassSelect={(selectedClass) => {
+        setCharacter(prev => ({ ...prev, Class: selectedClass }));
+        setShowClassModal(false);
+      }}
+    />
+  )}
+    
+  </div>
+      
     </div>
   );
 };

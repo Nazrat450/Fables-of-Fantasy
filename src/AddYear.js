@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-const AddYear = ({ character, setCharacter, setLogMessage }) => {
+const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
+  
 
   const yearSummaries = [
     "Accidentally spilled a potion, growing a third ear for a week.",
@@ -225,6 +226,11 @@ const AddYear = ({ character, setCharacter, setLogMessage }) => {
           return;
         }
       }
+      // Check if the character's age is 17 and a class hasn't been chosen
+      if (character.Age === 17 && !character.Class) {
+        setShowClassModal(true); // use the passed down prop function
+        return;
+      }
 
       let summary = "";
       if (character.Age > 15 && Math.random() < 0.30) { // 30% chance after age 15
@@ -264,6 +270,7 @@ const AddYear = ({ character, setCharacter, setLogMessage }) => {
   return (
     <button onClick={handleAgeIncrement}>Add a Year</button>
   );
+
 };
 
 export default AddYear;

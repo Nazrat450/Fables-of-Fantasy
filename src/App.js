@@ -4,9 +4,13 @@ import CharacterGen from './CharacterGen';
 import AddYear from './AddYear';
 import React, { useState, useRef, useEffect } from 'react';
 
+
+
 function App() {
   const [logMessage, setLogMessage] = useState('');
   const [character, setCharacter] = useState(null);
+  const [showClassModal, setShowClassModal] = useState(false);
+
 
   const textareaRef = useRef(null);
 
@@ -20,10 +24,10 @@ function App() {
     <div className="App">
       <div className="App-log">
       <textarea ref={textareaRef} readOnly placeholder={logMessage}></textarea>
-        <AddYear character={character} setCharacter={setCharacter} setLogMessage={setLogMessage} />
+      <AddYear character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
       </div>
       <div className="CharacterGen">
-      <CharacterGen character={character} setCharacter={setCharacter} setLogMessage={setLogMessage} />
+      <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
       </div>
     </div>
   );

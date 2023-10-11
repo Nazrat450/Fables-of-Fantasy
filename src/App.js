@@ -4,7 +4,7 @@ import CharacterGen from './CharacterGen';
 import AddYear from './AddYear';
 import React, { useState, useRef, useEffect } from 'react';
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
 
 function App() {
   const [logMessage, setLogMessage] = useState('');

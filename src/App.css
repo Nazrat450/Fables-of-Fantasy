@@ -18,6 +18,15 @@
   .App-log {
     margin-bottom: 20px;
   }
+
+  .App-log textarea {
+    height: 200px; /* reduced height for mobile */
+  }
+
+  .CharacterGen {
+    width: 100%; /* full width for mobile */
+    padding: 10px; /* reduced padding */
+  }
 }
 
 .App-log {
@@ -67,14 +76,39 @@
   flex-direction: column;
 }
 
-#genbut {
-  margin-left: 10px;
-}
-.radio-option {
-  margin-left: 20px;
-}
 .input-field {
-  margin-left: 10px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.radio-option {
+  margin-right: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#genbut {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 10px;
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#genbut:hover {
+  background-color: #4fa8d7;
 }
 
 .modal {

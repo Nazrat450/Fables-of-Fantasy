@@ -116,20 +116,20 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   return (
     <div>
       {!character ? (
-        <div class= "CharacterGen">
-          <input type="text" placeholder="First Name" class="input-field" value={firstName} onChange={e => setFirstName(e.target.value)} />
-          <input type="text" placeholder="Last Name" class="input-field" value={lastName} onChange={e => setLastName(e.target.value)} />
+        <div className= "CharacterGen">
+          <input type="text" placeholder="First Name" className="input-field" value={firstName} onChange={e => setFirstName(e.target.value)} />
+          <input type="text" placeholder="Last Name" className="input-field" value={lastName} onChange={e => setLastName(e.target.value)} />
           
           <label>
-            <input type="radio" name="gender" class="radio-option" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" className="radio-option" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
             Male
           </label>
           <label>
-            <input type="radio" name="gender" class="radio-option" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" className="radio-option" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
             Female
           </label>
           <label>
-            <input type="radio" name="gender" class="radio-option" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
+            <input type="radio" name="gender" className="radio-option" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
             Non-Binary  
           </label>
 

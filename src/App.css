@@ -13,6 +13,8 @@
   .App {
     flex-direction: column;
     padding: 5px;
+    height: auto; 
+    margin: 10px 0; 
   }
 
   .App-log {
@@ -20,12 +22,34 @@
   }
 
   .App-log textarea {
-    height: 200px; /* reduced height for mobile */
+    height: 200px;
   }
 
   .CharacterGen {
-    width: 100%; /* full width for mobile */
-    padding: 10px; /* reduced padding */
+    width: 95%; 
+    padding: 10px;
+    margin-top: 20px; 
+  }
+
+  label {
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 10px;
+  }
+
+  .radio-option {
+    margin-right: 10px;
+  }
+
+  .input-field {
+    width: 100%; 
+    margin-bottom: 15px; 
+  }
+
+  #genbut {
+    width: 100%; 
+    margin-left: 0; 
+    margin-top: 10px; 
   }
 }
 

@@ -89,7 +89,7 @@
 }
 
 .CharacterGen {
-  width: 30%;
+  width: 30%vw;
   padding: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -98,6 +98,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
+
 }
 
 .input-field {
@@ -119,6 +120,7 @@ label {
   margin-bottom: 10px;
   font-size: 16px; 
   line-height: 24px; 
+  
 }
 
 #genbut {
@@ -132,6 +134,7 @@ label {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
+ 
 }
 
 #genbut:hover {

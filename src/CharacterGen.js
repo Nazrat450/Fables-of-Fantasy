@@ -9,16 +9,7 @@ const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halflin
 const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger"];
 const locations = [];
 
-const ClassSelectionModal = ({ onClassSelect }) => (
-  <div className="modal">
-    <div className="modal-content">
-      <h4>Select your class:</h4>
-      <button onClick={() => onClassSelect('Warrior')}>Warrior</button>
-      <button onClick={() => onClassSelect('Wizard')}>Wizard</button>
-      <button onClick={() => onClassSelect('Rogue')}>Rogue</button>
-    </div>
-  </div>
-);
+
 
 
 const heightRanges = {
@@ -61,6 +52,29 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
+  const getClassMessage = (selectedClass) => {
+    switch(selectedClass) {
+      case 'Warrior':
+        return "Warrior, huh? Finally, someone who can open that pesky jar of pickles!";
+      case 'Rogue':
+        return "Rogue? Sneakily done! But remember, it's all fun and games until someone loses a loot bag.";
+      case 'Wizard':
+        return "Picked Wizard, did you? Just remember, 'Abracadabra' won't fix your credit score!";
+      default:
+        return ""; // Return an empty string if no match (or you can have a default message)
+    }
+  };
+
+  const ClassSelectionModal = ({ onClassSelect }) => (
+    <div className="modal">
+      <div className="modal-content">
+        <h4>Select your class:</h4>
+        <button onClick={() => onClassSelect('Warrior')}>Warrior</button>
+        <button onClick={() => onClassSelect('Wizard')}>Wizard</button>
+        <button onClick={() => onClassSelect('Rogue')}>Rogue</button>
+      </div>
+    </div>
+  );
 
   useEffect(() => {
     const resetHandler = () => {
@@ -83,7 +97,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       return;
     }
   
-
+    
   
     
 
@@ -159,13 +173,16 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
         
       )}
       <div>
+        
       {showClassModal && (
     <ClassSelectionModal
-      onClassSelect={(selectedClass) => {
-        setCharacter(prev => ({ ...prev, Class: selectedClass }));
-        setShowClassModal(false);
-      }}
-    />
+    onClassSelect={(selectedClass) => {
+      const classMessage = getClassMessage(selectedClass);
+      setLogMessage(prevLog => prevLog + "\n" + classMessage);
+      setCharacter(prev => ({ ...prev, Class: selectedClass }));
+      setShowClassModal(false);
+    }}
+  />
   )}
     
   </div>

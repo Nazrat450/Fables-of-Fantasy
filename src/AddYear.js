@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+
 const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
   
@@ -242,7 +243,7 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) 
         Age: prevCharacter.Age + 1
       }));
 
-      setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${character.Age + 1} years old.</strong><br> ${summary}`);
+      setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${character.Age + 1} years old:</strong><br> ${summary}`);
     }
   };
 

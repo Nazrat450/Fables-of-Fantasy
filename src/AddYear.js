@@ -3,6 +3,7 @@ import './App.css';
 
 const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) => {
   const [isDead, setIsDead] = useState(false);
+  const [yearsAsFrog, setYearsAsFrog] = useState(0);
   
 
   const yearSummaries = [
@@ -210,12 +211,15 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) 
     "Borrowed a dryad's favorite branch. She was stumped.",
     "Mispronounced a spell and summoned a bunny horde.",
     "Attempted to out-prank a leprechaun. Room's still upside-down.",
+    "I attempted to do a gold digger prank on a witch.. she turned me into a frog."
 ];
 
 
-  const getRandomSummary = () => {
-    return yearSummaries[Math.floor(Math.random() * yearSummaries.length)];
-  };
+  
+const getRandomSummary = () => {
+  const randomIndex = Math.floor(Math.random() * yearSummaries.length);
+  return yearSummaries[randomIndex];
+};
 
   const handleAgeIncrement = () => {
     if (character) {
@@ -232,11 +236,39 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) 
         setShowClassModal(true); // use the passed down prop function
         return;
       }
-
+      
       let summary = "";
-      if (character.Age > 15 && Math.random() < 0.30) { // 30% chance after age 15
-        summary = getRandomSummary();
+      summary = "";
+    
+    if (character.Age > 15 && Math.random() < 0.30) { // 30% chance after age 15
+     summary = getRandomSummary();
+     
+     if (summary === "I attempted to do a gold digger prank on a witch.. she turned me into a frog.") {
+      // Save the original race if the character is being turned into a 
+      
+      if (character.Race !== 'Frog') {
+        setCharacter(prevCharacter => ({
+          ...prevCharacter,
+          OriginalRace: prevCharacter.Race,
+          Race: 'Frog',
+        
+        }));
+       
       }
+      setYearsAsFrog(1);
+    } else if (yearsAsFrog > 0) {
+      setYearsAsFrog(prevYears => prevYears - 1);
+      if (yearsAsFrog === 1) {
+        // Revert race back to original
+        setCharacter(prevCharacter => ({
+          ...prevCharacter,
+          Race: prevCharacter.OriginalRace // revert to the original race
+        }));
+      }
+    }
+   
+    }
+    
 
       setCharacter(prevCharacter => ({
         ...prevCharacter,
@@ -244,7 +276,12 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) 
       }));
 
       setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${character.Age + 1} years old:</strong><br> ${summary}`);
+      
     }
+    
+    
+
+  
   };
 
   const handleRestart = () => {
@@ -269,7 +306,8 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage }) 
   }
 
   return (
-    <button onClick={handleAgeIncrement}>Add a Year</button>
+   <button onClick={handleAgeIncrement}>Add a Year</button>
+    
   );
 
 };

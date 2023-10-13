@@ -5,11 +5,35 @@ const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 
 
-const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen", "Fairy"];
+const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen", "Fairy",];
 const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger"];
 const locations = [];
+const motherNames = ["Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara", "Nora", "Tara"];
+const fatherNames = ["Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan"];
+
+const occupations = ["bakers", "blacksmiths", "farmers", "merchants", "knights", "scholars", "tailors", "healers", "minstrels"];
+const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "unknown"];
 
 
+
+
+
+
+const generateParentBackstory = () => {
+  const motherName = motherNames[Math.floor(Math.random() * motherNames.length)];
+  const fatherName = fatherNames[Math.floor(Math.random() * fatherNames.length)];
+
+  const motherOccupation = occupations[Math.floor(Math.random() * occupations.length)];
+  const fatherOccupation = occupations[Math.floor(Math.random() * occupations.length)];
+  
+  const status = statuses[Math.floor(Math.random() * statuses.length)];
+
+  return {
+      motherName,
+      fatherName,
+      backstory: `Before you were born, your mother, ${motherName}, was one of the town's most skilled ${motherOccupation} while your father, ${fatherName}, was known for being a talented ${fatherOccupation}. They were considered ${status} in the community. Their life was filled with adventures and stories, and now, it's your turn to create your own legacy.`
+  };
+}
 
 
 const heightRanges = {
@@ -31,7 +55,8 @@ const heightRanges = {
     Triton: [160, 190],
     Rockmen: [100, 110],
     Plantmen: [130, 160],
-    Fairy: [90, 120]
+    Fairy: [90, 120],
+    Frog: [5, 10]
 };
 
 const getHairColor = (race) => {
@@ -101,8 +126,10 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   
     
 
-    const race = races[Math.floor(Math.random() * races.length)];
-
+    let race = races[Math.floor(Math.random() * races.length)];
+    do {
+      race = races[Math.floor(Math.random() * races.length)];
+    } while (race === "Frog"); // This loop will continue to pick a random race until it's not "Frog"
     const newCharacter = {
       FirstName: firstName,
       LastName: lastName,
@@ -120,17 +147,20 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       Wisdom: getRandomStat(),
       Charisma: getRandomStat(),
       HairColor: getHairColor(race),
-      Height: getRandomHeight(race)
+      Height: getRandomHeight(race),
+      
+      
     };
-
+  
+    const parentDetails = generateParentBackstory();
     setCharacter(newCharacter);
-    setLogMessage(prevLog => prevLog + "\n" + firstName + " " + lastName + " Welcome to the world!");
+    setLogMessage(prevLog => prevLog + "\n" + "<strong>You Are Born</strong>" + "\n" + firstName + " " + lastName + " Welcome to the world!" + "\n" + parentDetails.backstory);
   };
   
   return (
     <div>
       {!character ? (
-        <div className= "CharacterGen">
+        <div className= "Nameform">
           <input type="text" placeholder="First Name" className="input-field" value={firstName} onChange={e => setFirstName(e.target.value)} />
           <input type="text" placeholder="Last Name" className="input-field" value={lastName} onChange={e => setLastName(e.target.value)} />
           
@@ -153,12 +183,14 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
         
       ) : (
         
-        <div>
-          <h1>Active Character: {character.FirstName} {character.LastName}</h1>
+        <div className= "stats">
+          <h1>{character.FirstName} {character.LastName}</h1>
           <p>Age: {character.Age}</p>
           <p>Gender: {character.Gender}</p>
           {character.Class && <p>Class: {character.Class}</p>}
-          <p>Race: {character.Race}</p>
+          <p className={character.Race === "Frog" ? "selectedRace" : ""}>
+            Race: {character.Race}
+          </p>
           <p>Health: {character.Health}%</p>
           <p>Looks: {character.Looks}%</p>
           {character.HairColor && <p>Hair Color: {character.HairColor}</p>}

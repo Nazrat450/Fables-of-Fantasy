@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-log">
-      <textarea ref={textareaRef} readOnly placeholder={logMessage}></textarea>
+      <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
       <AddYear character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
       </div>
       <div className="CharacterGen">

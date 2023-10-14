@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ChronoSaga/static/css/main.0f9c9f06.css",
-    "main.js": "/ChronoSaga/static/js/main.d2fb9e04.js",
+    "main.css": "/ChronoSaga/static/css/main.e8521e71.css",
+    "main.js": "/ChronoSaga/static/js/main.560815db.js",
     "static/js/787.3c00c20a.chunk.js": "/ChronoSaga/static/js/787.3c00c20a.chunk.js",
     "index.html": "/ChronoSaga/index.html",
-    "main.0f9c9f06.css.map": "/ChronoSaga/static/css/main.0f9c9f06.css.map",
-    "main.d2fb9e04.js.map": "/ChronoSaga/static/js/main.d2fb9e04.js.map",
+    "main.e8521e71.css.map": "/ChronoSaga/static/css/main.e8521e71.css.map",
+    "main.560815db.js.map": "/ChronoSaga/static/js/main.560815db.js.map",
     "787.3c00c20a.chunk.js.map": "/ChronoSaga/static/js/787.3c00c20a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f9c9f06.css",
-    "static/js/main.d2fb9e04.js"
+    "static/css/main.e8521e71.css",
+    "static/js/main.560815db.js"
   ]
 }

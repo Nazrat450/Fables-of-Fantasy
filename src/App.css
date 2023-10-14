@@ -70,7 +70,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.App-log button {
+.App-log #addyearbut {
   position: absolute;
   bottom: -50px;
   left: 50%;
@@ -202,4 +202,71 @@ label {
   transition: all 0.5s ease;
   transform: scale(2) rotate(360deg);
   
+}
+
+.inventory-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #ffffff;
+  border: 1px solid #888;
+  width: 80%; 
+  max-width: 400px; 
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.inventory-modal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.inventory-modal-close:hover,
+.inventory-modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#pack{
+ width: 40px;
+ height: 40px;
+ 
+}
+
+#packbut{
+  margin-left: 400px;
+  
+
+}
+.age-five-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  width: 300px;
+  text-align: center;
+  z-index: 1000;
+  color: #000;
+  
+}
+
+.App-log .age-five-popup button {
+  background-color: #4CAF50; /* Green background */
+  border: none;              /* No border */
+  color: white;              /* White text */
+  padding: 10px 20px;        /* Padding */
+  text-align: center;        /* Center text */
+  text-decoration: none;    /* No underlines */
+  display: inline-block;     /* Display as inline-block */
+  margin: 4px 2px;           /* Some margin */
+  cursor: pointer;           /* Cursor as pointer */
+  border-radius: 16px;       /* Rounded corners */
 }

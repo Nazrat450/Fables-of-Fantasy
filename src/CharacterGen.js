@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { addItemToInventory } from './Inventory';
 
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
@@ -201,6 +202,11 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
           <p>Intelligence: {character.Intelligence}</p>
           <p>Wisdom: {character.Wisdom}</p>
           <p>Charisma: {character.Charisma}</p>
+          {/* Inventory test buttons */}
+{/* 
+  <button onClick={() => addItemToInventory("Sword")}>Add Sword</button>
+  <button onClick={() => addItemToInventory("Potion")}>Add Potion</button>
+*/}
         </div>
         
       )}

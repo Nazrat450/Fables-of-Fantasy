@@ -2,6 +2,8 @@ import CharacterGen from './CharacterGen';
 import './App.css';
 import React from 'react';
 
+
+
 export const inventory = [];
 
 export const addItemToInventory = (item) => {
@@ -14,6 +16,7 @@ export const removeItemFromInventory = (item) => {
     inventory.splice(index, 1);
   }
 }
+
 
 
 export const InventoryComponent = (props) => {

@@ -35,6 +35,7 @@
     display: flex; 
     justify-content: space-between; 
     margin-bottom: 10px;
+    
   }
 
   .radio-option {
@@ -183,20 +184,20 @@ label {
   border-radius: 10px; 
 }
 .Nameform {
-  width: 22vw; /* Set explicit width */
-  height: 60vh; /* Set explicit height */
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: #fff;
-  color: #333;
-  overflow: hidden; /* or auto if you want scrollbars */
-  flex-direction: column;
-  margin-right: 20px;
-  text-align: center;
+  
+    width: 100%; 
+    height: 100%; 
+    margin: 0;
+   border-color: #000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    color: #333;
+    overflow: hidden; /* or auto if you want scrollbars */
+    flex-direction: column;
+    text-align: center;
+  }
 
-
-}
 .selectedRace {
   color: greenyellow;
   transition: all 0.5s ease;

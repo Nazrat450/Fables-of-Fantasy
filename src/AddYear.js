@@ -81,6 +81,7 @@ const getRandomSummary = () => {
       
       let summary = "";
       summary = "";
+      
     
     if (character.Age > 15 && Math.random() < 0.30) { // 30% chance after age 15
      summary = getRandomSummary();

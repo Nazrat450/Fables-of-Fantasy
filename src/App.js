@@ -1,10 +1,10 @@
-
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import CharacterGen from './CharacterGen';
 import AddYear from './AddYear';
-import React, { useState, useRef, useEffect } from 'react';
 import { InventoryComponent } from './Inventory';
 import backpackimg from "./Img/backpack.png";
+import Wallet from './wallet';
 
 const inventoryicon = backpackimg
 
@@ -13,8 +13,21 @@ function App() {
   const [character, setCharacter] = useState(null);
   const [showClassModal, setShowClassModal] = useState(false);
   const [showInventory, setShowInventory] = useState(false);
+  const [coins, setCoins] = useState(0);
 
   const textareaRef = useRef(null);
+
+
+const addCoins = (amount) => {setCoins(prevCoins => prevCoins + amount);
+};
+const spendCoins = (amount) => {
+  if (coins >= amount) {
+    setCoins(prevCoins => prevCoins - amount);
+  } else {
+    alert("Not enough coins!");
+  }
+};
+
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -24,9 +37,10 @@ function App() {
 
   return (
     <div className="App">
+      <Wallet coins={coins} addCoins={addCoins} />
       <div className="App-log">
       <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
-      <AddYear character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
+      <AddYear character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} setCoins={setCoins} />
       </div>
       <div className="CharacterGen">
       <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
@@ -35,8 +49,9 @@ function App() {
       </button>
         {showInventory && <InventoryComponent closeModal={() => setShowInventory(false)} />}
       </div>
+    
       
-    </div>
+</div>
   );
   
 }

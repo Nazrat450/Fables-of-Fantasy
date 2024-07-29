@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/ChronoSaga/static/css/main.c38b3580.css",
-    "main.js": "/ChronoSaga/static/js/main.73e09a56.js",
+    "main.css": "/ChronoSaga/static/css/main.bf9e0c39.css",
+    "main.js": "/ChronoSaga/static/js/main.d258c424.js",
     "static/js/787.3c00c20a.chunk.js": "/ChronoSaga/static/js/787.3c00c20a.chunk.js",
     "static/media/backpack.png": "/ChronoSaga/static/media/backpack.6c443133cd4cca21c0bb.png",
+    "static/media/logo.png": "/ChronoSaga/static/media/logo.9de979851edea5fa8de2.png",
     "static/media/yearSummaries.txt": "/ChronoSaga/static/media/yearSummaries.2f6cfa05955a6bb07dec.txt",
     "index.html": "/ChronoSaga/index.html",
-    "main.c38b3580.css.map": "/ChronoSaga/static/css/main.c38b3580.css.map",
-    "main.73e09a56.js.map": "/ChronoSaga/static/js/main.73e09a56.js.map",
+    "main.bf9e0c39.css.map": "/ChronoSaga/static/css/main.bf9e0c39.css.map",
+    "main.d258c424.js.map": "/ChronoSaga/static/js/main.d258c424.js.map",
     "787.3c00c20a.chunk.js.map": "/ChronoSaga/static/js/787.3c00c20a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c38b3580.css",
-    "static/js/main.73e09a56.js"
+    "static/css/main.bf9e0c39.css",
+    "static/js/main.d258c424.js"
   ]
 }

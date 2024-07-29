@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/ChronoSaga/static/css/main.bf9e0c39.css",
-    "main.js": "/ChronoSaga/static/js/main.d258c424.js",
-    "static/js/787.3c00c20a.chunk.js": "/ChronoSaga/static/js/787.3c00c20a.chunk.js",
-    "static/media/backpack.png": "/ChronoSaga/static/media/backpack.6c443133cd4cca21c0bb.png",
-    "static/media/logo.png": "/ChronoSaga/static/media/logo.9de979851edea5fa8de2.png",
-    "static/media/yearSummaries.txt": "/ChronoSaga/static/media/yearSummaries.2f6cfa05955a6bb07dec.txt",
-    "index.html": "/ChronoSaga/index.html",
-    "main.bf9e0c39.css.map": "/ChronoSaga/static/css/main.bf9e0c39.css.map",
-    "main.d258c424.js.map": "/ChronoSaga/static/js/main.d258c424.js.map",
-    "787.3c00c20a.chunk.js.map": "/ChronoSaga/static/js/787.3c00c20a.chunk.js.map"
+    "main.css": "/Fables-of-Fantasy/static/css/main.bf9e0c39.css",
+    "main.js": "/Fables-of-Fantasy/static/js/main.c4fecfc6.js",
+    "static/js/787.3c00c20a.chunk.js": "/Fables-of-Fantasy/static/js/787.3c00c20a.chunk.js",
+    "static/media/backpack.png": "/Fables-of-Fantasy/static/media/backpack.6c443133cd4cca21c0bb.png",
+    "static/media/logo.png": "/Fables-of-Fantasy/static/media/logo.9de979851edea5fa8de2.png",
+    "static/media/yearSummaries.txt": "/Fables-of-Fantasy/static/media/yearSummaries.2f6cfa05955a6bb07dec.txt",
+    "index.html": "/Fables-of-Fantasy/index.html",
+    "main.bf9e0c39.css.map": "/Fables-of-Fantasy/static/css/main.bf9e0c39.css.map",
+    "main.c4fecfc6.js.map": "/Fables-of-Fantasy/static/js/main.c4fecfc6.js.map",
+    "787.3c00c20a.chunk.js.map": "/Fables-of-Fantasy/static/js/787.3c00c20a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bf9e0c39.css",
-    "static/js/main.d258c424.js"
+    "static/js/main.c4fecfc6.js"
   ]
 }

@@ -228,9 +228,6 @@ export default function BlacksmithMiniGame({ onResult }) {
             ))}
           </div>
           <div style={{ margin: '18px 0' }}>
-            <button className="blacksmith-btn" onClick={handleHammer}>
-              Slam Hammer!
-            </button>
           </div>
           <div className="blacksmith-score">Score: {score}</div>
           <div className="blacksmith-message">{message}</div>

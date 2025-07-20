@@ -26,19 +26,19 @@ function App() {
   const [coins, setCoins] = useState(0);
   const [showShop, setShowShop] = useState(false);
   const [shopMessage, setShopMessage] = useState('');
-  const [inventory, setInventory] = useState([]); // Add inventory state
+  const [inventory, setInventory] = useState([]);
   const [showDice, setShowDice] = useState(false);
   const [diceCallback, setDiceCallback] = useState(null);
   const [haggleItem, setHaggleItem] = useState(null);
   const [haggleOffer, setHaggleOffer] = useState('');
   const [haggleResult, setHaggleResult] = useState(null);
   const [diceResultText, setDiceResultText] = useState('');
-  const [haggledItems, setHaggledItems] = useState([]); // Add this state
+  const [haggledItems, setHaggledItems] = useState([]);
   const [job, setJob] = useState(null);
   const [showJob, setShowJob] = useState(false);
   const [showSocial, setShowSocial] = useState(false);
-  const [metPeople, setMetPeople] = useState([]); // You can add to this array as the player meets new people
-  const [yearsAsFrog, setYearsAsFrog] = useState(0); // <-- add this
+  const [metPeople, setMetPeople] = useState([]);
+  const [yearsAsFrog, setYearsAsFrog] = useState(0);
 
   const textareaRef = useRef(null);
 
@@ -74,7 +74,7 @@ const spendCoins = (amount) => {
   setCoins={setCoins}
   setCharacter={setCharacter}
   setYearsAsFrog={setYearsAsFrog}
-  setJob={setJob} // <-- add this
+  setJob={setJob}
 />
       <div className="MainContent">
         <div className="App-log">
@@ -93,7 +93,7 @@ const spendCoins = (amount) => {
   yearsAsFrog={yearsAsFrog}
   setYearsAsFrog={setYearsAsFrog}
   inventory={inventory}
-  setInventory={setInventory} // <-- Add this line!
+  setInventory={setInventory}
 />
         </div>
         <div className="CharacterGen">

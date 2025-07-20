@@ -6,6 +6,12 @@ import { InventoryComponent } from './Inventory';
 import backpackimg from "./Img/backpack.png";
 import Wallet from './wallet';
 import logoimg from "./Img/logo.png";
+import Menu from './Menu';
+import DiceRoll from './DiceRoll';
+import Shop from './Shop';
+import Job from './Job';
+import Social from './Social';
+import DevOptions from './DevOptions';
 
 const inventoryicon = backpackimg
 const logoicon = logoimg
@@ -18,6 +24,21 @@ function App() {
   const [showClassModal, setShowClassModal] = useState(false);
   const [showInventory, setShowInventory] = useState(false);
   const [coins, setCoins] = useState(0);
+  const [showShop, setShowShop] = useState(false);
+  const [shopMessage, setShopMessage] = useState('');
+  const [inventory, setInventory] = useState([]); // Add inventory state
+  const [showDice, setShowDice] = useState(false);
+  const [diceCallback, setDiceCallback] = useState(null);
+  const [haggleItem, setHaggleItem] = useState(null);
+  const [haggleOffer, setHaggleOffer] = useState('');
+  const [haggleResult, setHaggleResult] = useState(null);
+  const [diceResultText, setDiceResultText] = useState('');
+  const [haggledItems, setHaggledItems] = useState([]); // Add this state
+  const [job, setJob] = useState(null);
+  const [showJob, setShowJob] = useState(false);
+  const [showSocial, setShowSocial] = useState(false);
+  const [metPeople, setMetPeople] = useState([]); // You can add to this array as the player meets new people
+  const [yearsAsFrog, setYearsAsFrog] = useState(0); // <-- add this
 
   const textareaRef = useRef(null);
 
@@ -39,28 +60,126 @@ const spendCoins = (amount) => {
     }
   }, [logMessage]);
 
+  // Helper to get age from character
+  const getAge = () => character?.Age || 0;
+
   return (
     <div className="App">
       <div className="Logo">
         <img id="logo" src={logoicon} alt="Logo" />
       </div>
       <Wallet coins={coins} addCoins={addCoins} />
+      <DevOptions
+  character={character}
+  setCoins={setCoins}
+  setCharacter={setCharacter}
+  setYearsAsFrog={setYearsAsFrog}
+  setJob={setJob} // <-- add this
+/>
       <div className="MainContent">
         <div className="App-log">
+          <div className="welcome-message">
+            Welcome to Fables of Fantasy!
+          </div>
           <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
-          <AddYear character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} setCoins={setCoins} />
+          <AddYear
+  character={character}
+  setCharacter={setCharacter}
+  showClassModal={showClassModal}
+  setShowClassModal={setShowClassModal}
+  setLogMessage={setLogMessage}
+  setCoins={setCoins}
+  job={job}
+  yearsAsFrog={yearsAsFrog}
+  setYearsAsFrog={setYearsAsFrog}
+  inventory={inventory}
+  setInventory={setInventory} // <-- Add this line!
+/>
         </div>
         <div className="CharacterGen">
           <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
-          <button id="packbut" onClick={() => setShowInventory(!showInventory)}>
-            <img id="pack" src={inventoryicon} alt="Backpack" />
-          </button>
-          {showInventory && <InventoryComponent closeModal={() => setShowInventory(false)} />}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'absolute', bottom: 20, right: 20 }}>
+            <button id="packbut" onClick={() => setShowInventory(!showInventory)}>
+              <img id="pack" src={inventoryicon} alt="Backpack" />
+            </button>
+            <Menu
+              onShopClick={() => { setShopMessage(''); setShowShop(true); }}
+              onDiceClick={() => setShowDice(true)}
+              onJobClick={() => setShowJob(true)}
+              onSocialClick={() => setShowSocial(true)}
+            />
+          </div>
+          {showInventory && (
+            <InventoryComponent
+              closeModal={() => setShowInventory(false)}
+              inventory={inventory}
+            />
+          )}
         </div>
       </div>
+      {showShop && (
+        <Shop
+          coins={coins}
+          setCoins={setCoins}
+          inventory={inventory}
+          setInventory={setInventory}
+          character={character}
+          getAge={getAge}
+          showShop={showShop}
+          setShowShop={setShowShop}
+          showDice={showDice}
+          setShowDice={setShowDice}
+          diceCallback={diceCallback}
+          setDiceCallback={setDiceCallback}
+          diceResultText={diceResultText}
+          setDiceResultText={setDiceResultText}
+          shopMessage={shopMessage}
+          setShopMessage={setShopMessage}
+          setLogMessage={setLogMessage}
+        />
+      )}
+      {showJob && (
+        <Job
+          character={character}
+          job={job}
+          setJob={setJob}
+          coins={coins}
+          setCoins={setCoins}
+          showJob={showJob}
+          setShowJob={setShowJob}
+          showDice={showDice}
+          setShowDice={setShowDice}
+          diceCallback={diceCallback}
+          setDiceCallback={setDiceCallback}
+          diceResultText={diceResultText}
+          setDiceResultText={setDiceResultText}
+          setLogMessage={setLogMessage}
+          setInventory={setInventory} // <-- Make sure this is here!
+        />
+      )}
+      {showSocial && (
+        <>
+          <div className="menu-drawer-backdrop" onClick={() => setShowSocial(false)} />
+          <Social
+            show={showSocial}
+            onClose={() => setShowSocial(false)}
+            character={character}
+            metPeople={metPeople}
+          />
+        </>
+      )}
+      {showDice && (
+        <>
+          <div className="menu-drawer-backdrop" onClick={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }} />
+          <DiceRoll
+            onClose={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }}
+            onResult={diceCallback}
+            resultText={diceResultText}
+          />
+        </>
+      )}
     </div>
   );
-  
 }
 
 export default App;

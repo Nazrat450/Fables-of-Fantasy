@@ -20,15 +20,22 @@ export const removeItemFromInventory = (item) => {
 
 
 export const InventoryComponent = (props) => {
-    return (
-      <div className="inventory-modal">
-        <span className="inventory-modal-close" onClick={props.closeModal}>&times;</span>
-        <h2>Your Inventory</h2>
-        <ul>
-          {inventory.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+  const { inventory = [], closeModal } = props;
+  return (
+    <div className="inventory-modal">
+      <span className="inventory-modal-close" onClick={closeModal}>&times;</span>
+      <h2>Your Inventory</h2>
+      <div className="inventory-grid">
+        {inventory.length === 0 ? (
+          <p>Your inventory is empty.</p>
+        ) : (
+          inventory.map((item, index) => (
+            <div className="inventory-item" key={index}>
+              {item.name}
+            </div>
+          ))
+        )}
       </div>
-    );
-  };
+    </div>
+  );
+};

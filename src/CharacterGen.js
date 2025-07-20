@@ -87,7 +87,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       case 'Wizard':
         return "Picked Wizard, did you? Just remember, 'Abracadabra' won't fix your credit score!";
       default:
-        return ""; // Return an empty string if no match (or you can have a default message)
+        return "";
     }
   };
 
@@ -108,10 +108,8 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       setLastName('');
       setGender('');
     };
-    // Add the event listener for the event
     window.addEventListener('characterReset', resetHandler);
 
-    // Clean up the listener when the component is unmounted
     return () => {
       window.removeEventListener('characterReset', resetHandler);
     };
@@ -122,21 +120,19 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       alert('Please provide all details.');
       return;
     }
-  
-    
-  
-    
 
     let race = races[Math.floor(Math.random() * races.length)];
     do {
       race = races[Math.floor(Math.random() * races.length)];
-    } while (race === "Frog"); // This loop will continue to pick a random race until it's not "Frog"
+    } while (race === "Frog");
+
+    const parentDetails = generateParentBackstory();
+
     const newCharacter = {
       FirstName: firstName,
       LastName: lastName,
       Class: null,
       Age: 0,
-      Class: null,
       Race: race,
       Gender: gender,
       Health: 100,
@@ -149,15 +145,17 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       Charisma: getRandomStat(),
       HairColor: getHairColor(race),
       Height: getRandomHeight(race),
-      
-      
+      MotherName: parentDetails.motherName,
+      FatherName: parentDetails.fatherName  
     };
-  
-    const parentDetails = generateParentBackstory();
+
     setCharacter(newCharacter);
     setLogMessage(prevLog => prevLog + "\n" + "<strong>You Are Born</strong>" + "\n" + firstName + " " + lastName + " Welcome to the world!" + "\n" + parentDetails.backstory);
   };
   
+  const statColor = value => value >= 15 ? "#39ff14" : value <= 5 ? "#d32f2f" : "#333";
+  const statClass = value => value >= 15 ? "stat-green" : value <= 5 ? "stat-red" : "stat-normal";
+
   return (
     <div>
       {!character ? (
@@ -184,29 +182,40 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
         
       ) : (
         
-        <div className= "stats">
+        <div className= "stats-card">
           <h1>{character.FirstName} {character.LastName}</h1>
-          <p>Age: {character.Age}</p>
-          <p>Gender: {character.Gender}</p>
-          {character.Class && <p>Class: {character.Class}</p>}
-          <p className={character.Race === "Frog" ? "selectedRace" : ""}>
-            Race: {character.Race}
-          </p>
-          <p>Health: {character.Health}%</p>
-          <p>Looks: {character.Looks}%</p>
-          {character.HairColor && <p>Hair Color: {character.HairColor}</p>}
-          {character.Age >= 21 && <p>Height: {character.Height} cm</p>}
-          <p>Strength: {character.Strength}</p>
-          <p>Dexterity: {character.Dexterity}</p>
-          <p>Constitution: {character.Constitution}</p>
-          <p>Intelligence: {character.Intelligence}</p>
-          <p>Wisdom: {character.Wisdom}</p>
-          <p>Charisma: {character.Charisma}</p>
-          {/* Inventory test buttons */}
-{/* 
-  <button onClick={() => addItemToInventory("Sword")}>Add Sword</button>
-  <button onClick={() => addItemToInventory("Potion")}>Add Potion</button>
-*/}
+          <div className="basic-info">
+            <p><strong>Age:</strong> {character.Age}</p>
+            <p><strong>Gender:</strong> {character.Gender}</p>
+            {character.Class && <p><strong>Class:</strong> {character.Class}</p>}
+            <p className={character.Race === "Frog" ? "selectedRace" : ""}>
+              <strong>Race:</strong> {character.Race} {character.Race === "Frog" ? "🐸" : ""}
+            </p>
+            <p><strong>Health:</strong> {character.Health}%</p>
+            <p><strong>Looks:</strong> {character.Looks}%</p>
+            {character.HairColor && <p><strong>Hair Color:</strong> {character.HairColor}</p>}
+            {character.Age >= 21 && <p><strong>Height:</strong> {character.Height} cm</p>}
+          </div>
+          <div className="stats-grid">
+            <div className={statClass(character.Strength)}>
+              <span role="img" aria-label="Strength">💪</span> <span className="stat-label">Strength:</span> <span className="stat-value">{character.Strength}</span>
+            </div>
+            <div className={statClass(character.Dexterity)}>
+              <span role="img" aria-label="Dexterity">🤸</span> <span className="stat-label">Dexterity:</span> <span className="stat-value">{character.Dexterity}</span>
+            </div>
+            <div className={statClass(character.Constitution)}>
+              <span role="img" aria-label="Constitution">🛡️</span> <span className="stat-label">Constitution:</span> <span className="stat-value">{character.Constitution}</span>
+            </div>
+            <div className={statClass(character.Intelligence)}>
+              <span role="img" aria-label="Intelligence">🧠</span> <span className="stat-label">Intelligence:</span> <span className="stat-value">{character.Intelligence}</span>
+            </div>
+            <div className={statClass(character.Wisdom)}>
+              <span role="img" aria-label="Wisdom">🦉</span> <span className="stat-label">Wisdom:</span> <span className="stat-value">{character.Wisdom}</span>
+            </div>
+            <div className={statClass(character.Charisma)}>
+              <span role="img" aria-label="Charisma">🗣️</span> <span className="stat-label">Charisma:</span> <span className="stat-value">{character.Charisma}</span>
+            </div>
+          </div>
         </div>
         
       )}

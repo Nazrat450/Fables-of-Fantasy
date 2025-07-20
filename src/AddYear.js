@@ -5,9 +5,19 @@ import yearSummariesFile from './yearSummaries.txt';
 import { inventory } from './Inventory';
 import Wallet from './wallet';
 
-const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage, setCoins }) => { 
+const AddYear = ({ 
+  character, 
+  setCharacter, 
+  setShowClassModal, 
+  setLogMessage, 
+  setCoins, 
+  job, 
+  yearsAsFrog, 
+  setYearsAsFrog, 
+  inventory, 
+  setInventory 
+}) => { 
   const [isDead, setIsDead] = useState(false);
-  const [yearsAsFrog, setYearsAsFrog] = useState(0);
   const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState(null);
   const [yearSummaries, setYearSummaries] = useState([]);
@@ -41,57 +51,83 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage, se
   };
 
   const handleAgeIncrement = () => {
-    if (character) {
-      if (character.Age > 50) {
-        const deathChance = Math.random();
-        if (deathChance < 0.10) {
-          setIsDead(true);
-          setLogMessage(prevLog => prevLog + "\n" + character.FirstName + " " + character.LastName + " has died.");
-          return;
-        }
-      }
-      if (character.Age === 5 && !character.hasSelectedWeapon) {
-        setShowAgeFivePopup(true);
+    if (!character || typeof character.Age !== "number") return;
+
+    // Death logic
+    if (character.Age > 50) {
+      const deathChance = Math.random();
+      if (deathChance < 0.10) {
+        setIsDead(true);
+        setLogMessage(prevLog => prevLog + "\n" + character.FirstName + " " + character.LastName + " has died.");
         return;
       }
-
-      if (character.Age === 17 && !character.Class) {
-        setShowClassModal(true);
-        return;
-      }
-
-      let summary = "";
-      if (character.Age > 15 && Math.random() < 0.30) {
-        summary = getRandomSummary();
-        if (summary.includes("gold digger prank on a witch")) {
-          if (character.Race !== 'Frog') {
-            setCharacter(prevCharacter => ({
-              ...prevCharacter,
-              OriginalRace: prevCharacter.Race,
-              Race: 'Frog',
-            }));
-          }
-          setYearsAsFrog(1);
-        } else if (yearsAsFrog > 0) {
-          setYearsAsFrog(prevYears => prevYears - 1);
-          if (yearsAsFrog === 1) {
-            setCharacter(prevCharacter => ({
-              ...prevCharacter,
-              Race: prevCharacter.OriginalRace
-            }));
-          }
-        }
-      }
-
-      setCharacter(prevCharacter => ({
-        ...prevCharacter,
-        Age: prevCharacter.Age + 1
-      }));
-
-      setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${character.Age + 1} years old:</strong><br> ${summary}`);
-
-    
     }
+    if (character.Age === 5 && !character.hasSelectedWeapon) {
+      setShowAgeFivePopup(true);
+      return;
+    }
+    if (character.Age === 17 && !character.Class) {
+      setShowClassModal(true);
+      return;
+    }
+
+    let summary = "";
+    // Random event logic
+    if (character.Age > 15 && Math.random() < 0.30) {
+      summary = getRandomSummary();
+      if (summary.includes("gold digger prank on a witch")) {
+        if (character.Race !== 'Frog') {
+          setCharacter(prevCharacter => ({
+            ...prevCharacter,
+            OriginalRace: prevCharacter.Race,
+            Race: 'Frog',
+          }));
+        }
+        setYearsAsFrog(2);
+      }
+    }
+
+    // Decrement frog years every year if currently a frog
+    if (character.Race === 'Frog' && yearsAsFrog > 0) {
+      setYearsAsFrog(prevYears => {
+        const newYears = prevYears - 1;
+        if (newYears === 0) {
+          setCharacter(prevCharacter => ({
+            ...prevCharacter,
+            Race: prevCharacter.OriginalRace || prevCharacter.Race
+          }));
+        }
+        return newYears;
+      });
+    }
+
+    // Calculate new age BEFORE updating character
+    const newAge = character.Age + 1;
+
+    setCharacter(prevCharacter => ({
+      ...prevCharacter,
+      Age: newAge
+    }));
+
+    // Pie expiration logic
+    if (inventory && inventory.length > 0) {
+      const expiredPies = inventory.filter(item => item.addedYear !== undefined && item.addedYear <= newAge - 1);
+      if (expiredPies.length > 0) {
+        setInventory(prev => prev.filter(item => item.addedYear === undefined || item.addedYear > newAge - 1));
+        if (expiredPies.length === 1) {
+          setLogMessage(prevLog => prevLog + `<br> Ew, a pie expired in my bag. Better throw that out.`);
+        } else {
+          setLogMessage(prevLog => prevLog + `<br> Ewwww, a bunch of pies expired in my inventory!`);
+        }
+      }
+    }
+
+    // Add job pay for the year
+    if (job && job.pay) {
+      setCoins(prev => prev + job.pay * 52);
+    }
+
+    setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${newAge} years old:</strong><br> ${summary}`);
   };
 
   const handleRestart = () => {
@@ -102,7 +138,7 @@ const AddYear = ({ character, setCharacter, setShowClassModal, setLogMessage, se
       setLogMessage("");
       setCoins(0);
       setSelectedWeapon(null);
-      inventory.length = 0;
+      setInventory([]);
       const resetEvent = new Event('characterReset', { 'bubbles': true });
       window.dispatchEvent(resetEvent);
     }

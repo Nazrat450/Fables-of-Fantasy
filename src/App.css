@@ -34,49 +34,71 @@
   .App {
     flex-direction: column;
     padding: 5px;
-    height: auto; 
-    margin: 10px 0; 
+    height: auto;
+    margin: 10px 0;
   }
 
-  .App-log {
-    margin-bottom: 20px;
-  }
-
-  .App-log textarea {
-    height: 200px;
-  }
-
-  .CharacterGen {
-    width: 95%; 
-    padding: 10px;
-    margin-top: 20px; 
-    position: relative;
-  }
-
-  label {
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 10px;
-  }
-
-  .radio-option {
-    margin-right: 10px;
-  }
-
-  .input-field {
-    width: 100%; 
-    margin-bottom: 15px; 
-  }
-
-  #genbut {
-    width: 100%; 
-    margin-left: 0; 
-    margin-top: 10px; 
+  .Logo img {
+    width: 120px;
   }
 
   .MainContent {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+  }
+
+  .App-log {
+    margin-right: 0;
+    width: 95vw;
+    min-width: 0;
+  }
+
+  .logDiv {
+    width: 95vw;
+    height: 30vh;
+    font-size: 1em;
+  }
+
+  .CharacterGen {
+    width: 95vw;
+    height: auto;
+    padding: 10px;
+    margin-top: 20px;
+    position: static;
+  }
+
+  .stats-card {
+    max-width: 95vw;
+    padding: 10px;
+  }
+
+  .shop-modal, .dice-modal, .inventory-modal {
+    width: 95vw;
+    max-width: 95vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+  }
+
+  .rythm-track {
+    width: 98vw !important;
+    min-width: 0;
+    max-width: 98vw;
+    height: 180px;
+  }
+
+  .blacksmith-game, .baker-mini-game {
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  button, .blacksmith-btn, .baker-btn {
+    font-size: 1.1em;
+    padding: 10px 18px;
+  }
+  .blacksmith-score, .blacksmith-message, .blacksmith-instructions {
+    font-size: 1em;
   }
 }
 

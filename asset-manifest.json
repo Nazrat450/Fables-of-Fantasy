@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Fables-of-Fantasy/static/css/main.f20cb0e1.css",
+    "main.css": "/Fables-of-Fantasy/static/css/main.4b0a6f57.css",
     "main.js": "/Fables-of-Fantasy/static/js/main.e65b1292.js",
     "static/js/787.3c00c20a.chunk.js": "/Fables-of-Fantasy/static/js/787.3c00c20a.chunk.js",
     "static/media/Track2.mp3": "/Fables-of-Fantasy/static/media/Track2.ff22fa7e18dc62397499.mp3",
@@ -9,12 +9,12 @@
     "static/media/logo.png": "/Fables-of-Fantasy/static/media/logo.9de979851edea5fa8de2.png",
     "static/media/yearSummaries.txt": "/Fables-of-Fantasy/static/media/yearSummaries.2f6cfa05955a6bb07dec.txt",
     "index.html": "/Fables-of-Fantasy/index.html",
-    "main.f20cb0e1.css.map": "/Fables-of-Fantasy/static/css/main.f20cb0e1.css.map",
+    "main.4b0a6f57.css.map": "/Fables-of-Fantasy/static/css/main.4b0a6f57.css.map",
     "main.e65b1292.js.map": "/Fables-of-Fantasy/static/js/main.e65b1292.js.map",
     "787.3c00c20a.chunk.js.map": "/Fables-of-Fantasy/static/js/787.3c00c20a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f20cb0e1.css",
+    "static/css/main.4b0a6f57.css",
     "static/js/main.e65b1292.js"
   ]
 }

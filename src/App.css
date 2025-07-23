@@ -212,20 +212,98 @@ label {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(34,34,34,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1100;
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #fffbe7 80%, #61dafb 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(97,218,251,0.18);
+  padding: 32px 24px 24px 24px;
+  min-width: 280px;
+  max-width: 380px;
   text-align: center;
+  color: #222;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  position: relative;
+  animation: bakerFadeIn 0.7s;
+}
+
+.modal-content h2 {
+  font-size: 2em;
+  color: #61dafb;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.modal-content p {
+  font-size: 1.15em;
+  margin: 8px 0;
+  color: #333;
+}
+
+.modal-content button {
+  background: linear-gradient(90deg, #ff9800 60%, #ffe066 100%);
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  margin-top: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #ffe06688;
+  transition: transform 0.1s;
+}
+
+.modal-content button:active {
+  transform: scale(0.95);
+}
+
+/* Relationship bar for social modal */
+.modal-content .relationship-bar {
+  background: #eee;
+  border-radius: 8px;
+  height: 18px;
+  width: 80%;
+  margin: 0 auto 12px auto;
+  box-shadow: 0 2px 8px #61dafb22;
+  position: relative;
+}
+.modal-content .relationship-fill {
+  background: linear-gradient(90deg, #61dafb 60%, #39ff14 100%);
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+.modal-content .relationship-label {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  color: #222;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    min-width: 0;
+    max-width: 95vw;
+    padding: 16px 6vw;
+  }
+  .modal-content h2 {
+    font-size: 1.3em;
+  }
+  .modal-content p {
+    font-size: 1em;
+  }
 }
 
 .input-field, .radio-option {

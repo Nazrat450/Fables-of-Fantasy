@@ -17,9 +17,6 @@ const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "
 
 
 
-
-
-
 const generateParentBackstory = () => {
   const motherName = motherNames[Math.floor(Math.random() * motherNames.length)];
   const fatherName = fatherNames[Math.floor(Math.random() * fatherNames.length)];
@@ -61,7 +58,7 @@ const heightRanges = {
 };
 
 const getHairColor = (race) => {
-    const racesWithHair = ["Human", "Dwarf", "Elf", "Orc", "Halfling", "Rockmen", "Tiefling", "Goliath"];
+    const racesWithHair = ["Human", "Dwarf", "Elf", "Orc", "Halfling", "Rockmen", "Tiefling", "Goliath", "Fairy"];
     if (racesWithHair.includes(race)) {
       return hairColors[Math.floor(Math.random() * hairColors.length)];
     }
@@ -153,7 +150,6 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
     setLogMessage(prevLog => prevLog + "\n" + "<strong>You Are Born</strong>" + "\n" + firstName + " " + lastName + " Welcome to the world!" + "\n" + parentDetails.backstory);
   };
   
-  const statColor = value => value >= 15 ? "#39ff14" : value <= 5 ? "#d32f2f" : "#333";
   const statClass = value => value >= 15 ? "stat-green" : value <= 5 ? "stat-red" : "stat-normal";
 
   return (

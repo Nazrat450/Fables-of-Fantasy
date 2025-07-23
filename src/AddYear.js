@@ -15,8 +15,9 @@ const AddYear = ({
   yearsAsFrog, 
   setYearsAsFrog, 
   inventory, 
-  setInventory 
-}) => { 
+  setInventory,
+  setSocialSheets
+ }) => { 
   const [isDead, setIsDead] = useState(false);
   const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState(null);
@@ -108,6 +109,22 @@ const AddYear = ({
       ...prevCharacter,
       Age: newAge
     }));
+
+    // Increment parent ages in socialSheets
+    if (typeof setSocialSheets === "function") {
+      setSocialSheets(prevSheets => {
+        const updated = { ...prevSheets };
+        Object.keys(updated).forEach(name => {
+          if (
+            (character.MotherName && name.includes(character.MotherName)) ||
+            (character.FatherName && name.includes(character.FatherName))
+          ) {
+            updated[name] = { ...updated[name], Age: updated[name].Age + 1 };
+          }
+        });
+        return updated;
+      });
+    }
 
     // Pie expiration logic
     if (inventory && inventory.length > 0) {

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "lost_dog",
+    "ageMin": 6,
+    "ageMax": 12,
+    "prompt": "The young adventurer spots a lost dog in the village square. What do they do?",
+    "options": [
+      {
+        "text": "Try to find the owner.",
+        "outcome": "I searched for the dog's owner and reunited them. The villagers praised my kindness.",
+        "outcomeId": "1"
+      },
+      {
+        "text": "Keep the dog as a companion.",
+        "outcome": "I decided to keep the dog. Now I have a loyal friend by my side.",
+        "outcomeId": "2"
+      },
+      {
+        "text": "Ignore the dog.",
+        "outcome": "I ignored the dog and continued on my way. Maybe someone else will help.",
+        "outcomeId": "3"
+      },
+      {
+        "text": "Feed the dog some food.",
+        "outcome": "I fed the dog. It wagged its tail and followed me for a while.",
+        "outcomeId": "4"
+      }
+    ]
+  },
+  {
+    "id": "mysterious_cat",
+    "ageMin": 8,
+    "ageMax": 12,
+    "prompt": "The young adventurer notices a mysterious cat watching them from a rooftop. What do they do?",
+    "options": [
+      {
+        "text": "Try to approach the cat.",
+        "outcome": "I tried to approach the cat, but it leapt away gracefully, disappearing into the alley.",
+        "outcomeId": "1"
+      },
+      {
+        "text": "Offer the cat some food.",
+        "outcome": "I offered the cat some food. It jumped down, ate, and rubbed against my leg before vanishing.",
+        "outcomeId": "2"
+      },
+      {
+        "text": "Ignore the cat.",
+        "outcome": "I ignored the cat and continued on my way, but I felt its eyes on me for a while.",
+        "outcomeId": "3"
+      },
+      {
+        "text": "Try to mimic the cat's movements.",
+        "outcome": "I tried to mimic the cat's movements. It seemed amused and watched me for a moment then said 'No one will ever believe you.' It then bit me and ran away.",
+        "outcomeId": "4"
+      }
+    ]
+  }
+]

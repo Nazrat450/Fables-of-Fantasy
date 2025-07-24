@@ -20,7 +20,8 @@ const Social = ({
     `${motherName} ${lastName}`,
     `${fatherName} ${lastName}`
   ];
-  const people = metPeople && metPeople.length > 0 ? metPeople : parents;
+  const parentObjects = parents.map(name => ({ name, clickable: true }));
+  const people = [...parentObjects, ...(metPeople || [])];
 
   return (
     <>
@@ -28,20 +29,21 @@ const Social = ({
         <span className="menu-drawer-close" onClick={onClose}>&times;</span>
         <h3 className="menu-title">Social Circle</h3>
         <ul style={{ padding: 0, listStyle: 'none', marginTop: '18px' }}>
-          {people.map((name, idx) => (
+          {people.map((person, idx) => (
             <li key={idx}
               style={{
-                background: '#333',
-                color: '#61dafb',
+                background: person.clickable === false ? '#222' : '#333',
+                color: person.clickable === false ? '#aaa' : '#61dafb',
                 borderRadius: '6px',
                 padding: '10px 16px',
                 marginBottom: '10px',
                 fontWeight: 'bold',
-                fontSize: '1.1em'
+                fontSize: '1.1em',
+                cursor: person.clickable === false ? 'default' : 'pointer'
               }}
-              onClick={() => onPersonClick && onPersonClick(name)}
+              onClick={person.clickable === false ? undefined : () => onPersonClick && onPersonClick(person.name)}
             >
-              {name}
+              {person.name}
             </li>
           ))}
         </ul>

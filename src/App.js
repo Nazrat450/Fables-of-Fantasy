@@ -12,6 +12,7 @@ import Shop from './Shop';
 import Job from './Job';
 import Social from './Social';
 import DevOptions from './DevOptions';
+import RandomEventWidget from './RandomEventWidget';
 
 const inventoryicon = backpackimg
 const logoicon = logoimg
@@ -41,6 +42,8 @@ function App() {
   const [yearsAsFrog, setYearsAsFrog] = useState(0);
   const [socialSheets, setSocialSheets] = useState({});
   const [showSocialSheet, setShowSocialSheet] = useState(null); // stores the name to show
+  const [showRandomEvent, setShowRandomEvent] = useState(false);
+  const [usedEventIds, setUsedEventIds] = useState(new Set());
 
   const textareaRef = useRef(null);
 
@@ -97,6 +100,7 @@ const spendCoins = (amount) => {
   inventory={inventory}
   setInventory={setInventory}
   setSocialSheets={setSocialSheets}
+  setMetPeople={setMetPeople}
 />
         </div>
         <div className="CharacterGen">
@@ -220,6 +224,21 @@ const spendCoins = (amount) => {
             onClose={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }}
             onResult={diceCallback}
             resultText={diceResultText}
+          />
+        </>
+      )}
+      {showRandomEvent && character && (
+        <>
+          <div className="menu-drawer-backdrop" onClick={() => setShowRandomEvent(false)} />
+          <RandomEventWidget
+            age={character.Age}
+            onLog={msg => setLogMessage(prev => prev + msg)}
+            onClose={eventId => {
+              setUsedEventIds(prev => [...prev, eventId]);
+              setShowRandomEvent(false);
+            }}
+            usedEventIds={usedEventIds}
+            setMetPeople={setMetPeople}
           />
         </>
       )}

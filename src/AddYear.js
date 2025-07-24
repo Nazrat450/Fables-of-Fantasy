@@ -3,6 +3,7 @@ import './App.css';
 import { addItemToInventory } from './Inventory';
 import yearSummariesFile from './yearSummaries.txt';
 import Wallet from './wallet';
+import RandomEventWidget from './RandomEventWidget';
 
 const AddYear = ({ 
   character, 
@@ -15,12 +16,15 @@ const AddYear = ({
   setYearsAsFrog, 
   inventory, 
   setInventory,
-  setSocialSheets
+  setSocialSheets,
+  setMetPeople
  }) => { 
   const [isDead, setIsDead] = useState(false);
   const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState(null);
   const [yearSummaries, setYearSummaries] = useState([]);
+  const [showRandomEvent, setShowRandomEvent] = useState(false);
+  const [usedEventIds, setUsedEventIds] = useState([]);
 
   useEffect(() => {
     fetch(yearSummariesFile)
@@ -165,6 +169,11 @@ const AddYear = ({
     }
 
     setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${newAge} years old:</strong><br> ${summary}`);
+
+    // Random event trigger
+    if (Math.random() < 0.05) {
+      setShowRandomEvent(true);
+    }
   };
 
   const handleRestart = () => {
@@ -214,6 +223,18 @@ const AddYear = ({
           <button onClick={() => handleWeaponSelection('Stick Staff')}>Staff</button>
           <button onClick={() => handleWeaponSelection('Broken Stick')}>Dual Blades</button>
         </div>
+      )}
+      {showRandomEvent && (
+        <RandomEventWidget
+          age={character.Age}
+          onLog={msg => setLogMessage(prev => prev + msg)}
+          onClose={eventId => {
+            setUsedEventIds(prev => [...prev, eventId]);
+            setShowRandomEvent(false);
+          }}
+          usedEventIds={usedEventIds}
+          setMetPeople={setMetPeople}
+        />
       )}
     </>
   );

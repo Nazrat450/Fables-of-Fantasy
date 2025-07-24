@@ -54,5 +54,33 @@
         "outcomeId": "4"
       }
     ]
+  },
+  {
+    "id": "strange_coin",
+    "ageMin": 9,
+    "ageMax": 15,
+    "prompt": "The young adventurer discovers a strange, glowing coin lying in the middle of the road. What do they do?",
+    "options": [
+      {
+        "text": "Pick up the coin.",
+        "outcome": "I picked up the coin. It felt warm in my hand and I suddenly felt a little luckier.",
+        "outcomeId": "1"
+      },
+      {
+        "text": "Leave the coin alone.",
+        "outcome": "I decided to leave the coin where it was. Sometimes it's best not to mess with mysterious things.",
+        "outcomeId": "2"
+      },
+      {
+        "text": "Show the coin to a nearby merchant.",
+        "outcome": "I showed the coin to a merchant. They gasped and offered me a rare item in exchange.",
+        "outcomeId": "3"
+      },
+      {
+        "text": "Bury the coin for safekeeping.",
+        "outcome": "I buried the coin under a tree, marking the spot. Maybe I'll return for it one day.",
+        "outcomeId": "4"
+      }
+    ]
   }
 ]

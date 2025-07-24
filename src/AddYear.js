@@ -205,6 +205,10 @@ const AddYear = ({
         "it's my imagination and determination that truly define my destiny");
   }
 
+  if (!character) {
+    return null;
+  }
+
   if (isDead) {
     return (
       <div>

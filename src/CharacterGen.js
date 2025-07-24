@@ -11,6 +11,8 @@ const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger
 const locations = [ "RiverWood"];
 const motherNames = ["Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara", "Nora", "Tara"];
 const fatherNames = ["Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan"];
+const furColors = ["Brown", "Black", "White", "Gray", "Spotted", "Striped"];
+const scaleColors = ["Green", "Blue", "Red", "Black", "White", "Gold", "Silver"];
 
 const occupations = ["bakers", "blacksmiths", "farmers", "merchants", "knights", "scholars", "tailors", "healers", "minstrels"];
 const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "unknown"];
@@ -61,6 +63,22 @@ const getHairColor = (race) => {
     const racesWithHair = ["Human", "Dwarf", "Elf", "Orc", "Halfling", "Rockmen", "Tiefling", "Goliath", "Fairy"];
     if (racesWithHair.includes(race)) {
       return hairColors[Math.floor(Math.random() * hairColors.length)];
+    }
+    return null;
+};
+
+const getFurColor = (race) => {
+    const racesWithFur = ["Tabaxi"]
+    if (racesWithFur.includes(race)) {
+      return furColors[Math.floor(Math.random() * furColors.length)];
+    }
+    return null;
+};
+
+const getScaleColor = (race) => {
+    const racesWithScales = ["DragonBorn", "Lizardfolk", "Triton", "Sharkmen", "Axolotl"];
+    if (racesWithScales.includes(race)) {
+      return scaleColors[Math.floor(Math.random() * scaleColors.length)];
     }
     return null;
 };
@@ -141,6 +159,8 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       Wisdom: getRandomStat(),
       Charisma: getRandomStat(),
       HairColor: getHairColor(race),
+      FurColor: getFurColor(race),
+      ScaleColor: getScaleColor(race),
       Height: getRandomHeight(race),
       MotherName: parentDetails.motherName,
       FatherName: parentDetails.fatherName  
@@ -190,6 +210,8 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
             <p><strong>Health:</strong> {character.Health}%</p>
             <p><strong>Looks:</strong> {character.Looks}%</p>
             {character.HairColor && <p><strong>Hair Color:</strong> {character.HairColor}</p>}
+            {character.FurColor && <p><strong>Fur Color:</strong> {character.FurColor}</p>}
+            {character.ScaleColor && <p><strong>Scale Color:</strong> {character.ScaleColor}</p>}
             {character.Age >= 21 && <p><strong>Height:</strong> {character.Height} cm</p>}
           </div>
           <div className="stats-grid">

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { addItemToInventory } from './Inventory';
 import yearSummariesFile from './yearSummaries.txt';
-import { inventory } from './Inventory';
 import Wallet from './wallet';
 
 const AddYear = ({ 
@@ -35,11 +34,32 @@ const AddYear = ({
       });
   }, []);
 
+  const popupMessage = `As the young adventurer ventured through the mystical forest, keen eyes caught a glimmer of something on the forest floor. 
+  They bent down to examine it, and to many, it may appear as just a simple stick, but to them, it held the potential for greatness. 
+  In their hands, this unassuming branch transformed into a powerful sword, capable of defending against formidable foes, or perhaps it became a wizard's staff, channeling arcane energies to shape reality itself.
+  Alternatively, their dexterity allowed them to snap the stick in two, revealing dual blades fit for a skilled rogue. In a world where ordinary objects hold extraordinary potential, 
+  it's the imagination and determination of the beholder that truly defines their destiny.`;
+
   const handleWeaponSelection = (weapon) => {
-    addItemToInventory(weapon);
+    setInventory(prev => [...prev, { name: weapon }]);
     setSelectedWeapon(weapon);
     setShowAgeFivePopup(false);
-    setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} has selected a ${weapon}:</strong><br>`);
+
+    let customMessage = "";
+    if (weapon === "Stick Sword") {
+      customMessage = `${character.FirstName} found a Powerful sword, the kids at kinder will bow before its might:`;
+    } else if (weapon === "Stick Staff") {
+      customMessage = `${character.FirstName} found the Mightest Staff anyone has ever seen, you feel the awesome power eminating from it:`;
+    } else if (weapon === "Broken Stick") {
+      customMessage = `${character.FirstName} found not one but two of the sharpest blades known to the realm, wait until dad gets a look at these:`;
+    }
+
+    setLogMessage(prevLog =>
+      prevLog +
+      `<br><strong>${customMessage}</strong><br>` +
+      `${toFirstPerson(popupMessage)}`
+    );
+
     setCharacter(prevCharacter => ({
       ...prevCharacter,
       hasSelectedWeapon: true, 
@@ -161,6 +181,21 @@ const AddYear = ({
     }
   };
 
+  const toFirstPerson = (msg) => {
+    return msg
+      .replace(/the young adventurer/g, "I")
+      .replace(/keen eyes caught/g, "my keen eyes caught")
+      .replace(/They bent down to examine it/g, "I bent down to examine it")
+      .replace(/to many, it may appear as just a simple stick, but to them, it held the potential for greatness/g,
+        "to many, it may appear as just a simple stick, but to me, it held the potential for greatness")
+      .replace(/In their hands, this unassuming branch transformed into/g, "In my hands, this unassuming branch transformed into")
+      .replace(/perhaps it became/g, "or perhaps it became")
+      .replace(/their dexterity allowed them to snap the stick in two/g, "my dexterity allowed me to snap the stick in two")
+      .replace(/fit for a skilled rogue/g, "fit for a skilled rogue")
+      .replace(/it'?s the imagination and determination of the beholder that truly defines their destiny/g,
+        "it's my imagination and determination that truly define my destiny");
+  }
+
   if (isDead) {
     return (
       <div>
@@ -174,11 +209,7 @@ const AddYear = ({
       <button id="addyearbut" onClick={handleAgeIncrement}>Add a Year</button>
       {showAgeFivePopup && (
         <div className="age-five-popup">
-          <p>"As you venture through the mystical forest, your keen eyes catch a glimmer of something on the forest floor. 
-            You bend down to examine it, and to many, it may appear as just a simple stick, but to you, it holds the potential for greatness. 
-            In your hands, this unassuming branch transforms into a powerful sword, capable of defending against formidable foes, or perhaps it becomes a wizard's staff, channeling arcane energies to shape reality itself.
-            Alternatively, your dexterity allows you to snap the stick in two, revealing dual blades fit for a skilled rogue. In a world where ordinary objects hold extraordinary potential, 
-            it's the imagination and determination of the beholder that truly defines their destiny."</p>
+          <p>{popupMessage}</p>
           <button onClick={() => handleWeaponSelection('Stick Sword')}>Sword</button>
           <button onClick={() => handleWeaponSelection('Stick Staff')}>Staff</button>
           <button onClick={() => handleWeaponSelection('Broken Stick')}>Dual Blades</button>

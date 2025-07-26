@@ -13,6 +13,7 @@ const motherNames = ["Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara"
 const fatherNames = ["Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan"];
 const furColors = ["Brown", "Black", "White", "Gray", "Spotted", "Striped"];
 const scaleColors = ["Green", "Blue", "Red", "Black", "White", "Gold", "Silver"];
+const featherColors = ["Brown", "Black", "White", "Gray", "Blue", "Green", "Red"];
 
 const occupations = ["bakers", "blacksmiths", "farmers", "merchants", "knights", "scholars", "tailors", "healers", "minstrels"];
 const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "unknown"];

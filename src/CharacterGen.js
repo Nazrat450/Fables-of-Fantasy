@@ -82,6 +82,13 @@ const getScaleColor = (race) => {
     }
     return null;
 };
+const getFeatherColor = (race) => {
+    const racesWithFeathers = ["Aarakocra", "Kenku"];
+    if (racesWithFeathers.includes(race)) {
+      return featherColors[Math.floor(Math.random() * featherColors.length)];
+    }
+    return null;
+};
 
 const getRandomHeight = (race) => {
     const [minHeight, maxHeight] = heightRanges[race];
@@ -161,6 +168,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       HairColor: getHairColor(race),
       FurColor: getFurColor(race),
       ScaleColor: getScaleColor(race),
+      FeatherColor: getFeatherColor(race),
       Height: getRandomHeight(race),
       MotherName: parentDetails.motherName,
       FatherName: parentDetails.fatherName  
@@ -212,6 +220,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
             {character.HairColor && <p><strong>Hair Color:</strong> {character.HairColor}</p>}
             {character.FurColor && <p><strong>Fur Color:</strong> {character.FurColor}</p>}
             {character.ScaleColor && <p><strong>Scale Color:</strong> {character.ScaleColor}</p>}
+            {character.FeatherColor && <p><strong>Feather Color:</strong> {character.FeatherColor}</p>}
             {character.Age >= 21 && <p><strong>Height:</strong> {character.Height} cm</p>}
           </div>
           <div className="stats-grid">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getRandomHeight } from './CharacterGen';
 
 const DevOptions = ({ character, setCoins, setCharacter, setYearsAsFrog, setJob }) => {
   if (!character || `${character.FirstName} ${character.LastName}`.toLowerCase() !== "devon toole") {
@@ -11,7 +12,8 @@ const DevOptions = ({ character, setCoins, setCharacter, setYearsAsFrog, setJob 
     setCharacter(prev => ({
       ...prev,
       OriginalRace: prev.Race,
-      Race: "Frog"
+      Race: "Frog",
+      Height: getRandomHeight("Frog")
     }));
     if (setYearsAsFrog) setYearsAsFrog(2);
   };
@@ -41,6 +43,7 @@ const DevOptions = ({ character, setCoins, setCharacter, setYearsAsFrog, setJob 
       <button onClick={handleTurnToFrog} style={{ marginLeft: 10 }}>Turn to Frog</button>
       <button onClick={handleBecomeBaker} style={{ marginLeft: 10, background: "#ffe066", color: "#333" }}>Become Baker</button>
       <button onClick={handleBecomeBlacksmith} style={{ marginLeft: 10, background: "#ff9800", color: "#fff" }}>Become Blacksmith</button>
+      {character.Age >= 21 && <p><strong>Height:</strong> {character.Height} cm</p>}
     </div>
   );
 };

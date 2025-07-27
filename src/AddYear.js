@@ -4,6 +4,7 @@ import { addItemToInventory } from './Inventory';
 import yearSummariesFile from './yearSummaries.txt';
 import Wallet from './wallet';
 import RandomEventWidget from './RandomEventWidget';
+import { heightRanges, getRandomHeight } from './CharacterGen';
 
 const AddYear = ({ 
   character, 
@@ -106,6 +107,7 @@ const AddYear = ({
             ...prevCharacter,
             OriginalRace: prevCharacter.Race,
             Race: 'Frog',
+            Height: getRandomHeight('Frog')
           }));
         }
         setYearsAsFrog(2);
@@ -119,7 +121,8 @@ const AddYear = ({
         if (newYears === 0) {
           setCharacter(prevCharacter => ({
             ...prevCharacter,
-            Race: prevCharacter.OriginalRace || prevCharacter.Race
+            Race: prevCharacter.OriginalRace || prevCharacter.Race,
+            Height: getRandomHeight(prevCharacter.OriginalRace || prevCharacter.Race) // Restore original height
           }));
         }
         return newYears;

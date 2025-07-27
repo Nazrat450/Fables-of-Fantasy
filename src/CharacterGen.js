@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import parentBackstories from './parentBackstories.json';
 
 const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
@@ -9,8 +9,26 @@ const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 const races = ["Human", "Dwarf", "Elf", "DragonBorn", "Axolotl", "Orc", "Halfling", "Sharkmen", "Rockmen", "Tiefling", "Aarakocra", "Goliath", "Tabaxi", "Firbolg", "Kenku", "Lizardfolk", "Plantmen", "Fairy",];
 const hairColors = ["Blonde", "Brown", "Black", "White", "Pink", "Blue", "Ginger"];
 const locations = [ "RiverWood"];
-const motherNames = ["Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara", "Nora", "Tara"];
-const fatherNames = ["Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan"];
+const motherNames = [
+  "Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara", "Nora", "Tara",
+  "Vivienne", "Isolde", "Maeve", "Seraphina", "Rowan", "Thalia", "Cassandra", "Ophelia", "Lyra",
+  "Astrid", "Freya", "Juniper", "Calista", "Daphne", "Evelyn", "Hazel", "Iris", "Juno",
+  "Kiera", "Luna", "Maris", "Odette", "Penelope", "Quinn", "Rhea", "Sable", "Tamsin",
+  "Vesper", "Willow", "Yara", "Zinnia", "Briony", "Coraline", "Delphine", "Esme", "Faye",
+  "Adeline", "Beatrix", "Celeste", "Dahlia", "Eira", "Florence", "Greta", "Helena", "Ingrid",
+  "Jessamine", "Katya", "Leona", "Magnolia", "Nadine", "Olive", "Phoebe", "Rosalind", "Saskia",
+  "Tabitha", "Uma", "Valeria", "Winona", "Xenia", "Yvette", "Zelda", "Blythe", "Cleo", "Demi"
+];
+const fatherNames = [
+  "Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan",
+  "Lucian", "Magnus", "Orion", "Percival", "Quentin", "Ronan", "Soren", "Theron", "Ulric",
+  "Valen", "Wystan", "Xander", "Yorick", "Zane", "Bram", "Cedric", "Darius", "Evander",
+  "Finnian", "Gideon", "Hawke", "Jasper", "Kellan", "Leander", "Merrick", "Niall", "Oberon",
+  "Phineas", "Quill", "Rafe", "Silas", "Tobin", "Vaughn", "Wynn", "Zephyr", "Alaric",
+  "Benedict", "Cassian", "Damon", "Edric", "Felix", "Galen", "Hugo", "Ivor", "Julius",
+  "Kai", "Lysander", "Milo", "Nestor", "Oscar", "Piers", "Quincy", "Remus", "Stellan",
+  "Tristan", "Uriah", "Victor", "Weston", "Xavier", "Yannis", "Zebulon", "Archer", "Basil", "Cyrus"
+];
 const furColors = ["Brown", "Black", "White", "Gray", "Spotted", "Striped"];
 const scaleColors = ["Green", "Blue", "Red", "Black", "White", "Gold", "Silver"];
 const featherColors = ["Brown", "Black", "White", "Gray", "Blue", "Green", "Red"];
@@ -23,19 +41,25 @@ const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "
 const generateParentBackstory = () => {
   const motherName = motherNames[Math.floor(Math.random() * motherNames.length)];
   const fatherName = fatherNames[Math.floor(Math.random() * fatherNames.length)];
-
   const motherOccupation = occupations[Math.floor(Math.random() * occupations.length)];
   const fatherOccupation = occupations[Math.floor(Math.random() * occupations.length)];
-  
   const status = statuses[Math.floor(Math.random() * statuses.length)];
 
+  // Pick a random template
+  const templateObj = parentBackstories[Math.floor(Math.random() * parentBackstories.length)];
+  let backstory = templateObj.template
+    .replace('{motherName}', motherName)
+    .replace('{fatherName}', fatherName)
+    .replace('{motherOccupation}', motherOccupation)
+    .replace('{fatherOccupation}', fatherOccupation)
+    .replace('{status}', status);
+
   return {
-      motherName,
-      fatherName,
-      backstory: `Before you were born, your mother, ${motherName}, was one of the town's most skilled ${motherOccupation} while your father, ${fatherName}, was known for being a talented ${fatherOccupation}. They were considered ${status} in the community. Their life was filled with adventures and stories, and now, it's your turn to create your own legacy.`
+    motherName,
+    fatherName,
+    backstory
   };
 }
-
 
 const heightRanges = {
     Human: [150, 200],
@@ -83,6 +107,7 @@ const getScaleColor = (race) => {
     }
     return null;
 };
+
 const getFeatherColor = (race) => {
     const racesWithFeathers = ["Aarakocra", "Kenku"];
     if (racesWithFeathers.includes(race)) {
@@ -222,7 +247,9 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
             {character.FurColor && <p><strong>Fur Color:</strong> {character.FurColor}</p>}
             {character.ScaleColor && <p><strong>Scale Color:</strong> {character.ScaleColor}</p>}
             {character.FeatherColor && <p><strong>Feather Color:</strong> {character.FeatherColor}</p>}
-            {character.Age >= 21 && <p><strong>Height:</strong> {character.Height} cm</p>}
+            {(character.Age >= 21 || character.Race === "Frog") && (
+              <p><strong>Height:</strong> {character.Height} cm</p>
+            )}
           </div>
           <div className="stats-grid">
             <div className={statClass(character.Strength)}>
@@ -266,4 +293,5 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   );
 };
 
+export { heightRanges, getRandomHeight };
 export default CharacterGen;

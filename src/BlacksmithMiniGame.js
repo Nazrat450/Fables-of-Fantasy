@@ -186,7 +186,7 @@ export default function BlacksmithMiniGame({ onResult }) {
     <div className="blacksmith-game">
       <h3 style={{ fontSize: '2em', color: '#ff9800', marginBottom: 10 }}>Blacksmith Rhythm Mini-Game</h3>
       {!started && countdown === null && (
-        <button className="blacksmith-btn" onClick={handleStart} style={{ fontSize: '1.4em', marginBottom: 18 }}>
+        <button className="fantasy-button" onClick={handleStart} style={{ fontSize: '1.4em', marginBottom: 18 }}>
           Start Mini-Game
         </button>
       )}

@@ -20,11 +20,14 @@ export const removeItemFromInventory = (item) => {
 
 
 export const InventoryComponent = (props) => {
-  const { inventory = [], closeModal } = props;
+  const { inventory = [], closeModal, coins } = props;
   return (
     <div className="inventory-modal">
       <span className="inventory-modal-close" onClick={closeModal}>&times;</span>
       <h2>Your Inventory</h2>
+      <div className="mobile-wallet-display">
+        <h3>Coins: {coins || 0}</h3>
+      </div>
       <div className="inventory-grid">
         {inventory.length === 0 ? (
           <p>Your inventory is empty.</p>

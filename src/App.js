@@ -3,23 +3,38 @@ import './App.css';
 import CharacterGen from './CharacterGen';
 import AddYear from './AddYear';
 import { InventoryComponent } from './Inventory';
-import backpackimg from "./Img/backpack.png";
-import Wallet from './wallet';
-import logoimg from "./Img/logo.png";
 import Menu from './Menu';
-import DiceRoll from './DiceRoll';
 import Shop from './Shop';
 import Job from './Job';
 import Social from './Social';
+import DiceRoll from './DiceRoll';
 import DevOptions from './DevOptions';
+import Wallet from './wallet';
 import RandomEventWidget from './RandomEventWidget';
+import BakerMiniGame from './BakerMiniGame';
+import BlacksmithMiniGame from './BlacksmithMiniGame';
 
-const inventoryicon = backpackimg
-const logoicon = logoimg
+// Mobile detection hook
+const useMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  return isMobile;
+};
 
 //NEW NAME 2024 --- Fables of Fantasy//
 
 function App() {
+  const isMobile = useMobile();
   const [logMessage, setLogMessage] = useState('');
   const [character, setCharacter] = useState(null);
   const [showClassModal, setShowClassModal] = useState(false);
@@ -44,6 +59,7 @@ function App() {
   const [showSocialSheet, setShowSocialSheet] = useState(null); // stores the name to show
   const [showRandomEvent, setShowRandomEvent] = useState(false);
   const [usedEventIds, setUsedEventIds] = useState(new Set());
+  const [showMobileCharacterSheet, setShowMobileCharacterSheet] = useState(false);
 
   const textareaRef = useRef(null);
 
@@ -70,8 +86,10 @@ const spendCoins = (amount) => {
 
   return (
     <div className="App">
-      <div className="Logo">
-        <img id="logo" src={logoicon} alt="Logo" />
+      <div className="crt-scan-effect"></div>
+      <div className="reactive-logo">
+        <h1 className="logo-text">Fables of Fantasy</h1>
+        <p className="logo-subtitle">A Tale of Adventure Awaits</p>
       </div>
       <Wallet coins={coins} addCoins={addCoins} />
       <DevOptions
@@ -82,11 +100,35 @@ const spendCoins = (amount) => {
   setJob={setJob}
 />
       <div className="MainContent">
-        <div className="App-log">
-          <div className="welcome-message">
-            Welcome to Fables of Fantasy!
-          </div>
+        <div className={`App-log ${character ? 'mobile-visible' : ''}`}>
+          {character && isMobile && (
+            <div className="mobile-top-buttons">
+              <button
+                className="inventory-button"
+                onClick={() => setShowInventory(!showInventory)}
+                disabled={!character}
+              >
+                <span role="img" aria-label="Inventory">🎒</span>
+                Inventory
+              </button>
+              <Menu
+                onShopClick={() => { setShopMessage(''); setShowShop(true); }}
+                onDiceClick={() => setShowDice(true)}
+                onJobClick={() => setShowJob(true)}
+                onSocialClick={() => setShowSocial(true)}
+                disabled={!character}
+              />
+            </div>
+          )}
           <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
+          {character && (
+            <button 
+              className="mobile-character-sheet-toggle"
+              onClick={() => setShowMobileCharacterSheet(!showMobileCharacterSheet)}
+            >
+              Character Sheet
+            </button>
+          )}
           <AddYear
   character={character}
   setCharacter={setCharacter}
@@ -95,6 +137,7 @@ const spendCoins = (amount) => {
   setLogMessage={setLogMessage}
   setCoins={setCoins}
   job={job}
+  setJob={setJob}
   yearsAsFrog={yearsAsFrog}
   setYearsAsFrog={setYearsAsFrog}
   inventory={inventory}
@@ -103,28 +146,32 @@ const spendCoins = (amount) => {
   setMetPeople={setMetPeople}
 />
         </div>
-        <div className="CharacterGen">
+        <div className={`CharacterGen ${showMobileCharacterSheet ? 'mobile-visible' : ''}`}>
           <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'absolute', bottom: 20, right: 20 }}>
-            <button
-  id="packbut"
-  onClick={() => setShowInventory(!showInventory)}
-  disabled={!character}
->
-  <img id="pack" src={inventoryicon} alt="Backpack" />
-</button>
-<Menu
-  onShopClick={() => { setShopMessage(''); setShowShop(true); }}
-  onDiceClick={() => setShowDice(true)}
-  onJobClick={() => setShowJob(true)}
-  onSocialClick={() => setShowSocial(true)}
-  disabled={!character}
-/>
-          </div>
+          {!isMobile && (
+            <div className="menu-container">
+              <button
+                className="inventory-button"
+                onClick={() => setShowInventory(!showInventory)}
+                disabled={!character}
+              >
+                <span role="img" aria-label="Inventory">🎒</span>
+                Inventory
+              </button>
+              <Menu
+                onShopClick={() => { setShopMessage(''); setShowShop(true); }}
+                onDiceClick={() => setShowDice(true)}
+                onJobClick={() => setShowJob(true)}
+                onSocialClick={() => setShowSocial(true)}
+                disabled={!character}
+              />
+            </div>
+          )}
           {showInventory && (
             <InventoryComponent
               closeModal={() => setShowInventory(false)}
               inventory={inventory}
+              coins={coins}
             />
           )}
         </div>
@@ -175,6 +222,7 @@ const spendCoins = (amount) => {
           <Social
             show={showSocial}
             onClose={() => setShowSocial(false)}
+            setShowSocial={setShowSocial}
             character={character}
             metPeople={metPeople}
             onPersonClick={name => {
@@ -214,12 +262,15 @@ const spendCoins = (amount) => {
             showSocialSheet={showSocialSheet}
             setShowSocialSheet={setShowSocialSheet}
             setLogMessage={setLogMessage}
+            currentYear={character?.Age || 0}
           />
         </>
       )}
       {showDice && (
         <>
-          <div className="menu-drawer-backdrop" onClick={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }} />
+          <div className="modal-backdrop" onClick={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }} style={{
+            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 1000
+          }} />
           <DiceRoll
             onClose={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }}
             onResult={diceCallback}

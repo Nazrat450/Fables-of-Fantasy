@@ -36,11 +36,11 @@ const DiceRoll = ({ onClose, onResult, resultText }) => {
         </div>
       </div>
       {result === null ? (
-        <button className="dice-roll-btn" onClick={rollDice} disabled={rolling}>
+        <button className="fantasy-button" onClick={rollDice} disabled={rolling}>
           {rolling ? "Rolling..." : "Roll D20"}
         </button>
       ) : (
-        <button className="dice-roll-btn" onClick={onClose}>
+        <button className="fantasy-button" onClick={onClose}>
           Close
         </button>
       )}

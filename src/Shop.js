@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import DiceRoll from './DiceRoll';
 import './App.css';
 
 const Shop = ({
@@ -141,12 +140,14 @@ const Shop = ({
               <div className="shop-item" key={item.name}>
                 <span>{item.name} - {item.price} coins</span>
                 <button
+                  className="fantasy-button"
                   onClick={() => handleBuyItem(item.name, item.price)}
                   disabled={inventory.includes(item.name)}
                 >
                   Buy
                 </button>
                 <button
+                  className="fantasy-button"
                   onClick={() => handleHaggle(item)}
                   disabled={haggledItems.includes(item.name) || inventory.includes(item.name)}
                 >
@@ -172,22 +173,12 @@ const Shop = ({
               placeholder="Your offer"
               style={{padding:'6px',borderRadius:'6px',marginRight:'8px'}}
             />
-            <button onClick={rollHaggleDice}>Roll to Haggle</button>
+            <button className="fantasy-button" onClick={rollHaggleDice}>Roll to Haggle</button>
             {haggleResult && <div style={{marginTop:'8px',fontWeight:'bold'}}>{haggleResult}</div>}
           </div>
         )}
         {shopMessage && <p className="shop-message">{shopMessage}</p>}
       </div>
-      {showDice && (
-        <>
-          <div className="menu-drawer-backdrop" onClick={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }} />
-          <DiceRoll
-            onClose={() => { setShowDice(false); setDiceCallback(null); setDiceResultText(''); }}
-            onResult={diceCallback}
-            resultText={diceResultText}
-          />
-        </>
-      )}
     </>
   ) : null;
 };

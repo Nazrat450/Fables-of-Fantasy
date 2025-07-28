@@ -13,6 +13,7 @@ const AddYear = ({
   setLogMessage, 
   setCoins, 
   job, 
+  setJob,
   yearsAsFrog, 
   setYearsAsFrog, 
   inventory, 
@@ -188,6 +189,7 @@ const AddYear = ({
       setCoins(0);
       setSelectedWeapon(null);
       setInventory([]);
+      setJob(null); // Reset job
       const resetEvent = new Event('characterReset', { 'bubbles': true });
       window.dispatchEvent(resetEvent);
     }
@@ -215,20 +217,20 @@ const AddYear = ({
   if (isDead) {
     return (
       <div>
-        <button id="addyearbut" style={{ backgroundColor: 'red', color: 'white' }} onClick={handleRestart}>Restart</button>
+        <button id="addyearbut" className="fantasy-button" style={{ backgroundColor: '#d32f2f', color: 'white' }} onClick={handleRestart}>Restart</button>
       </div>
     );
   }
 
   return (
     <>
-      <button id="addyearbut" onClick={handleAgeIncrement}>Add a Year</button>
+      <button id="addyearbut" className="fantasy-button" onClick={handleAgeIncrement}>Add a Year</button>
       {showAgeFivePopup && (
         <div className="age-five-popup">
           <p>{popupMessage}</p>
-          <button onClick={() => handleWeaponSelection('Stick Sword')}>Sword</button>
-          <button onClick={() => handleWeaponSelection('Stick Staff')}>Staff</button>
-          <button onClick={() => handleWeaponSelection('Broken Stick')}>Dual Blades</button>
+          <button className="fantasy-button" onClick={() => handleWeaponSelection('Stick Sword')}>Sword</button>
+          <button className="fantasy-button" onClick={() => handleWeaponSelection('Stick Staff')}>Staff</button>
+          <button className="fantasy-button" onClick={() => handleWeaponSelection('Broken Stick')}>Dual Blades</button>
         </div>
       )}
       {showRandomEvent && (

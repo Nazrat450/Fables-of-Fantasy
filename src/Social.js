@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Visit from './Visit';
 import './App.css';
 
 const Social = ({
   show,
   onClose,
+  setShowSocial,
   character,
   metPeople,
   onPersonClick,
@@ -11,8 +13,12 @@ const Social = ({
   setSocialSheets,
   showSocialSheet,
   setShowSocialSheet,
-  setLogMessage
+  setLogMessage,
+  currentYear
 }) => {
+  const [showVisit, setShowVisit] = useState(false);
+  const [currentPerson, setCurrentPerson] = useState(null);
+  const [lastVisited, setLastVisited] = useState({});
   const motherName = character?.MotherName || "Mother";
   const fatherName = character?.FatherName || "Father";
   const lastName = character?.LastName || "Unknown";
@@ -31,14 +37,8 @@ const Social = ({
         <ul style={{ padding: 0, listStyle: 'none', marginTop: '18px' }}>
           {people.map((person, idx) => (
             <li key={idx}
+              className="menu-option"
               style={{
-                background: person.clickable === false ? '#222' : '#333',
-                color: person.clickable === false ? '#aaa' : '#61dafb',
-                borderRadius: '6px',
-                padding: '10px 16px',
-                marginBottom: '10px',
-                fontWeight: 'bold',
-                fontSize: '1.1em',
                 cursor: person.clickable === false ? 'default' : 'pointer'
               }}
               onClick={person.clickable === false ? undefined : () => onPersonClick && onPersonClick(person.name)}
@@ -49,73 +49,132 @@ const Social = ({
         </ul>
       </div>
       {showSocialSheet && socialSheets[showSocialSheet] && (
-        <div className="modal">
-          <div className="modal-content">
+        <>
+          <div className="modal-backdrop" onClick={() => setShowSocialSheet(null)} style={{
+            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 1000
+          }} />
+          <div className="social-character-sheet">
             <h2>{showSocialSheet}'s Character Sheet</h2>
-            <div style={{ margin: '16px 0' }}>
-              <div style={{
-                background: '#eee',
-                borderRadius: '8px',
-                height: '18px',
-                width: '80%',
-                margin: '0 auto',
-                boxShadow: '0 2px 8px #61dafb22',
-                position: 'relative'
-              }}>
-                <div style={{
-                  width: `${socialSheets[showSocialSheet].Relationship}%`,
-                  background: 'linear-gradient(90deg, #61dafb 60%, #39ff14 100%)',
-                  height: '100%',
-                  borderRadius: '8px',
-                  transition: 'width 0.3s'
-                }} />
-                <span style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: '0',
-                  transform: 'translateX(-50%)',
-                  color: '#222',
-                  fontWeight: 'bold',
-                  fontSize: '0.95em'
-                }}>
-                  Relationship
+            
+            <div className="relationship-section">
+              <h3>Relationship</h3>
+              <div className="relationship-bar">
+                <div 
+                  className="relationship-fill"
+                  style={{
+                    width: `${socialSheets[showSocialSheet].Relationship}%`
+                  }}
+                />
+                <span className="relationship-label">
+                  {socialSheets[showSocialSheet].Relationship}%
                 </span>
               </div>
             </div>
-            <p><strong>Race:</strong> {socialSheets[showSocialSheet].Race}</p>
-            <p><strong>Gender:</strong> {socialSheets[showSocialSheet].Gender}</p>
-            <p><strong>Age:</strong> {socialSheets[showSocialSheet].Age}</p>
-            <p><strong>Health:</strong> {socialSheets[showSocialSheet].Health}%</p>
-            <p><strong>Looks:</strong> {socialSheets[showSocialSheet].Looks}%</p>
-            <p><strong>Strength:</strong> {socialSheets[showSocialSheet].Strength}</p>
-            <p><strong>Dexterity:</strong> {socialSheets[showSocialSheet].Dexterity}</p>
-            <p><strong>Constitution:</strong> {socialSheets[showSocialSheet].Constitution}</p>
-            <p><strong>Intelligence:</strong> {socialSheets[showSocialSheet].Intelligence}</p>
-            <p><strong>Wisdom:</strong> {socialSheets[showSocialSheet].Wisdom}</p>
-            <p><strong>Charisma:</strong> {socialSheets[showSocialSheet].Charisma}</p>
-            <button
-              style={{ marginTop: '18px' }}
-              onClick={() => {
-                setSocialSheets(prev => ({
-                  ...prev,
-                  [showSocialSheet]: {
-                    ...prev[showSocialSheet],
-                    Relationship: Math.min(100, prev[showSocialSheet].Relationship + 10)
-                  }
-                }));
-                const outcomes = [
-                  `Got Dinner with ${showSocialSheet}, it was nice.`,
-                  `Got Breakfast with ${showSocialSheet}, they started ranting about Bees.`,
-                  `Got Lunch with ${showSocialSheet}. Nothing of Note happened. I bought eggs, they got toast, we did not share the meal.`
-                ];
-                setLogMessage(prev => prev + `<br>${outcomes[Math.floor(Math.random() * outcomes.length)]}`);
-              }}
-            >
-              Chat
-            </button>
-            <button onClick={() => setShowSocialSheet(null)}>Close</button>
+
+            <div className="character-stats">
+              <div className="stat-group">
+                <h3>Basic Info</h3>
+                <div className="stat-item">
+                  <span className="stat-label">Race:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Race}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Gender:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Gender}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Age:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Age}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Health:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Health}%</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Looks:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Looks}%</span>
+                </div>
+              </div>
+
+              <div className="stat-group">
+                <h3>Attributes</h3>
+                <div className="stat-item">
+                  <span className="stat-label">Strength:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Strength}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Dexterity:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Dexterity}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Constitution:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Constitution}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Intelligence:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Intelligence}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Wisdom:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Wisdom}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Charisma:</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Charisma}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="action-buttons">
+              <button
+                className="fantasy-button"
+                onClick={() => {
+                  setCurrentPerson(showSocialSheet);
+                  setShowVisit(true);
+                }}
+              >
+                Visit
+              </button>
+              <button className="fantasy-button" onClick={() => setShowSocialSheet(null)}>
+                Close
+              </button>
+            </div>
           </div>
-        </div>
+        </>
+      )}
+      
+      {showVisit && currentPerson && (
+        <Visit
+          character={character}
+          currentPerson={currentPerson}
+          currentYear={currentYear}
+          lastVisited={lastVisited}
+          setLogMessage={setLogMessage}
+          onClose={() => {
+            setShowVisit(false);
+            setCurrentPerson(null);
+          }}
+          onCloseAll={() => {
+            setShowVisit(false);
+            setCurrentPerson(null);
+            setShowSocialSheet(null); // Close the social character sheet too
+            setShowSocial(false); // Close the social circle drawer too
+          }}
+          onRelationshipChange={(change, year) => {
+            setSocialSheets(prev => ({
+              ...prev,
+              [currentPerson]: {
+                ...prev[currentPerson],
+                Relationship: Math.max(0, Math.min(100, prev[currentPerson].Relationship + change))
+              }
+            }));
+            // Mark this person as visited this year
+            setLastVisited(prev => ({
+              ...prev,
+              [currentPerson]: year
+            }));
+          }}
+        />
       )}
     </>
   );

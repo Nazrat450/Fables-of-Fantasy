@@ -22,17 +22,9 @@ export default function Menu({ onShopClick, onDiceClick, onJobClick, onSocialCli
   return (
     <div style={{ display: 'inline-block', marginLeft: '10px', position: 'relative' }}>
       <button
-        style={{
-          backgroundColor: '#61dafb',
-          color: '#282c34',
-          border: 'none',
-          borderRadius: '5px',
-          padding: '8px 16px',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          zIndex: 100
-        }}
+        className="menu-button"
         onClick={() => setShowOptions(true)}
+        disabled={disabled}
       >
         Menu
       </button>

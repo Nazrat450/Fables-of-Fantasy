@@ -116,9 +116,9 @@ export default function BakerMiniGame({ onResult, setInventory, setCoins, charac
           </div>
           <div style={{ margin: '10px 0', fontWeight: 'bold' }}>Streak: {streak}</div>
           {!started ? (
-            <button className="baker-btn" onClick={startGame}>Start Baking</button>
+            <button className="fantasy-button" onClick={startGame}>Start Baking</button>
           ) : (
-            <button className="baker-btn" onClick={handleBake}>Bake!</button>
+            <button className="fantasy-button" onClick={handleBake}>Bake!</button>
           )}
           <div className="baker-message">{message}</div>
         </>

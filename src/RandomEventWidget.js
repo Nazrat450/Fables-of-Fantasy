@@ -51,21 +51,26 @@ const RandomEventWidget = ({
   if (!event) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <>
+      <div className="modal-backdrop" onClick={() => onClose(event.id)} style={{
+        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 1000
+      }} />
+      <div className="random-event-widget">
         <h2>Random Event</h2>
         <p>{event.prompt}</p>
-        {event.options.map((opt, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleOption(opt)}
-            style={{ margin: '8px 0' }}
-          >
-            {opt.text}
-          </button>
-        ))}
+        <div className="event-options">
+          {event.options.map((opt, idx) => (
+            <button
+              key={idx}
+              className="event-option"
+              onClick={() => handleOption(opt)}
+            >
+              {opt.text}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

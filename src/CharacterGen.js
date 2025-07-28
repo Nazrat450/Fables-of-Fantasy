@@ -142,10 +142,10 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   const ClassSelectionModal = ({ onClassSelect }) => (
     <div className="modal">
       <div className="modal-content">
-        <h4>Select your class:</h4>
-        <button onClick={() => onClassSelect('Warrior')}>Warrior</button>
-        <button onClick={() => onClassSelect('Wizard')}>Wizard</button>
-        <button onClick={() => onClassSelect('Rogue')}>Rogue</button>
+        <h2>Select your class:</h2>
+        <button className="fantasy-button" onClick={() => onClassSelect('Warrior')}>Warrior</button>
+        <button className="fantasy-button" onClick={() => onClassSelect('Wizard')}>Wizard</button>
+        <button className="fantasy-button" onClick={() => onClassSelect('Rogue')}>Rogue</button>
       </div>
     </div>
   );
@@ -226,7 +226,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
             Non-Binary  
           </label>
 
-          <button id="genbut" onClick={handleGenerateCharacter}>Generate Character</button>
+          <button id="genbut" className="fantasy-button" onClick={handleGenerateCharacter}>Generate Character</button>
         </div>
 
         

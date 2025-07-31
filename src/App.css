@@ -305,8 +305,8 @@ body {
   color: var(--ink-dark);
   text-shadow: none;
   font-size: 1.2em;
-  display: block;
-  margin: 8px 0;
+  display: inline;
+  margin: 0;
   letter-spacing: 0.5px;
 }
 
@@ -2523,5 +2523,248 @@ label {
   .visit-option {
     padding: 12px 15px;
     font-size: 0.9rem;
+  }
+}
+
+/* Town Drawer Styles */
+.town-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: var(--parchment);
+  border-left: 3px solid var(--border-gold);
+  box-shadow: -5px 0 15px var(--shadow-dark);
+  z-index: 1001;
+  animation: slideInRight 0.3s ease-out;
+  overflow-y: auto;
+}
+
+.town-drawer-header {
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  padding: 20px;
+  border-bottom: 2px solid var(--border-gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.town-drawer-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--ink-dark);
+  margin: 0;
+}
+
+.town-drawer-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--ink-dark);
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.town-drawer-close:hover {
+  color: var(--accent-gold);
+  transform: scale(1.1);
+}
+
+.town-options {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.town-option {
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 20px;
+  color: var(--ink-dark);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.town-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.town-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-dark);
+  border-color: var(--accent-gold);
+}
+
+.town-option:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.town-option:disabled {
+  background: var(--aged-parchment);
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ccc;
+  opacity: 0.7;
+}
+
+.town-option:disabled .town-option-description {
+  color: #666;
+  font-style: italic;
+}
+
+.town-option-description {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.current-house {
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(230, 177, 122, 0.1));
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.current-house h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: var(--ink-dark);
+  margin-bottom: 15px;
+}
+
+.current-house p {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.town-section {
+  padding: 20px;
+}
+
+.back-button {
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  border: 2px solid var(--border-gold);
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: var(--ink-dark);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px var(--shadow-dark);
+}
+
+.housing-intro {
+  text-align: center;
+  padding: 20px;
+}
+
+.housing-intro h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--ink-dark);
+  margin-bottom: 15px;
+}
+
+.housing-intro p {
+  font-size: 1rem;
+  color: var(--ink-medium);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.house-details {
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(230, 177, 122, 0.1));
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.house-details h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: var(--ink-dark);
+  margin-bottom: 15px;
+}
+
+.house-details p {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.house-details ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.house-details li {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.house-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .town-drawer {
+    width: 100vw;
+  }
+  
+  .town-drawer-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .town-option {
+    padding: 15px;
+    font-size: 1rem;
+  }
+  
+  .house-actions {
+    flex-direction: column;
+  }
+  
+  .house-actions .fantasy-button {
+    width: 100%;
+    margin-left: 0 !important;
   }
 }

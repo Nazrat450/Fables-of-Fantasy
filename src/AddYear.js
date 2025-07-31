@@ -19,14 +19,17 @@ const AddYear = ({
   inventory, 
   setInventory,
   setSocialSheets,
-  setMetPeople
+  setMetPeople,
+  playerHouse,
+  setPlayerHouse
  }) => { 
-  const [isDead, setIsDead] = useState(false);
-  const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
-  const [selectedWeapon, setSelectedWeapon] = useState(null);
-  const [yearSummaries, setYearSummaries] = useState([]);
-  const [showRandomEvent, setShowRandomEvent] = useState(false);
   const [usedEventIds, setUsedEventIds] = useState([]);
+  const [showRandomEvent, setShowRandomEvent] = useState(false);
+  const [selectedWeapon, setSelectedWeapon] = useState(null);
+  const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
+  const [isDead, setIsDead] = useState(false);
+  const [specificEventId, setSpecificEventId] = useState(null);
+  const [yearSummaries, setYearSummaries] = useState([]);
 
   useEffect(() => {
     fetch(yearSummariesFile)
@@ -53,17 +56,17 @@ const AddYear = ({
 
     let customMessage = "";
     if (weapon === "Stick Sword") {
-      customMessage = `${character.FirstName} found a Powerful sword, the kids at kinder will bow before its might:`;
+      customMessage = `${character.FirstName} found a Powerful sword, the kids at kinder will bow before its might`;
     } else if (weapon === "Stick Staff") {
-      customMessage = `${character.FirstName} found the Mightest Staff anyone has ever seen, you feel the awesome power eminating from it:`;
+      customMessage = `${character.FirstName} found the Mightest Staff anyone has ever seen, you feel the awesome power eminating from it`;
     } else if (weapon === "Broken Stick") {
-      customMessage = `${character.FirstName} found not one but two of the sharpest blades known to the realm, wait until dad gets a look at these:`;
+      customMessage = `${character.FirstName} found not one but two of the sharpest blades known to the realm, wait until dad gets a look at these`;
     }
 
     setLogMessage(prevLog =>
       prevLog +
-      `<br><strong>${customMessage}</strong><br>` +
-      `${toFirstPerson(popupMessage)}`
+      `<br>${toFirstPerson(popupMessage)}<br>` +
+      `${customMessage}`
     );
 
     setCharacter(prevCharacter => ({
@@ -85,7 +88,7 @@ const AddYear = ({
       const deathChance = Math.random();
       if (deathChance < 0.10) {
         setIsDead(true);
-        setLogMessage(prevLog => prevLog + "\n" + character.FirstName + " " + character.LastName + " has died.");
+        setLogMessage(prevLog => prevLog + `<br><strong>💀 ${character.FirstName} ${character.LastName} has died.</strong>`);
         return;
       }
     }
@@ -172,6 +175,21 @@ const AddYear = ({
       setCoins(prev => prev + job.pay * 52);
     }
 
+    // Handle house upkeep costs
+    if (playerHouse && playerHouse.upkeep) {
+      setCoins(prev => {
+        const newCoins = prev - playerHouse.upkeep;
+        if (newCoins < 0) {
+          setLogMessage(prevLog => prevLog + `<br><strong>⚠️ House Upkeep Warning:</strong><br>You couldn't afford your house upkeep of ${playerHouse.upkeep} coins! Your house has been foreclosed.`);
+          // Reset playerHouse to null (this will need to be passed as a prop)
+          setPlayerHouse(null); // Reset player's house
+          return 0; // Set coins to 0 if they go negative
+        } else {
+          return newCoins;
+        }
+      });
+    }
+
     setLogMessage(prevLog => prevLog + `<br><strong>${character.FirstName} is now ${newAge} years old:</strong><br> ${summary}`);
 
     // Random event trigger
@@ -190,6 +208,7 @@ const AddYear = ({
       setSelectedWeapon(null);
       setInventory([]);
       setJob(null); // Reset job
+      setPlayerHouse(null); // Reset player's house
       const resetEvent = new Event('characterReset', { 'bubbles': true });
       window.dispatchEvent(resetEvent);
     }
@@ -209,6 +228,19 @@ const AddYear = ({
       .replace(/it'?s the imagination and determination of the beholder that truly defines their destiny/g,
         "it's my imagination and determination that truly define my destiny");
   }
+
+  // Function to trigger specific random events
+  const triggerSpecificEvent = (eventId) => {
+    setSpecificEventId(eventId);
+    setShowRandomEvent(true);
+  };
+
+  // Expose the trigger function to parent component
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.triggerRandomEvent = triggerSpecificEvent;
+    }
+  }, []);
 
   if (!character) {
     return null;
@@ -243,6 +275,8 @@ const AddYear = ({
           }}
           usedEventIds={usedEventIds}
           setMetPeople={setMetPeople}
+          character={character}
+          specificEventId={specificEventId}
         />
       )}
     </>

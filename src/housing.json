@@ -1,0 +1,664 @@
+{
+  "houses": [
+    {
+      "id": "humble_cottage",
+      "name": "Humble Cottage",
+      "description": "A simple wooden cottage with a thatched roof. Basic amenities but cozy and warm.",
+      "address": "Willow Lane, 3rd House from the Bridge",
+      "price": 5000,
+      "upkeep": 500,
+      "quality": "basic",
+      "features": ["Basic kitchen", "Small garden", "Fireplace"]
+    },
+    {
+      "id": "merchant_house",
+      "name": "Merchant's House",
+      "description": "A well-built stone house with proper windows and a sturdy roof. Good for a growing family.",
+      "address": "Market Street, Corner of Gold Avenue",
+      "price": 15000,
+      "upkeep": 1500,
+      "quality": "moderate",
+      "features": ["Spacious kitchen", "Multiple bedrooms", "Storage cellar"]
+    },
+    {
+      "id": "noble_manor",
+      "name": "Noble Manor",
+      "description": "An elegant stone manor with decorative carvings and a grand entrance. The finest in town.",
+      "address": "Noble Heights, 1st Estate on the Hill",
+      "price": 50000,
+      "upkeep": 5000,
+      "quality": "luxury",
+      "features": ["Grand hall", "Multiple fireplaces", "Private garden", "Servant quarters"]
+    },
+    {
+      "id": "wizard_tower",
+      "name": "Wizard's Tower",
+      "description": "A tall stone tower with magical wards and enchanted lighting. Perfect for magical studies.",
+      "address": "Mystic Grove, Tower of the Arcane",
+      "price": 75000,
+      "upkeep": 7500,
+      "quality": "luxury",
+      "features": ["Study room", "Magic workshop", "Observatory", "Enchanted lighting"]
+    },
+    {
+      "id": "dwarven_hall",
+      "name": "Dwarven Hall",
+      "description": "A sturdy underground dwelling with stone walls and metalwork. Built to last centuries.",
+      "address": "Stone Deep, 2nd Hall Below",
+      "price": 25000,
+      "upkeep": 2500,
+      "quality": "moderate",
+      "features": ["Stone construction", "Forge room", "Underground storage"]
+    },
+    {
+      "id": "elven_treehouse",
+      "name": "Elven Treehouse",
+      "description": "A beautiful home built into the branches of an ancient tree. Harmony with nature.",
+      "address": "Whispering Woods, 3rd Tree from the Clearing",
+      "price": 35000,
+      "upkeep": 3500,
+      "quality": "moderate",
+      "features": ["Natural lighting", "Tree-top balcony", "Herb garden"]
+    },
+    {
+      "id": "peasant_hut",
+      "name": "Peasant's Hut",
+      "description": "A simple mud and straw hut. Basic shelter but very affordable.",
+      "address": "Mud Lane, Last House on the Left",
+      "price": 1000,
+      "upkeep": 100,
+      "quality": "basic",
+      "features": ["Basic shelter", "Small fireplace", "Garden plot"]
+    },
+    {
+      "id": "royal_palace",
+      "name": "Royal Palace",
+      "description": "A magnificent palace with gold trim and marble floors. The ultimate in luxury living.",
+      "address": "Royal District, Palace of the Crown",
+      "price": 200000,
+      "upkeep": 20000,
+      "quality": "luxury",
+      "features": ["Throne room", "Banquet hall", "Royal gardens", "Guard barracks"]
+    },
+    {
+      "id": "adventurer_inn",
+      "name": "Adventurer's Inn",
+      "description": "A converted inn with multiple rooms and a common area. Perfect for social types.",
+      "address": "Adventure Road, The Traveler's Rest",
+      "price": 30000,
+      "upkeep": 3000,
+      "quality": "moderate",
+      "features": ["Common room", "Multiple guest rooms", "Stable", "Tavern"]
+    },
+    {
+      "id": "hermit_cave",
+      "name": "Hermit's Cave",
+      "description": "A natural cave with basic modifications. Very cheap but quite primitive.",
+      "address": "Lonely Mountain, Cave of Solitude",
+      "price": 500,
+      "upkeep": 50,
+      "quality": "basic",
+      "features": ["Natural shelter", "Fresh spring", "Secluded location"]
+    },
+    {
+        "id": "frostcottage",
+        "name": "FrostCottage",
+        "description": "A moderate house named FrostCottage. It stands out for its unique character and charm.",
+        "address": "Twilight Ridge, House 1",
+        "price": 19442,
+        "upkeep": 1944,
+        "quality": "moderate",
+        "features": [
+          "Hidden cellar",
+          "Watchtower",
+          "Observatory"
+        ]
+      },
+      {
+        "id": "ashenmanor",
+        "name": "AshenManor",
+        "description": "A moderate house named AshenManor. It stands out for its unique character and charm.",
+        "address": "Skystone Crescent, House 2",
+        "price": 19152,
+        "upkeep": 1915,
+        "quality": "moderate",
+        "features": [
+          "Moat",
+          "Forge",
+          "Fireplace"
+        ]
+      },
+      {
+        "id": "frostrefuge",
+        "name": "FrostRefuge",
+        "description": "A basic house named FrostRefuge. It stands out for its unique character and charm.",
+        "address": "Wyvern Climb, House 3",
+        "price": 7386,
+        "upkeep": 738,
+        "quality": "basic",
+        "features": [
+          "Hidden cellar",
+          "Forge",
+          "Alchemy lab"
+        ]
+      },
+      {
+        "id": "goldenmanor",
+        "name": "GoldenManor",
+        "description": "A basic house named GoldenManor. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 4",
+        "price": 10695,
+        "upkeep": 1069,
+        "quality": "basic",
+        "features": [
+          "Magical lighting",
+          "Balcony",
+          "Forge"
+        ]
+      },
+      {
+        "id": "ironhold",
+        "name": "IronHold",
+        "description": "A luxury house named IronHold. It stands out for its unique character and charm.",
+        "address": "Eldergrove Trail, House 5",
+        "price": 57186,
+        "upkeep": 5718,
+        "quality": "luxury",
+        "features": [
+          "Bathhouse",
+          "Moat",
+          "Alchemy lab"
+        ]
+      },
+      {
+        "id": "whisperbastion",
+        "name": "WhisperBastion",
+        "description": "A luxury house named WhisperBastion. It stands out for its unique character and charm.",
+        "address": "Glimmerveil Street, House 6",
+        "price": 58970,
+        "upkeep": 5897,
+        "quality": "luxury",
+        "features": [
+          "Library",
+          "Moat",
+          "Fireplace"
+        ]
+      },
+      {
+        "id": "ironvilla",
+        "name": "IronVilla",
+        "description": "A moderate house named IronVilla. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 7",
+        "price": 23025,
+        "upkeep": 2302,
+        "quality": "moderate",
+        "features": [
+          "Fireplace",
+          "Alchemy lab",
+          "Magical lighting"
+        ]
+      },
+      {
+        "id": "frozenspire",
+        "name": "FrozenSpire",
+        "description": "A basic house named FrozenSpire. It stands out for its unique character and charm.",
+        "address": "Glimmerveil Street, House 8",
+        "price": 6054,
+        "upkeep": 605,
+        "quality": "basic",
+        "features": [
+          "Forge",
+          "Observatory",
+          "Magical lighting"
+        ]
+      },
+      {
+        "id": "obsidianvilla",
+        "name": "ObsidianVilla",
+        "description": "A basic house named ObsidianVilla. It stands out for its unique character and charm.",
+        "address": "Skystone Crescent, House 9",
+        "price": 5911,
+        "upkeep": 591,
+        "quality": "basic",
+        "features": [
+          "Library",
+          "Hidden cellar",
+          "Alchemy lab"
+        ]
+      },
+      {
+        "id": "frozencottage",
+        "name": "FrozenCottage",
+        "description": "A moderate house named FrozenCottage. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 10",
+        "price": 19121,
+        "upkeep": 1912,
+        "quality": "moderate",
+        "features": [
+          "Bathhouse",
+          "Fireplace",
+          "Tavern room"
+        ]
+      },
+      {
+        "id": "emeraldhall",
+        "name": "EmeraldHall",
+        "description": "A basic house named EmeraldHall. It stands out for its unique character and charm.",
+        "address": "Blackroot Way, House 11",
+        "price": 9726,
+        "upkeep": 972,
+        "quality": "basic",
+        "features": [
+          "Watchtower",
+          "Magical lighting",
+          "Tavern room"
+        ]
+      },
+      {
+        "id": "ironvilla",
+        "name": "IronVilla",
+        "description": "A basic house named IronVilla. It stands out for its unique character and charm.",
+        "address": "Dustfall Lane, House 12",
+        "price": 3848,
+        "upkeep": 384,
+        "quality": "basic",
+        "features": [
+          "Tavern room",
+          "Library",
+          "Forge"
+        ]
+      },
+      {
+        "id": "frosthold",
+        "name": "FrostHold",
+        "description": "A basic house named FrostHold. It stands out for its unique character and charm.",
+        "address": "Wyvern Climb, House 13",
+        "price": 1734,
+        "upkeep": 173,
+        "quality": "basic",
+        "features": [
+          "Watchtower",
+          "Hidden cellar",
+          "Moat"
+        ]
+      },
+      {
+        "id": "gildedtower",
+        "name": "GildedTower",
+        "description": "A basic house named GildedTower. It stands out for its unique character and charm.",
+        "address": "Eldergrove Trail, House 14",
+        "price": 9204,
+        "upkeep": 920,
+        "quality": "basic",
+        "features": [
+          "Balcony",
+          "Garden",
+          "Bathhouse"
+        ]
+      },
+      {
+        "id": "moonhold",
+        "name": "MoonHold",
+        "description": "A luxury house named MoonHold. It stands out for its unique character and charm.",
+        "address": "Eldergrove Trail, House 15",
+        "price": 54423,
+        "upkeep": 5442,
+        "quality": "luxury",
+        "features": [
+          "Watchtower",
+          "Fireplace",
+          "Hidden cellar"
+        ]
+      },
+      {
+        "id": "emeraldbastion",
+        "name": "EmeraldBastion",
+        "description": "A luxury house named EmeraldBastion. It stands out for its unique character and charm.",
+        "address": "Twilight Ridge, House 16",
+        "price": 54197,
+        "upkeep": 5419,
+        "quality": "luxury",
+        "features": [
+          "Garden",
+          "Alchemy lab",
+          "Observatory"
+        ]
+      },
+      {
+        "id": "goldenhall",
+        "name": "GoldenHall",
+        "description": "A luxury house named GoldenHall. It stands out for its unique character and charm.",
+        "address": "Starwatch Rise, House 17",
+        "price": 53967,
+        "upkeep": 5396,
+        "quality": "luxury",
+        "features": [
+          "Tavern room",
+          "Fireplace",
+          "Observatory"
+        ]
+      },
+      {
+        "id": "frozenden",
+        "name": "FrozenDen",
+        "description": "A luxury house named FrozenDen. It stands out for its unique character and charm.",
+        "address": "Moonfen Road, House 18",
+        "price": 49121,
+        "upkeep": 4912,
+        "quality": "luxury",
+        "features": [
+          "Garden",
+          "Tavern room",
+          "Observatory"
+        ]
+      },
+      {
+        "id": "goldenlodge",
+        "name": "GoldenLodge",
+        "description": "A basic house named GoldenLodge. It stands out for its unique character and charm.",
+        "address": "Blackroot Way, House 19",
+        "price": 10564,
+        "upkeep": 1056,
+        "quality": "basic",
+        "features": [
+          "Bathhouse",
+          "Hidden cellar",
+          "Moat"
+        ]
+      },
+      {
+        "id": "crimsoncottage",
+        "name": "CrimsonCottage",
+        "description": "A luxury house named CrimsonCottage. It stands out for its unique character and charm.",
+        "address": "Twilight Ridge, House 20",
+        "price": 55512,
+        "upkeep": 5551,
+        "quality": "luxury",
+        "features": [
+          "Fireplace",
+          "Forge",
+          "Library"
+        ]
+      },
+      {
+        "id": "hollowlodge",
+        "name": "HollowLodge",
+        "description": "A luxury house named HollowLodge. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 21",
+        "price": 56309,
+        "upkeep": 5630,
+        "quality": "luxury",
+        "features": [
+          "Forge",
+          "Garden",
+          "Secret tunnel"
+        ]
+      },
+      {
+        "id": "goldencottage",
+        "name": "GoldenCottage",
+        "description": "A moderate house named GoldenCottage. It stands out for its unique character and charm.",
+        "address": "Wyvern Climb, House 22",
+        "price": 24651,
+        "upkeep": 2465,
+        "quality": "moderate",
+        "features": [
+          "Fireplace",
+          "Garden",
+          "Tavern room"
+        ]
+      },
+      {
+        "id": "shadowrefuge",
+        "name": "ShadowRefuge",
+        "description": "A luxury house named ShadowRefuge. It stands out for its unique character and charm.",
+        "address": "Eldergrove Trail, House 23",
+        "price": 55911,
+        "upkeep": 5591,
+        "quality": "luxury",
+        "features": [
+          "Library",
+          "Hidden cellar",
+          "Moat"
+        ]
+      },
+      {
+        "id": "shadowtower",
+        "name": "ShadowTower",
+        "description": "A luxury house named ShadowTower. It stands out for its unique character and charm.",
+        "address": "Wyvern Climb, House 24",
+        "price": 58102,
+        "upkeep": 5810,
+        "quality": "luxury",
+        "features": [
+          "Bathhouse",
+          "Observatory",
+          "Watchtower"
+        ]
+      },
+      {
+        "id": "hollowrefuge",
+        "name": "HollowRefuge",
+        "description": "A moderate house named HollowRefuge. It stands out for its unique character and charm.",
+        "address": "Blackroot Way, House 25",
+        "price": 24655,
+        "upkeep": 2465,
+        "quality": "moderate",
+        "features": [
+          "Observatory",
+          "Balcony",
+          "Library"
+        ]
+      },
+      {
+        "id": "goldentower",
+        "name": "GoldenTower",
+        "description": "A basic house named GoldenTower. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 26",
+        "price": 7662,
+        "upkeep": 766,
+        "quality": "basic",
+        "features": [
+          "Bathhouse",
+          "Secret tunnel",
+          "Forge"
+        ]
+      },
+      {
+        "id": "whisperkeep",
+        "name": "WhisperKeep",
+        "description": "A luxury house named WhisperKeep. It stands out for its unique character and charm.",
+        "address": "Skystone Crescent, House 27",
+        "price": 53538,
+        "upkeep": 5353,
+        "quality": "luxury",
+        "features": [
+          "Watchtower",
+          "Observatory",
+          "Enchanted door"
+        ]
+      },
+      {
+        "id": "hollowcottage",
+        "name": "HollowCottage",
+        "description": "A moderate house named HollowCottage. It stands out for its unique character and charm.",
+        "address": "Eldergrove Trail, House 28",
+        "price": 14764,
+        "upkeep": 1476,
+        "quality": "moderate",
+        "features": [
+          "Watchtower",
+          "Library",
+          "Hidden cellar"
+        ]
+      },
+      {
+        "id": "obsidianhold",
+        "name": "ObsidianHold",
+        "description": "A luxury house named ObsidianHold. It stands out for its unique character and charm.",
+        "address": "Glimmerveil Street, House 29",
+        "price": 51523,
+        "upkeep": 5152,
+        "quality": "luxury",
+        "features": [
+          "Library",
+          "Secret tunnel",
+          "Magical lighting"
+        ]
+      },
+      {
+        "id": "gildedhall",
+        "name": "GildedHall",
+        "description": "A moderate house named GildedHall. It stands out for its unique character and charm.",
+        "address": "Frostpeak Path, House 30",
+        "price": 22919,
+        "upkeep": 2291,
+        "quality": "moderate",
+        "features": [
+          "Alchemy lab",
+          "Fireplace",
+          "Hidden cellar"
+        ]
+      },
+      {
+        "id": "emeraldburrow",
+        "name": "EmeraldBurrow",
+        "description": "A basic house named EmeraldBurrow. It stands out for its unique character and charm.",
+        "address": "Moonfen Road, House 31",
+        "price": 2277,
+        "upkeep": 227,
+        "quality": "basic",
+        "features": [
+          "Enchanted door",
+          "Tavern room",
+          "Secret tunnel"
+        ]
+      },
+      {
+        "id": "ashensanctum",
+        "name": "AshenSanctum",
+        "description": "A moderate house named AshenSanctum. It stands out for its unique character and charm.",
+        "address": "Twilight Ridge, House 32",
+        "price": 18252,
+        "upkeep": 1825,
+        "quality": "moderate",
+        "features": [
+          "Forge",
+          "Library",
+          "Secret tunnel"
+        ]
+      },
+      {
+        "id": "gildedvilla",
+        "name": "GildedVilla",
+        "description": "A luxury house named GildedVilla. It stands out for its unique character and charm.",
+        "address": "Skystone Crescent, House 33",
+        "price": 56971,
+        "upkeep": 5697,
+        "quality": "luxury",
+        "features": [
+          "Secret tunnel",
+          "Enchanted door",
+          "Alchemy lab"
+        ]
+      },
+      {
+        "id": "shadowbastion",
+        "name": "ShadowBastion",
+        "description": "A basic house named ShadowBastion. It stands out for its unique character and charm.",
+        "address": "Dustfall Lane, House 34",
+        "price": 8954,
+        "upkeep": 895,
+        "quality": "basic",
+        "features": [
+          "Bathhouse",
+          "Hidden cellar",
+          "Enchanted door"
+        ]
+      },
+      {
+        "id": "sunlodge",
+        "name": "SunLodge",
+        "description": "A moderate house named SunLodge. It stands out for its unique character and charm.",
+        "address": "Skystone Crescent, House 35",
+        "price": 20450,
+        "upkeep": 2045,
+        "quality": "moderate",
+        "features": [
+          "Garden",
+          "Hidden cellar",
+          "Moat"
+        ]
+      },
+      {
+        "id": "crimsonmanor",
+        "name": "CrimsonManor",
+        "description": "A luxury house named CrimsonManor. It stands out for its unique character and charm.",
+        "address": "Moonfen Road, House 36",
+        "price": 58827,
+        "upkeep": 5882,
+        "quality": "luxury",
+        "features": [
+          "Moat",
+          "Magical lighting",
+          "Secret tunnel"
+        ]
+      },
+      {
+        "id": "moonlodge",
+        "name": "MoonLodge",
+        "description": "A basic house named MoonLodge. It stands out for its unique character and charm.",
+        "address": "Twilight Ridge, House 37",
+        "price": 7054,
+        "upkeep": 705,
+        "quality": "basic",
+        "features": [
+          "Enchanted door",
+          "Observatory",
+          "Balcony"
+        ]
+      },
+      {
+        "id": "crimsonden",
+        "name": "CrimsonDen",
+        "description": "A moderate house named CrimsonDen. It stands out for its unique character and charm.",
+        "address": "Blackroot Way, House 38",
+        "price": 17912,
+        "upkeep": 1791,
+        "quality": "moderate",
+        "features": [
+          "Secret tunnel",
+          "Tavern room",
+          "Fireplace"
+        ]
+      },
+      {
+        "id": "emeraldvilla",
+        "name": "EmeraldVilla",
+        "description": "A luxury house named EmeraldVilla. It stands out for its unique character and charm.",
+        "address": "Moonfen Road, House 39",
+        "price": 50837,
+        "upkeep": 5083,
+        "quality": "luxury",
+        "features": [
+          "Library",
+          "Watchtower",
+          "Moat"
+        ]
+      },
+      {
+        "id": "emeraldden",
+        "name": "EmeraldDen",
+        "description": "A basic house named EmeraldDen. It stands out for its unique character and charm.",
+        "address": "Blackroot Way, House 40",
+        "price": 8073,
+        "upkeep": 807,
+        "quality": "basic",
+        "features": [
+          "Secret tunnel",
+          "Watchtower",
+          "Forge"
+        ]
+      }
+  ]
+} 

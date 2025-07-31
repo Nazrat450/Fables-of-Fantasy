@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import visitMessages from './visitMessages.json';
+import { getStatModifier } from './DiceRoll.js';
 import './App.css';
 
 const Visit = ({ character, currentPerson, onClose, onRelationshipChange, currentYear, lastVisited, setLogMessage, onCloseAll }) => {
@@ -16,9 +17,9 @@ const Visit = ({ character, currentPerson, onClose, onRelationshipChange, curren
   };
 
   const handleChat = () => {
-    // Calculate success chance based on charisma
-    const charisma = character?.Charisma || 0;
-    const successChance = Math.min(0.9, 0.3 + (charisma * 0.05)); // Base 30% + 5% per charisma point, max 90%
+    // Calculate success chance based on charisma modifier
+    const charismaModifier = getStatModifier(character, 'Charisma');
+    const successChance = Math.min(0.9, 0.3 + (charismaModifier * 0.1)); // Base 30% + 10% per charisma modifier, max 90%
     
     const random = Math.random();
     const isSuccess = random < successChance;
@@ -78,7 +79,7 @@ const Visit = ({ character, currentPerson, onClose, onRelationshipChange, curren
             <div className="visit-option-description">
               {wasVisitedThisYear 
                 ? `Already visited ${currentPerson} this year (Year ${currentYear}).`
-                : `Have a conversation. Success chance based on your Charisma (${character?.Charisma || 0}).`
+                : `Have a conversation. Success chance based on your Charisma modifier (${getStatModifier(character, 'Charisma')}).`
               }
             </div>
           </button>

@@ -13,6 +13,7 @@ import Wallet from './wallet';
 import RandomEventWidget from './RandomEventWidget';
 import BakerMiniGame from './BakerMiniGame';
 import BlacksmithMiniGame from './BlacksmithMiniGame';
+import Town from './Town';
 
 // Mobile detection hook
 const useMobile = () => {
@@ -58,8 +59,10 @@ function App() {
   const [socialSheets, setSocialSheets] = useState({});
   const [showSocialSheet, setShowSocialSheet] = useState(null); // stores the name to show
   const [showRandomEvent, setShowRandomEvent] = useState(false);
-  const [usedEventIds, setUsedEventIds] = useState(new Set());
-  const [showMobileCharacterSheet, setShowMobileCharacterSheet] = useState(false);
+  const [usedEventIds, setUsedEventIds] = useState([]);
+  const [showCharacterSheetModal, setShowCharacterSheetModal] = useState(false);
+  const [showTown, setShowTown] = useState(false);
+  const [playerHouse, setPlayerHouse] = useState(null);
 
   const textareaRef = useRef(null);
 
@@ -98,38 +101,35 @@ const spendCoins = (amount) => {
   setCharacter={setCharacter}
   setYearsAsFrog={setYearsAsFrog}
   setJob={setJob}
+  triggerRandomEvent={(eventId) => window.triggerRandomEvent?.(eventId)}
 />
       <div className="MainContent">
-        <div className={`App-log ${character ? 'mobile-visible' : ''}`}>
-          {character && isMobile && (
-            <div className="mobile-top-buttons">
-              <button
-                className="inventory-button"
-                onClick={() => setShowInventory(!showInventory)}
-                disabled={!character}
-              >
-                <span role="img" aria-label="Inventory">🎒</span>
-                Inventory
-              </button>
-              <Menu
-                onShopClick={() => { setShopMessage(''); setShowShop(true); }}
-                onDiceClick={() => setShowDice(true)}
-                onJobClick={() => setShowJob(true)}
-                onSocialClick={() => setShowSocial(true)}
-                disabled={!character}
-              />
-            </div>
-          )}
-          <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
-          {character && (
-            <button 
-              className="mobile-character-sheet-toggle"
-              onClick={() => setShowMobileCharacterSheet(!showMobileCharacterSheet)}
-            >
-              Character Sheet
-            </button>
-          )}
-          <AddYear
+        {character && (
+          <div className={`App-log ${character ? 'mobile-visible' : ''}`}>
+            {character && isMobile && (
+              <div className="mobile-top-buttons">
+                <button
+                  className="inventory-button"
+                  onClick={() => setShowInventory(!showInventory)}
+                  disabled={!character}
+                >
+                  <span role="img" aria-label="Inventory">🎒</span>
+                  Inventory
+                </button>
+                <Menu
+                  onShopClick={() => { setShopMessage(''); setShowShop(true); }}
+                  onDiceClick={() => setShowDice(true)}
+                  onJobClick={() => setShowJob(true)}
+                  onSocialClick={() => setShowSocial(true)}
+                  onCharacterSheetClick={() => setShowCharacterSheetModal(true)}
+                  onTownClick={() => setShowTown(true)}
+                  disabled={!character}
+                  isMobile={isMobile}
+                />
+              </div>
+            )}
+            <div ref={textareaRef} className="logDiv" contentEditable={false} dangerouslySetInnerHTML={{ __html: logMessage }}></div>
+            <AddYear
   character={character}
   setCharacter={setCharacter}
   showClassModal={showClassModal}
@@ -144,9 +144,12 @@ const spendCoins = (amount) => {
   setInventory={setInventory}
   setSocialSheets={setSocialSheets}
   setMetPeople={setMetPeople}
+  playerHouse={playerHouse}
+  setPlayerHouse={setPlayerHouse}
 />
-        </div>
-        <div className={`CharacterGen ${showMobileCharacterSheet ? 'mobile-visible' : ''}`}>
+          </div>
+        )}
+        <div className="CharacterGen">
           <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
           {!isMobile && (
             <div className="menu-container">
@@ -163,7 +166,10 @@ const spendCoins = (amount) => {
                 onDiceClick={() => setShowDice(true)}
                 onJobClick={() => setShowJob(true)}
                 onSocialClick={() => setShowSocial(true)}
+                onCharacterSheetClick={() => setShowCharacterSheetModal(true)}
+                onTownClick={() => setShowTown(true)}
                 disabled={!character}
+                isMobile={isMobile}
               />
             </div>
           )}
@@ -246,12 +252,12 @@ const spendCoins = (amount) => {
                     Age: age,
                     Health: 100,
                     Looks: Math.floor(Math.random() * 100) + 1,
-                    Strength: Math.floor(Math.random() * 18) + 1,
-                    Dexterity: Math.floor(Math.random() * 18) + 1,
-                    Constitution: Math.floor(Math.random() * 18) + 1,
-                    Intelligence: Math.floor(Math.random() * 18) + 1,
-                    Wisdom: Math.floor(Math.random() * 18) + 1,
-                    Charisma: Math.floor(Math.random() * 18) + 1,
+                            Strength: Math.floor(Math.random() * 20) + 1,
+        Dexterity: Math.floor(Math.random() * 20) + 1,
+        Constitution: Math.floor(Math.random() * 20) + 1,
+        Intelligence: Math.floor(Math.random() * 20) + 1,
+        Wisdom: Math.floor(Math.random() * 20) + 1,
+        Charisma: Math.floor(Math.random() * 20) + 1,
                     Relationship: relationship
                   }
                 };
@@ -292,6 +298,40 @@ const spendCoins = (amount) => {
             setMetPeople={setMetPeople}
           />
         </>
+      )}
+      {showCharacterSheetModal && character && (
+        <>
+          <div className="menu-drawer-backdrop" onClick={() => setShowCharacterSheetModal(false)} />
+          <div className="character-sheet-modal">
+            <div className="character-sheet-modal-content">
+              <span className="character-sheet-modal-close" onClick={() => setShowCharacterSheetModal(false)}>&times;</span>
+              <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
+            </div>
+          </div>
+        </>
+      )}
+      {showTown && (
+        <Town
+          show={showTown}
+          onClose={() => setShowTown(false)}
+          coins={coins}
+          setCoins={setCoins}
+          inventory={inventory}
+          setInventory={setInventory}
+          character={character}
+          getAge={getAge}
+          showDice={showDice}
+          setShowDice={setShowDice}
+          diceCallback={diceCallback}
+          setDiceCallback={setDiceCallback}
+          diceResultText={diceResultText}
+          setDiceResultText={setDiceResultText}
+          shopMessage={shopMessage}
+          setShopMessage={setShopMessage}
+          setLogMessage={setLogMessage}
+          playerHouse={playerHouse}
+          setPlayerHouse={setPlayerHouse}
+        />
       )}
     </div>
   );

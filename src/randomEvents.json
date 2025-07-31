@@ -3,27 +3,35 @@
     "id": "lost_dog",
     "ageMin": 6,
     "ageMax": 12,
-    "prompt": "The young adventurer spots a lost dog in the village square. What do they do?",
+    "prompt": "I spotted a lost dog in the village square. I had to decide what to do.",
     "options": [
       {
         "text": "Try to find the owner.",
         "outcome": "I searched for the dog's owner and reunited them. The villagers praised my kindness.",
-        "outcomeId": "1"
+        "outcomeId": "lost_dog_find_owner"
       },
       {
         "text": "Keep the dog as a companion.",
         "outcome": "I decided to keep the dog. Now I have a loyal friend by my side.",
-        "outcomeId": "2"
+        "outcomeId": "lost_dog_keep_companion",
+        "requiresRoll": true,
+        "rollType": "charisma",
+        "difficulty": 12,
+        "successOutcome": "I decided to keep the dog. Now I have a loyal friend by my side.",
+        "failureOutcomes": [
+          "The dog seemed annoyed with my very presence and ran down the street.",
+          "The dog looked at me confused, walked up to me, I bent down to pet him. He pressed his mouth to my ear, said something crazily racist about Sharkmen and then ran down the street. I was too stunned to move. A talking dog... a racist talking dog."
+        ]
       },
       {
         "text": "Ignore the dog.",
         "outcome": "I ignored the dog and continued on my way. Maybe someone else will help.",
-        "outcomeId": "3"
+        "outcomeId": "lost_dog_ignore"
       },
       {
         "text": "Feed the dog some food.",
         "outcome": "I fed the dog. It wagged its tail and followed me for a while.",
-        "outcomeId": "4"
+        "outcomeId": "lost_dog_feed"
       }
     ]
   },
@@ -36,22 +44,22 @@
       {
         "text": "Try to approach the cat.",
         "outcome": "I tried to approach the cat, but it leapt away gracefully, disappearing into the alley.",
-        "outcomeId": "1"
+        "outcomeId": "mysterious_cat_approach"
       },
       {
         "text": "Offer the cat some food.",
         "outcome": "I offered the cat some food. It jumped down, ate, and rubbed against my leg before vanishing.",
-        "outcomeId": "2"
+        "outcomeId": "mysterious_cat_feed"
       },
       {
         "text": "Ignore the cat.",
         "outcome": "I ignored the cat and continued on my way, but I felt its eyes on me for a while.",
-        "outcomeId": "3"
+        "outcomeId": "mysterious_cat_ignore"
       },
       {
         "text": "Try to mimic the cat's movements.",
         "outcome": "I tried to mimic the cat's movements. It seemed amused and watched me for a moment then said 'No one will ever believe you.' It then bit me and ran away.",
-        "outcomeId": "4"
+        "outcomeId": "mysterious_cat_mimic"
       }
     ]
   },
@@ -64,22 +72,162 @@
       {
         "text": "Pick up the coin.",
         "outcome": "I picked up the coin. It felt warm in my hand and I suddenly felt a little luckier.",
-        "outcomeId": "1"
+        "outcomeId": "strange_coin_pickup"
       },
       {
         "text": "Leave the coin alone.",
         "outcome": "I decided to leave the coin where it was. Sometimes it's best not to mess with mysterious things.",
-        "outcomeId": "2"
+        "outcomeId": "strange_coin_leave"
       },
       {
         "text": "Show the coin to a nearby merchant.",
         "outcome": "I showed the coin to a merchant. They gasped and offered me a rare item in exchange.",
-        "outcomeId": "3"
+        "outcomeId": "strange_coin_show_merchant"
       },
       {
         "text": "Bury the coin for safekeeping.",
         "outcome": "I buried the coin under a tree, marking the spot. Maybe I'll return for it one day.",
-        "outcomeId": "4"
+        "outcomeId": "strange_coin_bury"
+      }
+    ]
+  },
+  {
+    "id": "traveling_merchant",
+    "ageMin": 12,
+    "ageMax": 25,
+    "prompt": "A traveling merchant has set up shop in the town square with exotic goods from distant lands.",
+    "options": [
+      {
+        "text": "Browse the merchant's wares.",
+        "outcome": "I spent time browsing the merchant's exotic goods. The stories of distant lands fascinated me.",
+        "outcomeId": "traveling_merchant_browse"
+      },
+      {
+        "text": "Ask about their travels.",
+        "outcome": "I asked the merchant about their travels. They shared tales of distant kingdoms and strange creatures.",
+        "outcomeId": "traveling_merchant_ask_travels"
+      },
+      {
+        "text": "Try to haggle for a better price.",
+        "outcome": "I tried to haggle with the merchant. They seemed impressed by my negotiation skills.",
+        "outcomeId": "traveling_merchant_haggle"
+      },
+      {
+        "text": "Offer to help set up their stall.",
+        "outcome": "I helped the merchant set up their stall. They gave me a small trinket as thanks.",
+        "outcomeId": "traveling_merchant_help_setup"
+      }
+    ]
+  },
+  {
+    "id": "village_festival",
+    "ageMin": 10,
+    "ageMax": 30,
+    "prompt": "The village is hosting a festival today with games, food, and entertainment.",
+    "options": [
+      {
+        "text": "Participate in the games.",
+        "outcome": "I joined in the festival games and had a wonderful time with the other villagers.",
+        "outcomeId": "village_festival_games"
+      },
+      {
+        "text": "Sample the festival food.",
+        "outcome": "I tried various festival foods. The local delicacies were delicious and unique.",
+        "outcomeId": "village_festival_food"
+      },
+      {
+        "text": "Watch the entertainment.",
+        "outcome": "I watched the festival entertainment. The performers were skilled and entertaining.",
+        "outcomeId": "village_festival_entertainment"
+      },
+      {
+        "text": "Help organize the festival.",
+        "outcome": "I helped organize the festival. The villagers appreciated my assistance.",
+        "outcomeId": "village_festival_help_organize"
+      }
+    ]
+  },
+  {
+    "id": "strange_noise",
+    "ageMin": 14,
+    "ageMax": 35,
+    "prompt": "I heard a strange noise coming from the old abandoned house on the edge of town.",
+    "options": [
+      {
+        "text": "Investigate the noise.",
+        "outcome": "I investigated the noise and found a family of raccoons had made the house their home.",
+        "outcomeId": "strange_noise_investigate"
+      },
+      {
+        "text": "Ignore it and walk away.",
+        "outcome": "I decided to ignore the noise. Sometimes it's better not to investigate mysterious sounds.",
+        "outcomeId": "strange_noise_ignore"
+      },
+      {
+        "text": "Tell the town guard about it.",
+        "outcome": "I reported the noise to the town guard. They thanked me for being vigilant.",
+        "outcomeId": "strange_noise_tell_guard"
+      },
+      {
+        "text": "Gather friends to investigate together.",
+        "outcome": "I gathered some friends to investigate together. We found nothing dangerous, just some wildlife.",
+        "outcomeId": "strange_noise_gather_friends"
+      }
+    ]
+  },
+  {
+    "id": "wandering_sage",
+    "ageMin": 16,
+    "ageMax": 40,
+    "prompt": "A wise sage has stopped in town and is offering to share knowledge with anyone who seeks it.",
+    "options": [
+      {
+        "text": "Ask for wisdom about life.",
+        "outcome": "I asked the sage for wisdom. Their advice was profound and gave me new perspective.",
+        "outcomeId": "wandering_sage_life_wisdom"
+      },
+      {
+        "text": "Learn about distant lands.",
+        "outcome": "I asked the sage about distant lands. Their stories of faraway places were fascinating.",
+        "outcomeId": "wandering_sage_distant_lands"
+      },
+      {
+        "text": "Seek advice about my future.",
+        "outcome": "I asked the sage about my future. Their guidance was thoughtful and encouraging.",
+        "outcomeId": "wandering_sage_future_advice"
+      },
+      {
+        "text": "Share my own experiences.",
+        "outcome": "I shared my experiences with the sage. They seemed impressed by my perspective.",
+        "outcomeId": "wandering_sage_share_experiences"
+      }
+    ]
+  },
+  {
+    "id": "mysterious_map",
+    "ageMin": 18,
+    "ageMax": 50,
+    "prompt": "I found an old, weathered map in the town library that seems to lead to a hidden location.",
+    "options": [
+      {
+        "text": "Follow the map's directions.",
+        "outcome": "I followed the map and discovered an old, forgotten shrine with ancient inscriptions.",
+        "outcomeId": "mysterious_map_follow"
+      },
+      {
+        "text": "Research the map's origins.",
+        "outcome": "I researched the map's origins in the library. It led to fascinating historical discoveries.",
+        "outcomeId": "mysterious_map_research"
+      },
+      {
+        "text": "Share the map with a scholar.",
+        "outcome": "I shared the map with a local scholar. They were excited by the historical significance.",
+        "outcomeId": "mysterious_map_share_scholar"
+      },
+      {
+        "text": "Keep the map for future exploration.",
+        "outcome": "I decided to keep the map for future exploration. It might lead to adventure one day.",
+        "outcomeId": "mysterious_map_keep"
       }
     ]
   }

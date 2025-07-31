@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import parentBackstories from './parentBackstories.json';
 
-const getRandomStat = () => Math.floor(Math.random() * 18) + 1;
+const getRandomStat = () => Math.floor(Math.random() * 20) + 1;
 const getLooksPercentage = () => Math.floor(Math.random() * 100) + 1;
 
 
@@ -201,7 +201,7 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
     };
 
     setCharacter(newCharacter);
-    setLogMessage(prevLog => prevLog + "\n" + "<strong>You Are Born</strong>" + "\n" + firstName + " " + lastName + " Welcome to the world!" + "\n" + parentDetails.backstory);
+    setLogMessage(prevLog => prevLog + "<br><strong>You Are Born</strong><br>" + firstName + " " + lastName + " Welcome to the world! Everyone in town feared your mother, " + parentDetails.motherName + ", the ruthless " + (parentDetails.motherJob || "knights") + ", and your father, " + parentDetails.fatherName + ", the cunning merchants. Their reputation cast a long shadow over the community.");
   };
   
   const statClass = value => value >= 15 ? "stat-green" : value <= 5 ? "stat-red" : "stat-normal";

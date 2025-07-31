@@ -21,13 +21,14 @@ const AddYear = ({
   setSocialSheets,
   setMetPeople,
   playerHouse,
-  setPlayerHouse
+  setPlayerHouse,
+  isDead,
+  setIsDead
  }) => { 
   const [usedEventIds, setUsedEventIds] = useState([]);
   const [showRandomEvent, setShowRandomEvent] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState(null);
   const [showAgeFivePopup, setShowAgeFivePopup] = useState(false);
-  const [isDead, setIsDead] = useState(false);
   const [specificEventId, setSpecificEventId] = useState(null);
   const [yearSummaries, setYearSummaries] = useState([]);
 

@@ -23,7 +23,6 @@ const Town = ({
   playerHouse,
   setPlayerHouse
 }) => {
-  console.log('Town component loaded, housingData:', housingData);
   
   const [currentSection, setCurrentSection] = useState('main');
   const [showHousing, setShowHousing] = useState(false);
@@ -45,11 +44,7 @@ const Town = ({
   };
 
   const getRandomHouse = () => {
-    console.log('getRandomHouse called');
     const houses = housingData.houses;
-    console.log('Housing data:', housingData);
-    console.log('Houses array:', houses);
-    console.log('Houses length:', houses.length);
     
     if (!houses || houses.length === 0) {
       console.error('No houses found in housingData');
@@ -57,9 +52,7 @@ const Town = ({
     }
     
     const randomIndex = Math.floor(Math.random() * houses.length);
-    console.log('Random index:', randomIndex);
     const selectedHouse = houses[randomIndex];
-    console.log('Selected house:', selectedHouse);
     
     if (!selectedHouse) {
       console.error('No house selected at index:', randomIndex);
@@ -70,12 +63,9 @@ const Town = ({
   };
 
   const handleViewHouses = () => {
-    console.log('handleViewHouses called');
     const randomHouse = getRandomHouse();
-    console.log('Setting selectedHouse to:', randomHouse);
     setSelectedHouse(randomHouse);
     setShowHousing(true);
-    console.log('showHousing set to true');
   };
 
   const handleBuyHouse = () => {
@@ -201,8 +191,6 @@ const Town = ({
               ← Back to Town
             </button>
             
-            {console.log('Rendering housing section, showHousing:', showHousing, 'selectedHouse:', selectedHouse)}
-            
             {!showHousing ? (
               <div className="housing-intro">
                 <h3>🏠 Housing Market</h3>
@@ -210,12 +198,9 @@ const Town = ({
                 <button 
                   className="fantasy-button"
                   onClick={() => {
-                    console.log('View Available Houses button clicked');
                     const testHouse = housingData.houses[0];
-                    console.log('Test house:', testHouse);
                     setSelectedHouse(testHouse);
                     setShowHousing(true);
-                    console.log('Test: setSelectedHouse and setShowHousing called');
                   }}
                 >
                   View Available Houses
@@ -259,12 +244,9 @@ const Town = ({
                 <button 
                   className="fantasy-button"
                   onClick={() => {
-                    console.log('View Available Houses button clicked');
                     const testHouse = housingData.houses[0];
-                    console.log('Test house:', testHouse);
                     setSelectedHouse(testHouse);
                     setShowHousing(true);
-                    console.log('Test: setSelectedHouse and setShowHousing called');
                   }}
                 >
                   View Available Houses

@@ -63,6 +63,7 @@ function App() {
   const [showCharacterSheetModal, setShowCharacterSheetModal] = useState(false);
   const [showTown, setShowTown] = useState(false);
   const [playerHouse, setPlayerHouse] = useState(null);
+  const [isDead, setIsDead] = useState(false);
 
   const textareaRef = useRef(null);
 
@@ -111,7 +112,7 @@ const spendCoins = (amount) => {
                 <button
                   className="inventory-button"
                   onClick={() => setShowInventory(!showInventory)}
-                  disabled={!character}
+                  disabled={!character || isDead}
                 >
                   <span role="img" aria-label="Inventory">🎒</span>
                   Inventory
@@ -125,6 +126,7 @@ const spendCoins = (amount) => {
                   onTownClick={() => setShowTown(true)}
                   disabled={!character}
                   isMobile={isMobile}
+                  isDead={isDead}
                 />
               </div>
             )}
@@ -146,6 +148,8 @@ const spendCoins = (amount) => {
   setMetPeople={setMetPeople}
   playerHouse={playerHouse}
   setPlayerHouse={setPlayerHouse}
+  isDead={isDead}
+  setIsDead={setIsDead}
 />
           </div>
         )}
@@ -156,7 +160,7 @@ const spendCoins = (amount) => {
               <button
                 className="inventory-button"
                 onClick={() => setShowInventory(!showInventory)}
-                disabled={!character}
+                disabled={!character || isDead}
               >
                 <span role="img" aria-label="Inventory">🎒</span>
                 Inventory
@@ -170,6 +174,7 @@ const spendCoins = (amount) => {
                 onTownClick={() => setShowTown(true)}
                 disabled={!character}
                 isMobile={isMobile}
+                isDead={isDead}
               />
             </div>
           )}

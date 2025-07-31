@@ -61,6 +61,28 @@ const generateParentBackstory = () => {
   };
 }
 
+const generateParentSocialSheet = (name, gender, lastName) => {
+  const race = races[Math.floor(Math.random() * races.length)];
+  const age = Math.floor(Math.random() * 20) + 20; // Parents are 20-40 years old when child is born
+  
+  return {
+    name: `${name} ${lastName}`,
+    Race: race,
+    Gender: gender,
+    Age: age,
+    Health: Math.floor(Math.random() * 30) + 70, // 70-100%
+    Looks: Math.floor(Math.random() * 40) + 60, // 60-100%
+    Strength: getRandomStat(),
+    Dexterity: getRandomStat(),
+    Constitution: getRandomStat(),
+    Intelligence: getRandomStat(),
+    Wisdom: getRandomStat(),
+    Charisma: getRandomStat(),
+    Relationship: Math.floor(Math.random() * 30) + 70, // 70-100% relationship
+    isDead: false
+  };
+};
+
 const heightRanges = {
     Human: [150, 200],
     Dwarf: [120, 150],
@@ -169,7 +191,7 @@ const CharacterSheet = ({ character, isModal = false }) => {
   );
 };
 
-const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassModal, setLogMessage, isModal = false, isMobile = false }) => {
+const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassModal, setLogMessage, isModal = false, isMobile = false, setSocialSheets }) => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -247,6 +269,17 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
       MotherName: parentDetails.motherName,
       FatherName: parentDetails.fatherName  
     };
+
+    // Generate parent social character sheets
+    if (setSocialSheets) {
+      const motherSheet = generateParentSocialSheet(parentDetails.motherName, 'Female', lastName);
+      const fatherSheet = generateParentSocialSheet(parentDetails.fatherName, 'Male', lastName);
+      
+      setSocialSheets({
+        [motherSheet.name]: motherSheet,
+        [fatherSheet.name]: fatherSheet
+      });
+    }
 
     setCharacter(newCharacter);
     setLogMessage(prevLog => prevLog + "<br><strong>You Are Born</strong><br>" + firstName + " " + lastName + " Welcome to the world! Everyone in town feared your mother, " + parentDetails.motherName + ", the ruthless " + (parentDetails.motherJob || "knights") + ", and your father, " + parentDetails.fatherName + ", the cunning merchants. Their reputation cast a long shadow over the community.");

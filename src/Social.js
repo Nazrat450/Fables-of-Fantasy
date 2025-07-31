@@ -26,7 +26,17 @@ const Social = ({
     `${motherName} ${lastName}`,
     `${fatherName} ${lastName}`
   ];
-  const parentObjects = parents.map(name => ({ name, clickable: true }));
+  
+  // Check if parents are dead and add skull emoji
+  const parentObjects = parents.map(name => {
+    const isDead = socialSheets[name]?.isDead || false;
+    const displayName = isDead ? `💀 ${name}` : name;
+    return { 
+      name, 
+      displayName,
+      clickable: !isDead 
+    };
+  });
   const people = [...parentObjects, ...(metPeople || [])];
 
   return (
@@ -43,7 +53,7 @@ const Social = ({
               }}
               onClick={person.clickable === false ? undefined : () => onPersonClick && onPersonClick(person.name)}
             >
-              {person.name}
+              {person.displayName || person.name}
             </li>
           ))}
         </ul>
@@ -54,7 +64,9 @@ const Social = ({
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 1000
           }} />
           <div className="social-character-sheet">
-            <h2>{showSocialSheet}'s Character Sheet</h2>
+            <h2>
+              {socialSheets[showSocialSheet].isDead ? `💀 ${showSocialSheet} (Deceased)` : showSocialSheet}'s Character Sheet
+            </h2>
             
             <div className="relationship-section">
               <h3>Relationship</h3>
@@ -126,15 +138,21 @@ const Social = ({
             </div>
 
             <div className="action-buttons">
-              <button
-                className="fantasy-button"
-                onClick={() => {
-                  setCurrentPerson(showSocialSheet);
-                  setShowVisit(true);
-                }}
-              >
-                Visit
-              </button>
+              {!socialSheets[showSocialSheet].isDead ? (
+                <button
+                  className="fantasy-button"
+                  onClick={() => {
+                    setCurrentPerson(showSocialSheet);
+                    setShowVisit(true);
+                  }}
+                >
+                  Visit
+                </button>
+              ) : (
+                <div style={{ color: '#666', fontStyle: 'italic' }}>
+                  Cannot visit deceased person
+                </div>
+              )}
               <button className="fantasy-button" onClick={() => setShowSocialSheet(null)}>
                 Close
               </button>

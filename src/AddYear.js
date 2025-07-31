@@ -152,6 +152,18 @@ const AddYear = ({
             (character.FatherName && name.includes(character.FatherName))
           ) {
             updated[name] = { ...updated[name], Age: updated[name].Age + 1 };
+            
+            // Check for parent death (10% chance after age 60)
+            if (updated[name].Age >= 60 && !updated[name].isDead) {
+              const deathChance = Math.random();
+              if (deathChance < 0.10) {
+                updated[name].isDead = true;
+                
+                // Add death message to log
+                const parentType = name.includes(character.MotherName) ? "Mother" : "Father";
+                setLogMessage(prevLog => prevLog + `<br>💀 My ${parentType} ${name} died today.`);
+              }
+            }
           }
         });
         return updated;
@@ -210,6 +222,9 @@ const AddYear = ({
       setInventory([]);
       setJob(null); // Reset job
       setPlayerHouse(null); // Reset player's house
+      if (setSocialSheets) {
+        setSocialSheets({}); // Reset social sheets
+      }
       const resetEvent = new Event('characterReset', { 'bubbles': true });
       window.dispatchEvent(resetEvent);
     }

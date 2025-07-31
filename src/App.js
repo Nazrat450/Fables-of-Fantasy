@@ -33,6 +33,19 @@ const useMobile = () => {
 };
 
 //NEW NAME 2024 --- Fables of Fantasy//
+/*  @@                                             
+      @@@@@             @@@@@@@@@@                      
+  .@@   @@          %@@     @@%                        
+  .@@     @@@@@@@@@@@@@  (@@                           
+      @@@                 (@@                           
+  .@@                       @@%                        
+  .@@   @@          %@@     @@%                        
+  .@@   @@   @@     %@@     @@%                        
+  .@@     @@@  @@@          @@%                        
+      @@@                 (@@                           
+  .@@   @@@@@@@@@@@@@@@     @@%                        
+  .@@@@@@@             @@@@@@@% 
+*/
 
 function App() {
   const isMobile = useMobile();
@@ -64,7 +77,6 @@ function App() {
   const [showTown, setShowTown] = useState(false);
   const [playerHouse, setPlayerHouse] = useState(null);
   const [isDead, setIsDead] = useState(false);
-
   const textareaRef = useRef(null);
 
 
@@ -154,7 +166,7 @@ const spendCoins = (amount) => {
           </div>
         )}
         <div className="CharacterGen">
-          <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} isModal={false} isMobile={isMobile} />
+          <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} isModal={false} isMobile={isMobile} setSocialSheets={setSocialSheets} />
           {!isMobile && (
             <div className="menu-container">
               <button

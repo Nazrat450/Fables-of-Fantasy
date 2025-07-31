@@ -150,7 +150,7 @@ const spendCoins = (amount) => {
           </div>
         )}
         <div className="CharacterGen">
-          <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
+          <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} isModal={false} isMobile={isMobile} />
           {!isMobile && (
             <div className="menu-container">
               <button
@@ -305,7 +305,7 @@ const spendCoins = (amount) => {
           <div className="character-sheet-modal">
             <div className="character-sheet-modal-content">
               <span className="character-sheet-modal-close" onClick={() => setShowCharacterSheetModal(false)}>&times;</span>
-              <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} />
+              <CharacterGen character={character} setCharacter={setCharacter} showClassModal={showClassModal} setShowClassModal={setShowClassModal} setLogMessage={setLogMessage} isModal={true} isMobile={isMobile} />
             </div>
           </div>
         </>

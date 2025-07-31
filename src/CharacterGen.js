@@ -121,7 +121,55 @@ const getRandomHeight = (race) => {
     return Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
 };
 
-const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassModal, setLogMessage }) => {
+// Separate CharacterSheet component
+const CharacterSheet = ({ character, isModal = false }) => {
+  const statClass = value => value >= 15 ? "stat-green" : value <= 5 ? "stat-red" : "stat-normal";
+
+  return (
+    <div className={`stats-card ${isModal ? 'modal-stats-card' : ''}`}>
+      <h1>{character.FirstName} {character.LastName}</h1>
+      <div className="basic-info">
+        <p><strong>Age:</strong> {character.Age}</p>
+        <p><strong>Gender:</strong> {character.Gender}</p>
+        {character.Class && <p><strong>Class:</strong> {character.Class}</p>}
+        <p className={character.Race === "Frog" ? "selectedRace" : ""}>
+          <strong>Race:</strong> {character.Race} {character.Race === "Frog" ? "🐸" : ""}
+        </p>
+        <p><strong>Health:</strong> {character.Health}%</p>
+        <p><strong>Looks:</strong> {character.Looks}%</p>
+        {character.HairColor && <p><strong>Hair Color:</strong> {character.HairColor}</p>}
+        {character.FurColor && <p><strong>Fur Color:</strong> {character.FurColor}</p>}
+        {character.ScaleColor && <p><strong>Scale Color:</strong> {character.ScaleColor}</p>}
+        {character.FeatherColor && <p><strong>Feather Color:</strong> {character.FeatherColor}</p>}
+        {(character.Age >= 21 || character.Race === "Frog") && (
+          <p><strong>Height:</strong> {character.Height} cm</p>
+        )}
+      </div>
+      <div className="stats-grid">
+        <div className={statClass(character.Strength)}>
+          <span role="img" aria-label="Strength">💪</span> <span className="stat-label">Strength:</span> <span className="stat-value">{character.Strength}</span>
+        </div>
+        <div className={statClass(character.Dexterity)}>
+          <span role="img" aria-label="Dexterity">🤸</span> <span className="stat-label">Dexterity:</span> <span className="stat-value">{character.Dexterity}</span>
+        </div>
+        <div className={statClass(character.Constitution)}>
+          <span role="img" aria-label="Constitution">🛡️</span> <span className="stat-label">Constitution:</span> <span className="stat-value">{character.Constitution}</span>
+        </div>
+        <div className={statClass(character.Intelligence)}>
+          <span role="img" aria-label="Intelligence">🧠</span> <span className="stat-label">Intelligence:</span> <span className="stat-value">{character.Intelligence}</span>
+        </div>
+        <div className={statClass(character.Wisdom)}>
+          <span role="img" aria-label="Wisdom">🦉</span> <span className="stat-label">Wisdom:</span> <span className="stat-value">{character.Wisdom}</span>
+        </div>
+        <div className={statClass(character.Charisma)}>
+          <span role="img" aria-label="Charisma">🗣️</span> <span className="stat-label">Charisma:</span> <span className="stat-value">{character.Charisma}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassModal, setLogMessage, isModal = false, isMobile = false }) => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -204,8 +252,6 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
     setLogMessage(prevLog => prevLog + "<br><strong>You Are Born</strong><br>" + firstName + " " + lastName + " Welcome to the world! Everyone in town feared your mother, " + parentDetails.motherName + ", the ruthless " + (parentDetails.motherJob || "knights") + ", and your father, " + parentDetails.fatherName + ", the cunning merchants. Their reputation cast a long shadow over the community.");
   };
   
-  const statClass = value => value >= 15 ? "stat-green" : value <= 5 ? "stat-red" : "stat-normal";
-
   return (
     <div>
       {!character ? (
@@ -232,46 +278,9 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
         
       ) : (
         
-        <div className= "stats-card">
-          <h1>{character.FirstName} {character.LastName}</h1>
-          <div className="basic-info">
-            <p><strong>Age:</strong> {character.Age}</p>
-            <p><strong>Gender:</strong> {character.Gender}</p>
-            {character.Class && <p><strong>Class:</strong> {character.Class}</p>}
-            <p className={character.Race === "Frog" ? "selectedRace" : ""}>
-              <strong>Race:</strong> {character.Race} {character.Race === "Frog" ? "🐸" : ""}
-            </p>
-            <p><strong>Health:</strong> {character.Health}%</p>
-            <p><strong>Looks:</strong> {character.Looks}%</p>
-            {character.HairColor && <p><strong>Hair Color:</strong> {character.HairColor}</p>}
-            {character.FurColor && <p><strong>Fur Color:</strong> {character.FurColor}</p>}
-            {character.ScaleColor && <p><strong>Scale Color:</strong> {character.ScaleColor}</p>}
-            {character.FeatherColor && <p><strong>Feather Color:</strong> {character.FeatherColor}</p>}
-            {(character.Age >= 21 || character.Race === "Frog") && (
-              <p><strong>Height:</strong> {character.Height} cm</p>
-            )}
-          </div>
-          <div className="stats-grid">
-            <div className={statClass(character.Strength)}>
-              <span role="img" aria-label="Strength">💪</span> <span className="stat-label">Strength:</span> <span className="stat-value">{character.Strength}</span>
-            </div>
-            <div className={statClass(character.Dexterity)}>
-              <span role="img" aria-label="Dexterity">🤸</span> <span className="stat-label">Dexterity:</span> <span className="stat-value">{character.Dexterity}</span>
-            </div>
-            <div className={statClass(character.Constitution)}>
-              <span role="img" aria-label="Constitution">🛡️</span> <span className="stat-label">Constitution:</span> <span className="stat-value">{character.Constitution}</span>
-            </div>
-            <div className={statClass(character.Intelligence)}>
-              <span role="img" aria-label="Intelligence">🧠</span> <span className="stat-label">Intelligence:</span> <span className="stat-value">{character.Intelligence}</span>
-            </div>
-            <div className={statClass(character.Wisdom)}>
-              <span role="img" aria-label="Wisdom">🦉</span> <span className="stat-label">Wisdom:</span> <span className="stat-value">{character.Wisdom}</span>
-            </div>
-            <div className={statClass(character.Charisma)}>
-              <span role="img" aria-label="Charisma">🗣️</span> <span className="stat-label">Charisma:</span> <span className="stat-value">{character.Charisma}</span>
-            </div>
-          </div>
-        </div>
+        (!isMobile || isModal) && (
+          <CharacterSheet character={character} isModal={isModal} />
+        )
         
       )}
       <div>

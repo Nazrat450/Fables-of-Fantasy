@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import eventsData from './randomEvents.json';
 import { performSkillCheck } from './DiceRoll.js';
+import { calculateModifier } from './utils.js';
 import './App.css';
 
 function toFirstPerson(text) {
@@ -113,6 +114,11 @@ const RandomEventWidget = ({
   if (!event) return null;
 
   if (showDiceRoll && pendingOption) {
+    const statName = pendingOption.rollType.charAt(0).toUpperCase() + pendingOption.rollType.slice(1);
+    const statValue = character?.[statName] || 0;
+    const modifier = calculateModifier(statValue);
+    const effectiveDC = pendingOption.difficulty - modifier; // The DC the player needs to roll on the d20
+    
     return (
       <>
         <div className="modal-backdrop" onClick={() => {
@@ -125,7 +131,7 @@ const RandomEventWidget = ({
         }} />
         <div className="random-event-widget">
           <h2>Skill Check Required</h2>
-          <p>You need to make a {pendingOption.rollType} check (DC {pendingOption.difficulty}) to {pendingOption.text.toLowerCase()}.</p>
+          <p>You need to make a {pendingOption.rollType} check (DC {effectiveDC}) to {pendingOption.text.toLowerCase()}.</p>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
             <div className="dice-container">
               <div className={`dice-d20${rolling ? ' rolling' : ''}`}>

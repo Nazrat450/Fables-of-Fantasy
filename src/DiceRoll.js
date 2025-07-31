@@ -62,11 +62,15 @@ const DiceRoll = ({ onClose, onResult, resultText, dc, character, statName, onSk
 
   // Skill check UI
   if (dc && character && statName) {
+    const statValue = character?.[statName] || 0;
+    const modifier = calculateModifier(statValue);
+    const effectiveDC = dc - modifier; // The DC the player needs to roll on the d20
+    
     return (
       <div className="dice-modal">
         <span className="dice-modal-close" onClick={onClose}>&times;</span>
         <h2>Skill Check Required</h2>
-        <p>You need to make a {statName.toLowerCase()} check (DC {dc}) to succeed.</p>
+        <p>You need to make a {statName.toLowerCase()} check (DC {effectiveDC}) to succeed.</p>
         <div className="dice-container">
           <div className={`dice-d20${rolling ? ' rolling' : ''}`}>
             {skillCheckResult ? skillCheckResult.roll : (rolling ? "..." : "?")}

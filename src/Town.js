@@ -21,7 +21,10 @@ const Town = ({
   setShopMessage, 
   setLogMessage,
   playerHouse,
-  setPlayerHouse
+  setPlayerHouse,
+  currentYear,
+  shopState,
+  setShopState
 }) => {
   
   const [currentSection, setCurrentSection] = useState('main');
@@ -181,6 +184,9 @@ const Town = ({
               shopMessage={shopMessage}
               setShopMessage={setShopMessage}
               setLogMessage={setLogMessage}
+              currentYear={currentYear}
+              shopState={shopState}
+              setShopState={setShopState}
             />
           </div>
         )}

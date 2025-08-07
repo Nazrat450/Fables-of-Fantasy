@@ -1,0 +1,184 @@
+{
+  "shopItems": [
+    {
+      "name": "Toy Sword",
+      "price": 5,
+      "minAge": 5,
+      "maxAge": 12,
+      "inShop": true,
+      "description": "A wooden sword perfect for young adventurers"
+    },
+    {
+      "name": "Toy Shield", 
+      "price": 5,
+      "minAge": 5,
+      "maxAge": 12,
+      "inShop": true,
+      "description": "A small wooden shield for training"
+    },
+    {
+      "name": "Toy Staff",
+      "price": 5,
+      "minAge": 5,
+      "maxAge": 12,
+      "inShop": true,
+      "description": "A magical-looking stick for young wizards"
+    },
+    {
+      "name": "Short Sword",
+      "price": 30,
+      "inShop": true,
+      "description": "A reliable steel sword for beginners"
+    },
+    {
+      "name": "Shield",
+      "price": 30,
+      "inShop": true,
+      "description": "A sturdy wooden shield with metal trim"
+    },
+    {
+      "name": "Staff",
+      "price": 30,
+      "inShop": true,
+      "description": "A simple wooden staff for spellcasting"
+    },
+    {
+      "name": "Long Sword",
+      "price": 75,
+      "inShop": true,
+      "description": "A well-crafted steel longsword"
+    },
+    {
+      "name": "Steel Shield",
+      "price": 60,
+      "inShop": true,
+      "description": "A solid steel shield for serious combat"
+    },
+    {
+      "name": "Arcane Staff",
+      "price": 80,
+      "inShop": true,
+      "description": "A staff imbued with magical properties"
+    },
+    {
+      "name": "Dagger",
+      "price": 25,
+      "inShop": true,
+      "description": "A sharp dagger for stealth and precision"
+    },
+    {
+      "name": "Leather Armor",
+      "price": 45,
+      "inShop": true,
+      "description": "Light leather armor for protection"
+    },
+    {
+      "name": "Magic Ring",
+      "price": 120,
+      "inShop": true,
+      "description": "A ring that enhances magical abilities"
+    },
+    {
+      "name": "Battle Axe",
+      "price": 100,
+      "inShop": true,
+      "description": "A heavy battle axe for powerful strikes"
+    },
+    {
+      "name": "Chain Mail",
+      "price": 150,
+      "inShop": true,
+      "description": "Flexible chain mail armor"
+    },
+    {
+      "name": "Wizard's Robe",
+      "price": 90,
+      "inShop": true,
+      "description": "A robe that enhances magical power"
+    },
+    {
+      "name": "Crossbow",
+      "price": 85,
+      "inShop": true,
+      "description": "A reliable crossbow for ranged combat"
+    },
+    {
+      "name": "Healing Potion",
+      "price": 20,
+      "inShop": true,
+      "description": "A potion that restores health"
+    },
+    {
+      "name": "Mana Potion",
+      "price": 25,
+      "inShop": true,
+      "description": "A potion that restores magical energy"
+    },
+    {
+      "name": "Throwing Knives",
+      "price": 35,
+      "inShop": true,
+      "description": "A set of balanced throwing knives"
+    },
+    {
+      "name": "Scroll of Fireball",
+      "price": 150,
+      "inShop": true,
+      "description": "A scroll containing the fireball spell"
+    },
+    {
+      "name": "Enchanted Sword",
+      "price": 200,
+      "inShop": true,
+      "description": "A sword with magical enhancements"
+    },
+    {
+      "name": "Dragon Scale Armor",
+      "price": 500,
+      "inShop": false,
+      "description": "Legendary armor made from dragon scales"
+    },
+    {
+      "name": "Staff of Power",
+      "price": 300,
+      "inShop": true,
+      "description": "A powerful staff for master wizards"
+    },
+    {
+      "name": "Bow of Accuracy",
+      "price": 180,
+      "inShop": true,
+      "description": "A finely crafted bow with perfect balance"
+    },
+    {
+      "name": "Amulet of Protection",
+      "price": 250,
+      "inShop": true,
+      "description": "An amulet that provides magical protection"
+    },
+    {
+      "name": "Boots of Speed",
+      "price": 120,
+      "inShop": true,
+      "description": "Boots that enhance movement speed"
+    },
+    {
+      "name": "Ring of Invisibility",
+      "price": 400,
+      "inShop": true,
+      "description": "A ring that grants invisibility"
+    },
+    {
+      "name": "Sword of Light",
+      "price": 350,
+      "inShop": true,
+      "description": "A holy sword that glows with divine light"
+    },
+    {
+      "name": "Crystal Ball",
+      "price": 200,
+      "inShop": true,
+      "description": "A crystal ball for scrying and divination"
+    }
+  ]
+}

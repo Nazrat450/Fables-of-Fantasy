@@ -1308,8 +1308,9 @@ label {
   border: 3px solid var(--border-gold);
   border-radius: 20px;
   padding: 40px;
-  max-width: 90%;
-  max-height: 90%;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
   overflow-y: auto;
   z-index: 1001;
   box-shadow: 0 20px 60px var(--shadow-dark);
@@ -1332,59 +1333,135 @@ label {
 .shop-modal h2 {
   color: var(--primary-gold);
   font-family: 'Cinzel', serif;
-  font-size: 2rem;
-  margin-bottom: 25px;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
   text-align: center;
+  text-shadow: 2px 2px 4px var(--shadow-dark);
 }
 
 .shop-modal-close {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: var(--primary-gold);
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 1002;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .shop-modal-close:hover {
   color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.1);
+  transform: scale(1.1);
 }
 
 .shop-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  margin: 15px 0;
+  padding: 25px;
+  margin: 20px 0;
   background: var(--aged-parchment);
   border: 2px solid var(--border-gold);
   border-radius: 15px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 8px var(--shadow-dark);
 }
 
 .shop-item:hover {
   background: var(--parchment);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px var(--shadow-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+  border-color: var(--accent-gold);
+}
+
+.shop-item span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink-dark);
+  flex: 1;
+  margin-right: 20px;
+}
+
+.shop-item button {
+  margin-left: 10px;
+  min-width: 100px;
+  font-size: 0.9rem;
+  padding: 10px 15px;
 }
 
 .shop-message {
-  margin-top: 20px;
-  padding: 15px;
+  margin-top: 25px;
+  padding: 20px;
   background: var(--aged-parchment);
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
   font-weight: 600;
+  font-size: 1.1rem;
+  border: 2px solid var(--border-gold);
+  box-shadow: 0 4px 8px var(--shadow-dark);
+}
+
+.shop-message.success {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border-color: #4CAF50;
+}
+
+.shop-message.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+  border-color: #f44336;
+}
+
+.shop-message.warning {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  border-color: #ff9800;
 }
 
 .haggle-box {
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 25px;
+  padding: 25px;
   background: var(--aged-parchment);
   border-radius: 15px;
   border: 2px solid var(--border-gold);
+  box-shadow: 0 4px 8px var(--shadow-dark);
+}
+
+.haggle-box p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: var(--ink-dark);
+}
+
+.haggle-box input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--border-gold);
+  font-size: 1rem;
+  margin-right: 15px;
+  background: var(--parchment);
+  color: var(--ink-dark);
+  transition: all 0.3s ease;
+}
+
+.haggle-box input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+.haggle-box button {
+  padding: 12px 20px;
+  font-size: 1rem;
 }
 
 /* Inventory Modal */
@@ -1758,17 +1835,41 @@ label {
   
   .shop-modal {
     width: 95%;
-    padding: 20px;
+    padding: 25px;
+    max-width: none;
+  }
+  
+  .shop-modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
   
   .shop-item {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     text-align: center;
+    padding: 20px;
+  }
+  
+  .shop-item span {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
   
   .shop-item button {
     margin-left: 0;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .haggle-box {
+    padding: 20px;
+  }
+  
+  .haggle-box input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
   }
   
   .dice-modal {
@@ -2317,12 +2418,17 @@ label {
   max-width: 200px;
 }
 
+/* Show mobile buttons when overlap is detected OR on mobile */
+.mobile-top-buttons.show-mobile-buttons {
+  display: flex;
+}
+
 @media only screen and (max-width: 768px) {
   .mobile-wallet-display {
     display: block;
   }
   
-  /* Mobile Top Buttons - Show on mobile */
+  /* Mobile Top Buttons - Always show on mobile */
   .mobile-top-buttons {
     display: flex;
   }
@@ -2889,5 +2995,383 @@ label {
   /* Show character sheet only in modal on mobile */
   .character-sheet-modal .stats-card {
     display: block;
+  }
+}
+
+/* Magical Bag of Holding Inventory Styles */
+.inventory-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inventory-modal-magical {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.2),
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.magical-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+  border-radius: 20px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.inventory-title {
+  margin: 0;
+  color: #ffd700;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.magical-text {
+  background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.magical-sparkles {
+  font-size: 1.2em;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+}
+
+.inventory-close-magical {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.inventory-close-magical:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.coins-display-magical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.03) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 10px;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.coins-icon {
+  font-size: 1.5em;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+}
+
+.coins-amount {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.inventory-grid-magical {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.inventory-item-magical {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #e0e0e0;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.item-content {
+  position: relative;
+  z-index: 2;
+}
+
+.item-name {
+  font-size: 1.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.item-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.empty-inventory {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.empty-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+
+.empty-inventory p {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #aaa;
+}
+
+.empty-subtitle {
+  font-size: 1em !important;
+  color: #666 !important;
+  font-style: italic;
+}
+
+.magical-portal {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 20px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Scrollbar styling for magical theme */
+.inventory-modal-magical::-webkit-scrollbar {
+  width: 8px;
+}
+
+.inventory-modal-magical::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.inventory-modal-magical::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  border-radius: 4px;
+}
+
+.inventory-modal-magical::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ffed4e, #ffd700);
+}
+
+/* Pagination Styles */
+.inventory-page {
+  display: contents;
+}
+
+.inventory-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+}
+
+.pagination-button {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  color: #ffd700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.2) 100%);
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.pagination-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pagination-page {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+  color: #ffd700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-page:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.pagination-page.active {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.3) 100%);
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+  font-weight: bold;
+}
+
+.pagination-page.ellipsis {
+  background: none;
+  border: none;
+  cursor: default;
+  width: 20px;
+}
+
+.pagination-page.ellipsis:hover {
+  background: none;
+  border: none;
+}
+
+.page-info {
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.page-text {
+  color: #ffd700;
+  font-size: 0.9em;
+  opacity: 0.8;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Responsive design for magical inventory */
+@media (max-width: 768px) {
+  .inventory-modal-magical {
+    padding: 20px;
+    max-width: 95%;
+  }
+  
+  .inventory-title {
+    font-size: 1.5em;
+  }
+  
+  .inventory-grid-magical {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .inventory-item-magical {
+    padding: 12px;
+  }
+  
+  .inventory-pagination {
+    flex-direction: row;
+    gap: 10px;
+    padding: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .pagination-pages {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    order: 2;
+  }
+  
+  .pagination-button:first-child {
+    order: 1;
+  }
+  
+  .pagination-button:last-child {
+    order: 3;
+  }
+  
+  .pagination-button {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  
+  .pagination-page {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
   }
 }

@@ -77,6 +77,7 @@ function App() {
   const [showTown, setShowTown] = useState(false);
   const [playerHouse, setPlayerHouse] = useState(null);
   const [isDead, setIsDead] = useState(false);
+  const [shopState, setShopState] = useState(null);
   const textareaRef = useRef(null);
 
 
@@ -162,6 +163,7 @@ const spendCoins = (amount) => {
   setPlayerHouse={setPlayerHouse}
   isDead={isDead}
   setIsDead={setIsDead}
+  setShopState={setShopState}
 />
           </div>
         )}
@@ -218,6 +220,9 @@ const spendCoins = (amount) => {
           shopMessage={shopMessage}
           setShopMessage={setShopMessage}
           setLogMessage={setLogMessage}
+          currentYear={character?.Age || 0}
+          shopState={shopState}
+          setShopState={setShopState}
         />
       )}
       {showJob && (
@@ -348,6 +353,9 @@ const spendCoins = (amount) => {
           setLogMessage={setLogMessage}
           playerHouse={playerHouse}
           setPlayerHouse={setPlayerHouse}
+          currentYear={character?.Age || 0}
+          shopState={shopState}
+          setShopState={setShopState}
         />
       )}
     </div>

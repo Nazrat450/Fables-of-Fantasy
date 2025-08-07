@@ -23,7 +23,8 @@ const AddYear = ({
   playerHouse,
   setPlayerHouse,
   isDead,
-  setIsDead
+  setIsDead,
+  setShopState
  }) => { 
   const [usedEventIds, setUsedEventIds] = useState([]);
   const [showRandomEvent, setShowRandomEvent] = useState(false);
@@ -142,6 +143,18 @@ const AddYear = ({
       Age: newAge
     }));
 
+    // Reset shop state for new year (clear purchased items and failed haggles)
+    if (setShopState) {
+      setShopState(prev => ({
+        ...prev,
+        purchasedItems: [],
+        failedHaggles: [],
+        hasFailedHaggleThisYear: false,
+        lastMessageYear: newAge,
+        messageTimestamp: Date.now()
+      }));
+    }
+
     // Increment parent ages in socialSheets
     if (typeof setSocialSheets === "function") {
       setSocialSheets(prevSheets => {
@@ -224,6 +237,9 @@ const AddYear = ({
       setPlayerHouse(null); // Reset player's house
       if (setSocialSheets) {
         setSocialSheets({}); // Reset social sheets
+      }
+      if (setShopState) {
+        setShopState(null); // Reset shop state
       }
       const resetEvent = new Event('characterReset', { 'bubbles': true });
       window.dispatchEvent(resetEvent);

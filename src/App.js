@@ -78,6 +78,7 @@ function App() {
   const [playerHouse, setPlayerHouse] = useState(null);
   const [isDead, setIsDead] = useState(false);
   const [shopState, setShopState] = useState(null);
+  const [tavernVisits, setTavernVisits] = useState({});
   const textareaRef = useRef(null);
 
 
@@ -255,35 +256,8 @@ const spendCoins = (amount) => {
             metPeople={metPeople}
             onPersonClick={name => {
               setShowSocialSheet(name);
-              setSocialSheets(prev => {
-                if (prev[name]) return prev;
-                let gender = "Non-Binary";
-                if (character?.MotherName && name.includes(character.MotherName)) gender = "Female";
-                if (character?.FatherName && name.includes(character.FatherName)) gender = "Male";
-                let age = (name.includes(character?.MotherName) || name.includes(character?.FatherName))
-                  ? Math.floor(Math.random() * 31) + 30
-                  : character?.Age + Math.floor(Math.random() * 20) - 10;
-                let relationship = (name.includes(character?.MotherName) || name.includes(character?.FatherName)) ? 50 : Math.floor(Math.random() * 30) + 10;
-                return {
-                  ...prev,
-                  [name]: {
-                    FirstName: name.split(" ")[0],
-                    LastName: name.split(" ")[1] || "",
-                    Race: character?.Race || "Human",
-                    Gender: gender,
-                    Age: age,
-                    Health: 100,
-                    Looks: Math.floor(Math.random() * 100) + 1,
-                            Strength: Math.floor(Math.random() * 20) + 1,
-        Dexterity: Math.floor(Math.random() * 20) + 1,
-        Constitution: Math.floor(Math.random() * 20) + 1,
-        Intelligence: Math.floor(Math.random() * 20) + 1,
-        Wisdom: Math.floor(Math.random() * 20) + 1,
-        Charisma: Math.floor(Math.random() * 20) + 1,
-                    Relationship: relationship
-                  }
-                };
-              });
+              // Don't recreate character sheets for people who already have them (like tavern characters)
+              // The socialSheets should already contain the complete character data
             }}
             socialSheets={socialSheets}
             setSocialSheets={setSocialSheets}
@@ -356,6 +330,10 @@ const spendCoins = (amount) => {
           currentYear={character?.Age || 0}
           shopState={shopState}
           setShopState={setShopState}
+          tavernVisits={tavernVisits}
+          setTavernVisits={setTavernVisits}
+          setMetPeople={setMetPeople}
+          setSocialSheets={setSocialSheets}
         />
       )}
     </div>

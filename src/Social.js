@@ -37,7 +37,21 @@ const Social = ({
       clickable: !isDead 
     };
   });
-  const people = [...parentObjects, ...(metPeople || [])];
+  // Filter out empty or undefined names from metPeople
+  const validMetPeople = (metPeople || []).filter(name => name && name.trim() !== '');
+  
+  // Convert metPeople strings to objects with the same structure as parentObjects
+  const metPeopleObjects = validMetPeople.map(name => {
+    const isDead = socialSheets[name]?.isDead || false;
+    const displayName = isDead ? `💀 ${name}` : name;
+    return { 
+      name, 
+      displayName,
+      clickable: !isDead 
+    };
+  });
+  
+  const people = [...parentObjects, ...metPeopleObjects];
 
   return (
     <>
@@ -45,17 +59,24 @@ const Social = ({
         <span className="menu-drawer-close" onClick={onClose}>&times;</span>
         <h3 className="menu-title">Social Circle</h3>
         <ul style={{ padding: 0, listStyle: 'none', marginTop: '18px' }}>
-          {people.map((person, idx) => (
-            <li key={idx}
-              className="menu-option"
-              style={{
-                cursor: person.clickable === false ? 'default' : 'pointer'
-              }}
-              onClick={person.clickable === false ? undefined : () => onPersonClick && onPersonClick(person.name)}
-            >
-              {person.displayName || person.name}
-            </li>
-          ))}
+          {people.map((person, idx) => {
+            // Only render if person has a valid name
+            if (!person.name || person.name.trim() === '') {
+              return null;
+            }
+            
+            return (
+              <li key={idx}
+                className="menu-option"
+                style={{
+                  cursor: person.clickable === false ? 'default' : 'pointer'
+                }}
+                onClick={person.clickable === false ? undefined : () => onPersonClick && onPersonClick(person.name)}
+              >
+                {person.displayName || person.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
       {showSocialSheet && socialSheets[showSocialSheet] && (
@@ -65,7 +86,7 @@ const Social = ({
           }} />
           <div className="social-character-sheet">
             <h2>
-              {socialSheets[showSocialSheet].isDead ? `💀 ${showSocialSheet} (Deceased)` : showSocialSheet}'s Character Sheet
+              {(socialSheets[showSocialSheet].isDead || false) ? `💀 ${showSocialSheet} (Deceased)` : showSocialSheet}'s Character Sheet
             </h2>
             
             <div className="relationship-section">
@@ -74,11 +95,11 @@ const Social = ({
                 <div 
                   className="relationship-fill"
                   style={{
-                    width: `${socialSheets[showSocialSheet].Relationship}%`
+                    width: `${socialSheets[showSocialSheet].Relationship || 0}%`
                   }}
                 />
                 <span className="relationship-label">
-                  {socialSheets[showSocialSheet].Relationship}%
+                  {socialSheets[showSocialSheet].Relationship || 0}%
                 </span>
               </div>
             </div>
@@ -88,23 +109,23 @@ const Social = ({
                 <h3>Basic Info</h3>
                 <div className="stat-item">
                   <span className="stat-label">Race:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Race}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Race || 'Unknown'}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Gender:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Gender}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Gender || 'Unknown'}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Age:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Age}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Age || 'Unknown'}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Health:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Health}%</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Health || 0}%</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Looks:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Looks}%</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Looks || 0}%</span>
                 </div>
               </div>
 
@@ -112,33 +133,33 @@ const Social = ({
                 <h3>Attributes</h3>
                 <div className="stat-item">
                   <span className="stat-label">Strength:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Strength}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Strength || 0}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Dexterity:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Dexterity}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Dexterity || 0}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Constitution:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Constitution}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Constitution || 0}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Intelligence:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Intelligence}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Intelligence || 0}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Wisdom:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Wisdom}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Wisdom || 0}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-label">Charisma:</span>
-                  <span className="stat-value">{socialSheets[showSocialSheet].Charisma}</span>
+                  <span className="stat-value">{socialSheets[showSocialSheet].Charisma || 0}</span>
                 </div>
               </div>
             </div>
 
             <div className="action-buttons">
-              {!socialSheets[showSocialSheet].isDead ? (
+              {!(socialSheets[showSocialSheet].isDead || false) ? (
                 <button
                   className="fantasy-button"
                   onClick={() => {

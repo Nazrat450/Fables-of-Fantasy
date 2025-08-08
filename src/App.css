@@ -3375,3 +3375,201 @@ label {
     font-size: 12px;
   }
 }
+
+/* Tavern Styles */
+.tavern-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--aged-parchment) 0%, var(--parchment) 100%);
+  border-left: 3px solid var(--border-gold);
+  box-shadow: -5px 0 20px var(--shadow-dark);
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  font-family: 'Crimson Text', serif;
+}
+
+.tavern-drawer.open {
+  transform: translateX(0);
+}
+
+.tavern-drawer-header {
+  background: linear-gradient(135deg, var(--dark-brown) 0%, var(--medium-brown) 100%);
+  color: var(--primary-gold);
+  padding: 20px;
+  border-bottom: 2px solid var(--border-gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tavern-drawer-header h2 {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+}
+
+.tavern-drawer-close {
+  background: none;
+  border: none;
+  color: var(--primary-gold);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.tavern-drawer-close:hover {
+  background: rgba(212, 165, 116, 0.2);
+  transform: scale(1.1);
+}
+
+.tavern-content {
+  padding: 20px;
+}
+
+.tavern-description {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(212, 165, 116, 0.1);
+  border-radius: 10px;
+  border: 1px solid var(--border-gold);
+}
+
+.tavern-description p {
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-dark);
+}
+
+.encounter-description {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(230, 177, 122, 0.2);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-gold);
+}
+
+.encounter-description p {
+  margin: 0;
+  font-style: italic;
+  color: var(--ink-medium);
+}
+
+.tavern-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tavern-option {
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-gold) 100%);
+  border: 2px solid var(--border-gold);
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--dark-brown);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  font-weight: 600;
+}
+
+.tavern-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.tavern-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-dark);
+}
+
+.tavern-option:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.tavern-option:active {
+  transform: translateY(0);
+}
+
+.tavern-option.primary {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-gold) 100%);
+  border-color: var(--dark-brown);
+  font-weight: 700;
+}
+
+.tavern-option.disabled {
+  background: linear-gradient(135deg, var(--light-brown) 0%, var(--medium-brown) 100%);
+  color: var(--ink-medium);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.tavern-option.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.encounter-options {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border-gold);
+}
+
+.encounter-options h3 {
+  margin: 0 0 15px 0;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: var(--dark-brown);
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .tavern-drawer {
+    width: 100vw;
+  }
+  
+  .tavern-drawer-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .tavern-option {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+  
+  .tavern-content {
+    padding: 15px;
+  }
+  
+  .tavern-description {
+    padding: 15px;
+  }
+  
+  .encounter-description {
+    padding: 12px;
+  }
+}

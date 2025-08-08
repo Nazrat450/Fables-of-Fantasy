@@ -1,0 +1,175 @@
+{
+  "tavernEncounters": [
+    {
+      "id": "human_woman_dog",
+      "description": "A Human woman with blue hair sitting with a pet dog",
+      "options": [
+        "Approach and introduce yourself",
+        "Ask about the dog",
+        "Offer to buy her a drink"
+      ]
+    },
+    {
+      "id": "dwarves_cards",
+      "description": "A group of Dwarves playing cards in the corner",
+      "options": [
+        "Ask to join their game",
+        "Watch from a distance",
+        "Buy them a round of drinks"
+      ]
+    },
+    {
+      "id": "elf_bard_lute",
+      "description": "An Elf bard tuning their lute by the fireplace",
+      "options": [
+        "Request a song",
+        "Ask about their travels",
+        "Offer to buy them a drink"
+      ]
+    },
+    {
+      "id": "mysterious_hooded_figure",
+      "description": "A mysterious figure in a hooded cloak nursing a drink",
+      "options": [
+        "Try to strike up conversation",
+        "Keep your distance",
+        "Offer to buy them a drink"
+      ]
+    },
+    {
+      "id": "halfling_merchant_exotic",
+      "description": "A Halfling merchant showing off exotic goods",
+      "options": [
+        "Browse their wares",
+        "Ask about their travels",
+        "Inquire about rare items"
+      ]
+    },
+    {
+      "id": "adventurers_sharing_tales",
+      "description": "A group of adventurers sharing tales of their latest quest",
+      "options": [
+        "Listen to their stories",
+        "Ask about their adventures",
+        "Share your own tales"
+      ]
+    },
+    {
+      "id": "orc_blacksmith_weapons",
+      "description": "An Orc blacksmith discussing weapon quality with patrons",
+      "options": [
+        "Ask about weapon crafting",
+        "Inquire about armor",
+        "Discuss metalworking techniques"
+      ]
+    },
+      {
+    "id": "kenku_messenger_letters",
+    "description": "A Kenku messenger delivering letters to various patrons",
+    "options": [
+      "Ask about news from other towns",
+      "Inquire about message delivery",
+      "Offer to help with deliveries"
+    ]
+  },
+  {
+    "id": "random_character_meeting",
+    "description": "You see a {race} {gender} sitting alone at a table",
+    "options": [
+      "Introduce yourself",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_2",
+    "description": "You see a {race} {gender} reading a book by the fireplace",
+    "options": [
+      "Ask about their book",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_3",
+    "description": "You see a {race} {gender} playing a lute in the corner",
+    "options": [
+      "Request a song",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_4",
+    "description": "You see a {race} {gender} writing in a journal",
+    "options": [
+      "Ask about their writing",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_5",
+    "description": "You see a {race} {gender} studying a map intently",
+    "options": [
+      "Ask about their travels",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_6",
+    "description": "You see a {race} {gender} sharpening a blade",
+    "options": [
+      "Ask about their weapon",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_7",
+    "description": "You see a {race} {gender} brewing a potion",
+    "options": [
+      "Ask about their alchemy",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_8",
+    "description": "You see a {race} {gender} sketching in a notebook",
+    "options": [
+      "Ask about their art",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_9",
+    "description": "You see a {race} {gender} practicing magic tricks",
+    "options": [
+      "Ask for a demonstration",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_10",
+    "description": "You see a {race} {gender} playing chess alone",
+    "options": [
+      "Ask to join their game",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  },
+  {
+    "id": "random_character_meeting_11",
+    "description": "You see a {race} {gender} meditating quietly",
+    "options": [
+      "Wait for them to finish",
+      "Keep to yourself",
+      "Buy them a drink"
+    ]
+  }
+]
+}

@@ -78,6 +78,9 @@ const AddYear = ({
   };
 
   const getRandomSummary = () => {
+    if (!yearSummaries || yearSummaries.length === 0) {
+      return null;
+    }
     const randomIndex = Math.floor(Math.random() * yearSummaries.length);
     return yearSummaries[randomIndex];
   };
@@ -107,7 +110,7 @@ const AddYear = ({
     // Random event logic
     if (character.Age > 15 && Math.random() < 0.30) {
       summary = getRandomSummary();
-      if (summary.includes("gold digger prank on a witch")) {
+      if (summary && summary.includes("gold digger prank on a witch")) {
         if (character.Race !== 'Frog') {
           setCharacter(prevCharacter => ({
             ...prevCharacter,
@@ -177,6 +180,19 @@ const AddYear = ({
                 setLogMessage(prevLog => prevLog + `<br>💀 My ${parentType} ${name} died today.`);
               }
             }
+          } else {
+            // Age non-parent characters (tavern characters)
+            updated[name] = { ...updated[name], Age: updated[name].Age + 1 };
+            
+            // Check for death (5% chance after age 50, 10% chance after age 70)
+            if (updated[name].Age >= 50 && !updated[name].isDead) {
+              const deathChance = Math.random();
+              const deathThreshold = updated[name].Age >= 70 ? 0.10 : 0.05;
+              if (deathChance < deathThreshold) {
+                updated[name].isDead = true;
+                setLogMessage(prevLog => prevLog + `<br>💀 ${name} passed away today.`);
+              }
+            }
           }
         });
         return updated;
@@ -237,6 +253,9 @@ const AddYear = ({
       setPlayerHouse(null); // Reset player's house
       if (setSocialSheets) {
         setSocialSheets({}); // Reset social sheets
+      }
+      if (setMetPeople) {
+        setMetPeople([]); // Reset met people for new lifetime
       }
       if (setShopState) {
         setShopState(null); // Reset shop state

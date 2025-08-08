@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Shop from './Shop';
 import housingData from './housing.json';
+import Tavern from './Tavern';
 
 const Town = ({ 
   show, 
@@ -24,12 +25,17 @@ const Town = ({
   setPlayerHouse,
   currentYear,
   shopState,
-  setShopState
+  setShopState,
+  tavernVisits,
+  setTavernVisits,
+  setMetPeople,
+  setSocialSheets
 }) => {
   
   const [currentSection, setCurrentSection] = useState('main');
   const [showHousing, setShowHousing] = useState(false);
   const [selectedHouse, setSelectedHouse] = useState(null);
+  const [showTavern, setShowTavern] = useState(false);
 
   const handleHousingClick = () => {
     setShowHousing(true);
@@ -44,6 +50,10 @@ const Town = ({
     setCurrentSection('main');
     setShowHousing(false);
     setSelectedHouse(null);
+  };
+
+  const handleTavernClick = () => {
+    setShowTavern(true);
   };
 
   const getRandomHouse = () => {
@@ -136,11 +146,15 @@ const Town = ({
             
             <button 
               className="town-option" 
-              disabled
+              onClick={handleTavernClick}
+              disabled={getAge() < 18 || tavernVisits[currentYear]}
             >
               <span role="img" aria-label="Tavern">🍺</span>
               Tavern
-              <div className="town-option-description">Coming Soon - Socialize and gather information</div>
+              <div className="town-option-description">
+                {getAge() < 18 ? `Available at age 18 (currently ${getAge()})` : 
+                 tavernVisits[currentYear] ? "Already visited today" : "Socialize and gather information"}
+              </div>
             </button>
 
             {playerHouse && (
@@ -260,6 +274,23 @@ const Town = ({
               </div>
             )}
           </div>
+        )}
+
+        {showTavern && (
+          <Tavern
+            show={showTavern}
+            onClose={() => setShowTavern(false)}
+            setLogMessage={setLogMessage}
+            coins={coins}
+            setCoins={setCoins}
+            character={character}
+            closeTownDrawer={onClose}
+            currentYear={currentYear}
+            tavernVisits={tavernVisits}
+            setTavernVisits={setTavernVisits}
+            setMetPeople={setMetPeople}
+            setSocialSheets={setSocialSheets}
+          />
         )}
       </div>
     </>

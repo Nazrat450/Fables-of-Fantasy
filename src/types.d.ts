@@ -119,3 +119,6 @@ interface SocialPerson {
   Charisma: number;
   Relationship: number;
 }
+
+// Function types
+declare function generateRandomCharacter(encounterType: string, forceRace?: string | null): any;

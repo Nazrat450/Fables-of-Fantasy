@@ -2,6 +2,31 @@ import React, { useState } from 'react';
 import Visit from './Visit';
 import './App.css';
 
+// Helper function to get Kenku portrait path
+const getKenkuPortraitPath = (character) => {
+  if (character.Race !== 'Kenku') {
+    return null;
+  }
+  
+  const gender = character.Gender?.toLowerCase() || 'male';
+  const featherColor = character.FeatherColor?.toLowerCase() || 'black';
+  
+  // Map feather colors to folder names
+  const colorMap = {
+    'black': 'BlackFeather',
+    'brown': 'BrownFeather', 
+    'red': 'RedFeather',
+    'white': 'WhiteFeather'
+  };
+  
+  const folderName = colorMap[featherColor];
+  if (!folderName) {
+    return null;
+  }
+  
+  return `/Fables-of-Fantasy/Img/Character Portaits/Kenku/${gender}/${folderName}/portrait.png?t=${Date.now()}`;
+};
+
 const Social = ({
   show,
   onClose,
@@ -87,9 +112,27 @@ const Social = ({
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 1000
           }} />
           <div className="social-character-sheet">
-            <h2>
-              {(socialSheets[showSocialSheet].isDead || false) ? `💀 ${showSocialSheet} (Deceased)` : showSocialSheet}'s Character Sheet
-            </h2>
+            <div className="character-sheet-header">
+              <h2>
+                {(socialSheets[showSocialSheet].isDead || false) ? `💀 ${showSocialSheet} (Deceased)` : showSocialSheet}'s Character Sheet
+              </h2>
+              
+              {/* Kenku Portrait */}
+              {(() => {
+                const portraitPath = getKenkuPortraitPath(socialSheets[showSocialSheet]);
+                return portraitPath ? (
+                  <div className="character-portrait">
+                    <img 
+                      src={portraitPath} 
+                      alt={`${showSocialSheet} portrait`}
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                ) : null;
+              })()}
+            </div>
             
             <div className="relationship-section">
               <h3>Relationship</h3>
@@ -129,6 +172,24 @@ const Social = ({
                   <span className="stat-label">Looks:</span>
                   <span className="stat-value">{socialSheets[showSocialSheet].Looks || 0}%</span>
                 </div>
+                {socialSheets[showSocialSheet].ScaleColor && (
+                  <div className="stat-item">
+                    <span className="stat-label">Scale Color:</span>
+                    <span className="stat-value">{socialSheets[showSocialSheet].ScaleColor}</span>
+                  </div>
+                )}
+                {socialSheets[showSocialSheet].FurColor && (
+                  <div className="stat-item">
+                    <span className="stat-label">Fur Color:</span>
+                    <span className="stat-value">{socialSheets[showSocialSheet].FurColor}</span>
+                  </div>
+                )}
+                {socialSheets[showSocialSheet].FeatherColor && (
+                  <div className="stat-item">
+                    <span className="stat-label">Feather Color:</span>
+                    <span className="stat-value">{socialSheets[showSocialSheet].FeatherColor}</span>
+                  </div>
+                )}
               </div>
 
               <div className="stat-group">

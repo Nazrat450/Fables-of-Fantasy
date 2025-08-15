@@ -54,7 +54,9 @@ const Tavern: React.FC<TavernProps> = ({ show, onClose, setLogMessage, coins, se
        // Generate random character immediately if any random character meeting is selected
        const randomCharacterEncounter = selectedEncounters.find(encounter => encounter.id.startsWith("random_character_meeting"));
        if (randomCharacterEncounter) {
-         const randomChar = generateRandomCharacter(randomCharacterEncounter.id);
+         // Check if dev mode is forcing a specific race
+         const forceRaceInTavern = (window as any).forceRaceInTavern;
+         const randomChar = generateRandomCharacter(randomCharacterEncounter.id, forceRaceInTavern as any);
          if (randomChar) {
            setCurrentRandomCharacter(randomChar);
          } else {

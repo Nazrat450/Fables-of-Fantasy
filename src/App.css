@@ -1943,6 +1943,43 @@ label {
   letter-spacing: 1px;
 }
 
+.character-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.character-sheet-header h2 {
+  margin: 0;
+  flex: 1;
+  color: var(--primary-gold);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.character-portrait {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--border-gold);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+.character-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .social-character-sheet .character-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2079,6 +2116,23 @@ label {
   .social-character-sheet h2 {
     font-size: 2rem;
     margin-bottom: 25px;
+  }
+
+  .character-sheet-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .character-sheet-header h2 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .character-portrait {
+    width: 100px;
+    height: 100px;
   }
 
   .social-character-sheet .character-stats {

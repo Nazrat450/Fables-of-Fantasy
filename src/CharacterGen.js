@@ -60,6 +60,7 @@ const lastNames = [
 const furColors = ["Brown", "Black", "White", "Gray", "Spotted", "Striped"];
 const scaleColors = ["Green", "Blue", "Red", "Black", "White", "Gold", "Silver"];
 const featherColors = ["Brown", "Black", "White", "Gray", "Blue", "Green", "Red"];
+const kenkuFeatherColors = ["Black", "Brown", "Red", "White"];
 
 const occupations = ["bakers", "blacksmiths", "farmers", "merchants", "knights", "scholars", "tailors", "healers", "minstrels"];
 const statuses = ["rich", "famous", "poor", "well-respected", "controversial", "unknown"];
@@ -89,8 +90,8 @@ const generateParentBackstory = () => {
   };
 }
 
-const generateParentSocialSheet = (name, gender, lastName) => {
-  const race = races[Math.floor(Math.random() * races.length)];
+const generateParentSocialSheet = (name, gender, lastName, playerRace) => {
+  const race = playerRace; // Parents are the same race as the player
   const age = Math.floor(Math.random() * 20) + 20; // Parents are 20-40 years old when child is born
   
   return {
@@ -107,7 +108,12 @@ const generateParentSocialSheet = (name, gender, lastName) => {
     Wisdom: getRandomStat(),
     Charisma: getRandomStat(),
     Relationship: Math.floor(Math.random() * 30) + 70, // 70-100% relationship
-    isDead: false
+    isDead: false,
+    HairColor: getHairColor(race),
+    FurColor: getFurColor(race),
+    ScaleColor: getScaleColor(race),
+    FeatherColor: getFeatherColor(race),
+    Height: getRandomHeight(race)
   };
 };
 
@@ -161,7 +167,11 @@ const getScaleColor = (race) => {
 const getFeatherColor = (race) => {
     const racesWithFeathers = ["Aarakocra", "Kenku"];
     if (racesWithFeathers.includes(race)) {
-      return featherColors[Math.floor(Math.random() * featherColors.length)];
+      if (race === "Kenku") {
+        return kenkuFeatherColors[Math.floor(Math.random() * kenkuFeatherColors.length)];
+      } else {
+        return featherColors[Math.floor(Math.random() * featherColors.length)];
+      }
     }
     return null;
 };
@@ -172,8 +182,8 @@ const getRandomHeight = (race) => {
 };
 
 // Shared character generation function for tavern encounters
-const generateRandomCharacter = (encounterType) => {
-  const race = races[Math.floor(Math.random() * races.length)];
+const generateRandomCharacter = (encounterType, forceRace = null) => {
+  const race = forceRace || races[Math.floor(Math.random() * races.length)];
   const gender = Math.random() < 0.5 ? "Male" : "Female";
   
   // Safety check for name arrays
@@ -329,6 +339,21 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
+
+  const handleRandomize = () => {
+    // Random first name
+    const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    setFirstName(randomFirstName);
+    
+    // Random last name
+    const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+    setLastName(randomLastName);
+    
+    // Random gender
+    const genders = ['Male', 'Female', 'Non-Binary'];
+    const randomGender = genders[Math.floor(Math.random() * genders.length)];
+    setGender(randomGender);
+  };
   const getClassMessage = (selectedClass) => {
     switch(selectedClass) {
       case 'Warrior':
@@ -405,8 +430,8 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
 
     // Generate parent social character sheets
     if (setSocialSheets) {
-      const motherSheet = generateParentSocialSheet(parentDetails.motherName, 'Female', lastName);
-      const fatherSheet = generateParentSocialSheet(parentDetails.fatherName, 'Male', lastName);
+      const motherSheet = generateParentSocialSheet(parentDetails.motherName, 'Female', lastName, race);
+      const fatherSheet = generateParentSocialSheet(parentDetails.fatherName, 'Male', lastName, race);
       
       setSocialSheets({
         [motherSheet.name]: motherSheet,
@@ -425,20 +450,40 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
           <input type="text" placeholder="First Name" className="input-field" value={firstName} onChange={e => setFirstName(e.target.value)} />
           <input type="text" placeholder="Last Name" className="input-field" value={lastName} onChange={e => setLastName(e.target.value)} />
           
-          <label>
-            <input type="radio" name="gender" className="radio-option" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
-            Male
-          </label>
-          <label>
-            <input type="radio" name="gender" className="radio-option" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
-            Female
-          </label>
-          <label>
-            <input type="radio" name="gender" className="radio-option" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
-            Non-Binary  
-          </label>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', marginTop: '10px' }}>
+            <label>
+              <input type="radio" name="gender" className="radio-option" value="Male" checked={gender === 'Male'} onChange={e => setGender(e.target.value)} />
+              Male
+            </label>
+            <label>
+              <input type="radio" name="gender" className="radio-option" value="Female" checked={gender === 'Female'} onChange={e => setGender(e.target.value)} />
+              Female
+            </label>
+            <label>
+              <input type="radio" name="gender" className="radio-option" value="Non-Binary" checked={gender === 'Non-Binary'} onChange={e => setGender(e.target.value)} />
+              Non-Binary  
+            </label>
+          </div>
 
-          <button id="genbut" className="fantasy-button" onClick={handleGenerateCharacter}>Generate Character</button>
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '10px' }}>
+            <button 
+              className="fantasy-button" 
+              onClick={handleRandomize}
+              style={{ 
+                background: 'linear-gradient(135deg, #4a90e2, #357abd)', 
+                border: '2px solid #2c5aa0'
+              }}
+            >
+              🎲 Random
+            </button>
+            <button 
+              id="genbut" 
+              className="fantasy-button" 
+              onClick={handleGenerateCharacter}
+            >
+              Generate Character
+            </button>
+          </div>
         </div>
 
         

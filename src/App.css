@@ -3573,3 +3573,205 @@ label {
     padding: 12px;
   }
 }
+
+/* Gift Modal Styles */
+.gift-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-modal {
+  background: linear-gradient(135deg, var(--parchment), var(--aged-parchment));
+  border: 3px solid var(--border-gold);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--shadow-dark);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.gift-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid var(--border-gold);
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  border-radius: 12px 12px 0 0;
+}
+
+.gift-modal-header h3 {
+  margin: 0;
+  color: var(--ink-dark);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.gift-modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--ink-dark);
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.gift-modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.gift-selection {
+  padding: 20px;
+}
+
+.gift-selection p {
+  margin: 0 0 20px 0;
+  color: var(--ink-medium);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.gift-inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.gift-item {
+  background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+  border: 2px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gift-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+  border-color: var(--accent-gold);
+}
+
+.gift-item-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink-dark);
+}
+
+.gift-item-value {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  color: var(--ink-medium);
+  font-style: italic;
+}
+
+.gift-result {
+  padding: 20px;
+  text-align: center;
+}
+
+.gift-result h3 {
+  margin: 0 0 15px 0;
+  color: var(--ink-dark);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.gift-message {
+  margin: 0 0 15px 0;
+  color: var(--ink-medium);
+  font-family: 'Crimson Text', serif;
+  line-height: 1.6;
+  font-size: 1rem;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  border-left: 3px solid var(--border-gold);
+}
+
+.relationship-bonus {
+  margin: 0 0 20px 0;
+  color: #2d5a2d;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px;
+  background: rgba(45, 90, 45, 0.1);
+  border-radius: 8px;
+  border: 2px solid #2d5a2d;
+}
+
+/* Gift option specific styling */
+.visit-option.gift-option {
+  background: linear-gradient(135deg, #e6b17a, #d4a574);
+  border-color: #b8860b;
+}
+
+.visit-option.gift-option:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f0c088, #e6b17a);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-dark);
+}
+
+@media only screen and (max-width: 768px) {
+  .gift-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .gift-inventory-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .gift-item {
+    padding: 12px;
+  }
+  
+  .gift-item-name {
+    font-size: 0.9rem;
+  }
+  
+  .gift-item-value {
+    font-size: 0.8rem;
+  }
+}

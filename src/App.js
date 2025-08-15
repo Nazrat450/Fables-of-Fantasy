@@ -265,6 +265,8 @@ const spendCoins = (amount) => {
             setShowSocialSheet={setShowSocialSheet}
             setLogMessage={setLogMessage}
             currentYear={character?.Age || 0}
+            inventory={inventory}
+            setInventory={setInventory}
           />
         </>
       )}

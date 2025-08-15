@@ -29,6 +29,34 @@ const fatherNames = [
   "Kai", "Lysander", "Milo", "Nestor", "Oscar", "Piers", "Quincy", "Remus", "Stellan",
   "Tristan", "Uriah", "Victor", "Weston", "Xavier", "Yannis", "Zebulon", "Archer", "Basil", "Cyrus"
 ];
+
+// Shared name arrays for both character generation and tavern encounters
+const firstNames = [
+  "Aria", "Elena", "Lyria", "Mira", "Selena", "Zara", "Elara", "Nora", "Tara",
+  "Vivienne", "Isolde", "Maeve", "Seraphina", "Rowan", "Thalia", "Cassandra", "Ophelia", "Lyra",
+  "Astrid", "Freya", "Juniper", "Calista", "Daphne", "Evelyn", "Hazel", "Iris", "Juno",
+  "Kiera", "Luna", "Maris", "Odette", "Penelope", "Quinn", "Rhea", "Sable", "Tamsin",
+  "Vesper", "Willow", "Yara", "Zinnia", "Briony", "Coraline", "Delphine", "Esme", "Faye",
+  "Adeline", "Beatrix", "Celeste", "Dahlia", "Eira", "Florence", "Greta", "Helena", "Ingrid",
+  "Jessamine", "Katya", "Leona", "Magnolia", "Nadine", "Olive", "Phoebe", "Rosalind", "Saskia",
+  "Tabitha", "Uma", "Valeria", "Winona", "Xenia", "Yvette", "Zelda", "Blythe", "Cleo", "Demi",
+  "Alden", "Bran", "Cael", "Doran", "Eron", "Fael", "Garren", "Horan", "Ilan",
+  "Lucian", "Magnus", "Orion", "Percival", "Quentin", "Ronan", "Soren", "Theron", "Ulric",
+  "Valen", "Wystan", "Xander", "Yorick", "Zane", "Bram", "Cedric", "Darius", "Evander",
+  "Finnian", "Gideon", "Hawke", "Jasper", "Kellan", "Leander", "Merrick", "Niall", "Oberon",
+  "Phineas", "Quill", "Rafe", "Silas", "Tobin", "Vaughn", "Wynn", "Zephyr", "Alaric",
+  "Benedict", "Cassian", "Damon", "Edric", "Felix", "Galen", "Hugo", "Ivor", "Julius",
+  "Kai", "Lysander", "Milo", "Nestor", "Oscar", "Piers", "Quincy", "Remus", "Stellan",
+  "Tristan", "Uriah", "Victor", "Weston", "Xavier", "Yannis", "Zebulon", "Archer", "Basil", "Cyrus"
+];
+
+const lastNames = [
+  "Stormwind", "Ironforge", "Silvermoon", "Thunderbluff", "Darnassus", "Orgrimmar", "Undercity", "Dalaran",
+  "Shadowmend", "Lightbringer", "Frostwhisper", "Stormrage", "Windrunner", "Bloodhoof", "Proudmoore", "Hellscream",
+  "Fireforge", "Bronzebeard", "Wildhammer", "Darkiron", "Stormpike", "Frostwolf", "Warsong", "Blackrock",
+  "Ravenholdt", "Shadowfang", "Scarlet", "Argent", "Crimson", "Azure", "Verdant", "Golden",
+  "Silver", "Bronze", "Iron", "Steel", "Obsidian", "Crystal", "Amber", "Emerald"
+];
 const furColors = ["Brown", "Black", "White", "Gray", "Spotted", "Striped"];
 const scaleColors = ["Green", "Blue", "Red", "Black", "White", "Gold", "Silver"];
 const featherColors = ["Brown", "Black", "White", "Gray", "Blue", "Green", "Red"];
@@ -141,6 +169,111 @@ const getFeatherColor = (race) => {
 const getRandomHeight = (race) => {
     const [minHeight, maxHeight] = heightRanges[race];
     return Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+};
+
+// Shared character generation function for tavern encounters
+const generateRandomCharacter = (encounterType) => {
+  const race = races[Math.floor(Math.random() * races.length)];
+  const gender = Math.random() < 0.5 ? "Male" : "Female";
+  
+  // Safety check for name arrays
+  if (!firstNames || firstNames.length === 0 || !lastNames || lastNames.length === 0) {
+    console.error('Name arrays are empty or undefined!');
+    return null;
+  }
+  
+  const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+  const fullName = `${firstName} ${lastName}`;
+  
+  const hairColor = getHairColor(race);
+  const furColor = getFurColor(race);
+  const scaleColor = getScaleColor(race);
+  const featherColor = getFeatherColor(race);
+  
+  // Generate description based on encounter type, race and features
+  let baseDescription = "";
+  
+  switch(encounterType) {
+    case "random_character_meeting_2":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} reading a book by the fireplace`;
+      break;
+    case "random_character_meeting_3":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} playing a lute in the corner`;
+      break;
+    case "random_character_meeting_4":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} writing in a journal`;
+      break;
+    case "random_character_meeting_5":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} studying a map intently`;
+      break;
+    case "random_character_meeting_6":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} sharpening a blade`;
+      break;
+    case "random_character_meeting_7":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} brewing a potion`;
+      break;
+    case "random_character_meeting_8":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} sketching in a notebook`;
+      break;
+    case "random_character_meeting_9":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} practicing magic tricks`;
+      break;
+    case "random_character_meeting_10":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} playing chess alone`;
+      break;
+    case "random_character_meeting_11":
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} meditating quietly`;
+      break;
+    default:
+      baseDescription = `You see a ${race} ${gender.toLowerCase()} sitting alone at a table`;
+  }
+  
+  let description = baseDescription;
+  
+  if (hairColor) {
+    description += ` with ${hairColor.toLowerCase()} hair`;
+  } else if (furColor) {
+    description += ` with ${furColor.toLowerCase()} fur`;
+  } else if (scaleColor) {
+    description += ` with ${scaleColor.toLowerCase()} scales`;
+  } else if (featherColor) {
+    description += ` with ${featherColor.toLowerCase()} feathers`;
+  }
+  
+  description += ".";
+  
+  return {
+    fullName,
+    race,
+    gender,
+    hairColor,
+    furColor,
+    scaleColor,
+    featherColor,
+    description,
+    stats: {
+      FirstName: firstName,
+      LastName: lastName,
+      Race: race,
+      Gender: gender,
+      Age: Math.floor(Math.random() * 20) + 18, // 18-37 years old
+      Health: Math.floor(Math.random() * 30) + 70, // 70-100%
+      Looks: Math.floor(Math.random() * 40) + 60, // 60-100%
+      Strength: getRandomStat(),
+      Dexterity: getRandomStat(),
+      Constitution: getRandomStat(),
+      Intelligence: getRandomStat(),
+      Wisdom: getRandomStat(),
+      Charisma: getRandomStat(),
+      Relationship: Math.floor(Math.random() * 30) + 10, // 10-40% starting relationship
+      isDead: false,
+      HairColor: hairColor,
+      FurColor: furColor,
+      ScaleColor: scaleColor,
+      FeatherColor: featherColor
+    }
+  };
 };
 
 // Separate CharacterSheet component
@@ -335,5 +468,5 @@ const CharacterGen = ({ character, setCharacter, showClassModal, setShowClassMod
   );
 };
 
-export { heightRanges, getRandomHeight };
+export { heightRanges, getRandomHeight, generateRandomCharacter };
 export default CharacterGen;

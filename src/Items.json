@@ -6,7 +6,8 @@
       "minAge": 5,
       "maxAge": 12,
       "inShop": true,
-      "description": "A wooden sword perfect for young adventurers"
+      "description": "A wooden sword perfect for young adventurers",
+      "giftValue": 3
     },
     {
       "name": "Toy Shield", 
@@ -14,7 +15,8 @@
       "minAge": 5,
       "maxAge": 12,
       "inShop": true,
-      "description": "A small wooden shield for training"
+      "description": "A small wooden shield for training",
+      "giftValue": 3
     },
     {
       "name": "Toy Staff",
@@ -22,163 +24,190 @@
       "minAge": 5,
       "maxAge": 12,
       "inShop": true,
-      "description": "A magical-looking stick for young wizards"
+      "description": "A magical-looking stick for young wizards",
+      "giftValue": 3
     },
     {
       "name": "Short Sword",
       "price": 30,
       "inShop": true,
-      "description": "A reliable steel sword for beginners"
+      "description": "A reliable steel sword for beginners",
+      "giftValue": 8
     },
     {
       "name": "Shield",
       "price": 30,
       "inShop": true,
-      "description": "A sturdy wooden shield with metal trim"
+      "description": "A sturdy wooden shield with metal trim",
+      "giftValue": 8
     },
     {
       "name": "Staff",
       "price": 30,
       "inShop": true,
-      "description": "A simple wooden staff for spellcasting"
+      "description": "A simple wooden staff for spellcasting",
+      "giftValue": 8
     },
     {
       "name": "Long Sword",
       "price": 75,
       "inShop": true,
-      "description": "A well-crafted steel longsword"
+      "description": "A well-crafted steel longsword",
+      "giftValue": 15
     },
     {
       "name": "Steel Shield",
       "price": 60,
       "inShop": true,
-      "description": "A solid steel shield for serious combat"
+      "description": "A solid steel shield for serious combat",
+      "giftValue": 12
     },
     {
       "name": "Arcane Staff",
       "price": 80,
       "inShop": true,
-      "description": "A staff imbued with magical properties"
+      "description": "A staff imbued with magical properties",
+      "giftValue": 16
     },
     {
       "name": "Dagger",
       "price": 25,
       "inShop": true,
-      "description": "A sharp dagger for stealth and precision"
+      "description": "A sharp dagger for stealth and precision",
+      "giftValue": 7
     },
     {
       "name": "Leather Armor",
       "price": 45,
       "inShop": true,
-      "description": "Light leather armor for protection"
+      "description": "Light leather armor for protection",
+      "giftValue": 10
     },
     {
       "name": "Magic Ring",
       "price": 120,
       "inShop": true,
-      "description": "A ring that enhances magical abilities"
+      "description": "A ring that enhances magical abilities",
+      "giftValue": 20
     },
     {
       "name": "Battle Axe",
       "price": 100,
       "inShop": true,
-      "description": "A heavy battle axe for powerful strikes"
+      "description": "A heavy battle axe for powerful strikes",
+      "giftValue": 18
     },
     {
       "name": "Chain Mail",
       "price": 150,
       "inShop": true,
-      "description": "Flexible chain mail armor"
+      "description": "Flexible chain mail armor",
+      "giftValue": 25
     },
     {
       "name": "Wizard's Robe",
       "price": 90,
       "inShop": true,
-      "description": "A robe that enhances magical power"
+      "description": "A robe that enhances magical power",
+      "giftValue": 17
     },
     {
       "name": "Crossbow",
       "price": 85,
       "inShop": true,
-      "description": "A reliable crossbow for ranged combat"
+      "description": "A reliable crossbow for ranged combat",
+      "giftValue": 16
     },
     {
       "name": "Healing Potion",
       "price": 20,
       "inShop": true,
-      "description": "A potion that restores health"
+      "description": "A potion that restores health",
+      "giftValue": 5
     },
     {
       "name": "Mana Potion",
       "price": 25,
       "inShop": true,
-      "description": "A potion that restores magical energy"
+      "description": "A potion that restores magical energy",
+      "giftValue": 6
     },
     {
       "name": "Throwing Knives",
       "price": 35,
       "inShop": true,
-      "description": "A set of balanced throwing knives"
+      "description": "A set of balanced throwing knives",
+      "giftValue": 8
     },
     {
       "name": "Scroll of Fireball",
       "price": 150,
       "inShop": true,
-      "description": "A scroll containing the fireball spell"
+      "description": "A scroll containing the fireball spell",
+      "giftValue": 25
     },
     {
       "name": "Enchanted Sword",
       "price": 200,
       "inShop": true,
-      "description": "A sword with magical enhancements"
+      "description": "A sword with magical enhancements",
+      "giftValue": 30
     },
     {
       "name": "Dragon Scale Armor",
       "price": 500,
       "inShop": false,
-      "description": "Legendary armor made from dragon scales"
+      "description": "Legendary armor made from dragon scales",
+      "giftValue": 50
     },
     {
       "name": "Staff of Power",
       "price": 300,
       "inShop": true,
-      "description": "A powerful staff for master wizards"
+      "description": "A powerful staff for master wizards",
+      "giftValue": 40
     },
     {
       "name": "Bow of Accuracy",
       "price": 180,
       "inShop": true,
-      "description": "A finely crafted bow with perfect balance"
+      "description": "A finely crafted bow with perfect balance",
+      "giftValue": 28
     },
     {
       "name": "Amulet of Protection",
       "price": 250,
       "inShop": true,
-      "description": "An amulet that provides magical protection"
+      "description": "An amulet that provides magical protection",
+      "giftValue": 35
     },
     {
       "name": "Boots of Speed",
       "price": 120,
       "inShop": true,
-      "description": "Boots that enhance movement speed"
+      "description": "Boots that enhance movement speed",
+      "giftValue": 20
     },
     {
       "name": "Ring of Invisibility",
       "price": 400,
       "inShop": true,
-      "description": "A ring that grants invisibility"
+      "description": "A ring that grants invisibility",
+      "giftValue": 45
     },
     {
       "name": "Sword of Light",
       "price": 350,
       "inShop": true,
-      "description": "A holy sword that glows with divine light"
+      "description": "A holy sword that glows with divine light",
+      "giftValue": 40
     },
     {
       "name": "Crystal Ball",
       "price": 200,
       "inShop": true,
-      "description": "A crystal ball for scrying and divination"
+      "description": "A crystal ball for scrying and divination",
+      "giftValue": 30
     }
   ]
 }

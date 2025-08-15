@@ -1,11 +1,34 @@
 import React, { useState } from 'react';
 import visitMessages from './visitMessages.json';
 import { getStatModifier } from './DiceRoll.js';
+import itemsData from './Items.json';
 import './App.css';
 
-const Visit = ({ character, currentPerson, onClose, onRelationshipChange, currentYear, lastVisited, setLogMessage, onCloseAll }) => {
+// Helper function to group inventory items by name and count them
+const groupInventoryItems = (inventory) => {
+  const grouped = {};
+  
+  inventory.forEach(item => {
+    const itemName = item.name;
+    if (grouped[itemName]) {
+      grouped[itemName].count++;
+    } else {
+      grouped[itemName] = {
+        name: itemName,
+        count: 1,
+        item: item // Keep the original item for any additional properties
+      };
+    }
+  });
+  
+  return Object.values(grouped);
+};
+
+const Visit = ({ character, currentPerson, onClose, onRelationshipChange, currentYear, lastVisited, setLogMessage, onCloseAll, inventory = [], setInventory }) => {
   const [showChat, setShowChat] = useState(false);
   const [chatResult, setChatResult] = useState(null);
+  const [showGiftModal, setShowGiftModal] = useState(false);
+  const [giftResult, setGiftResult] = useState(null);
 
   // Check if this person was already visited this year
   const wasVisitedThisYear = lastVisited && lastVisited[currentPerson] === currentYear;
@@ -59,6 +82,58 @@ const Visit = ({ character, currentPerson, onClose, onRelationshipChange, curren
     }
   };
 
+  const handleGiveGift = () => {
+    if (!inventory || inventory.length === 0) {
+      setGiftResult({
+        success: false,
+        message: "You don't have any items to give as a gift.",
+        relationshipChange: 0
+      });
+      setShowGiftModal(true);
+      return;
+    }
+    setShowGiftModal(true);
+  };
+
+  const handleGiftSelection = (selectedItem) => {
+    // Look up the gift value from the items data
+    const itemDefinition = itemsData.shopItems.find(item => item.name === selectedItem.name);
+    const relationshipBonus = itemDefinition?.giftValue || 5; // Default to 5 if no giftValue found
+    
+    // Remove item from inventory
+    if (setInventory) {
+      const itemIndex = inventory.findIndex(item => item.name === selectedItem.name);
+      if (itemIndex > -1) {
+        const newInventory = [...inventory];
+        newInventory.splice(itemIndex, 1);
+        setInventory(newInventory);
+      }
+    }
+    
+    // Update relationship
+    if (onRelationshipChange) {
+      onRelationshipChange(relationshipBonus, currentYear);
+    }
+    
+    // Set gift result
+    setGiftResult({
+      success: true,
+      message: `${currentPerson} was delighted with the ${selectedItem.name}! They seem much happier now.`,
+      relationshipChange: relationshipBonus,
+      itemName: selectedItem.name
+    });
+  };
+
+  const handleCloseGift = () => {
+    setShowGiftModal(false);
+    setGiftResult(null);
+    if (onCloseAll) {
+      onCloseAll(); // Close both visit drawer and social sheet
+    } else {
+      onClose(); // Fallback to just closing visit drawer
+    }
+  };
+
   return (
     <>
       <div className="visit-drawer-backdrop" onClick={onClose} />
@@ -84,10 +159,22 @@ const Visit = ({ character, currentPerson, onClose, onRelationshipChange, curren
             </div>
           </button>
           
-          {/* Future visit options can be added here */}
-          <button className="visit-option" disabled>
+          {/* Gift option */}
+          <button 
+            className="visit-option gift-option"
+            onClick={handleGiveGift}
+            disabled={wasVisitedThisYear}
+          >
             <span role="img" aria-label="Gift">🎁</span>
-            Gift (Coming Soon)
+            Give Gift
+            <div className="visit-option-description">
+              {wasVisitedThisYear 
+                ? `Already visited ${currentPerson} this year (Year ${currentYear}).`
+                : inventory && inventory.length > 0
+                  ? `Give a gift from your inventory. More valuable items provide greater relationship bonuses.`
+                  : `You don't have any items to give as a gift.`
+              }
+            </div>
           </button>
           
           <button className="visit-option" disabled>
@@ -106,6 +193,57 @@ const Visit = ({ character, currentPerson, onClose, onRelationshipChange, curren
           </div>
         )}
       </div>
+
+      {/* Gift Modal */}
+      {showGiftModal && (
+        <div className="gift-modal-backdrop" onClick={handleCloseGift}>
+          <div className="gift-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="gift-modal-header">
+              <h3>🎁 Give Gift to {currentPerson}</h3>
+              <button className="gift-modal-close" onClick={handleCloseGift}>&times;</button>
+            </div>
+            
+            {!giftResult ? (
+              <div className="gift-selection">
+                <p>Choose an item from your inventory to give as a gift:</p>
+                <div className="gift-inventory-grid">
+                  {groupInventoryItems(inventory).map((groupedItem, index) => (
+                    <button
+                      key={groupedItem.name}
+                      className="gift-item"
+                      onClick={() => handleGiftSelection(groupedItem.item)}
+                    >
+                      <span className="gift-item-name">
+                        {groupedItem.count > 1 ? `${groupedItem.count}x ` : ''}
+                        {groupedItem.name}
+                      </span>
+                      {(() => {
+                        const itemDefinition = itemsData.shopItems.find(item => item.name === groupedItem.name);
+                        return itemDefinition?.giftValue ? (
+                          <span className="gift-item-value">Gift Value: +{itemDefinition.giftValue} relationship</span>
+                        ) : null;
+                      })()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="gift-result">
+                <h3>{giftResult.success ? '🎉 Gift Given!' : '❌ Cannot Give Gift'}</h3>
+                <p className="gift-message">{giftResult.message}</p>
+                {giftResult.success && (
+                  <p className="relationship-bonus">
+                    Relationship increased by +{giftResult.relationshipChange}%
+                  </p>
+                )}
+                <button className="fantasy-button" onClick={handleCloseGift}>
+                  Continue
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };

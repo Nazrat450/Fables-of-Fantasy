@@ -14,7 +14,9 @@ const Social = ({
   showSocialSheet,
   setShowSocialSheet,
   setLogMessage,
-  currentYear
+  currentYear,
+  inventory = [],
+  setInventory
 }) => {
   const [showVisit, setShowVisit] = useState(false);
   const [currentPerson, setCurrentPerson] = useState(null);
@@ -189,6 +191,8 @@ const Social = ({
           currentYear={currentYear}
           lastVisited={lastVisited}
           setLogMessage={setLogMessage}
+          inventory={inventory}
+          setInventory={setInventory}
           onClose={() => {
             setShowVisit(false);
             setCurrentPerson(null);
